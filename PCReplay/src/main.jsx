@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
 import "./index.css";
 import { UserProvider } from "./mocks/UserContext.jsx";
 import { ProductProvider } from "./mocks/ProductContext.jsx";
