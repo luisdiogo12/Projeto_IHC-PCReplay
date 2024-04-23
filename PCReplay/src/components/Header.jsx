@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
-import Hmenu from "./HMenu"; // Importe o componente Hmenu
+import Hmenu from "./HMenu.jsx"; // Importe o componente Hmenu
 import HSearchBar from "./HSearchBar"; // Importe o componente SearchBar
 import HUserIcons from "./HUserIcons"; // Importe o componente UserIcons
 
