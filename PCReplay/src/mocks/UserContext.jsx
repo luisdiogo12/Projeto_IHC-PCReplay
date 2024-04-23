@@ -1,32 +1,28 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const UserContext = createContext();
 
-export function useUser() {
-  return useContext(UserContext);
-}
-
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  // Inicializa o estado com o usuário armazenado em localStorage, se houver
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem("user");
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
 
-  const login = (email, password) => {
-    // Simulate API call
-    fetch("/api/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    })
-      .then((response) => response.json())
-      .then((data) => setUser({ email: data.email, token: data.token }));
-  };
-
-  const logout = () => {
-    setUser(null);
-  };
+  // Atualiza localStorage sempre que o usuário mudar
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("user");
+    }
+  }, [user]);
 
   return (
-    <UserContext.Provider value={{ user, login, logout }}>
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );
 };
+
+export const useUser = () => useContext(UserContext);

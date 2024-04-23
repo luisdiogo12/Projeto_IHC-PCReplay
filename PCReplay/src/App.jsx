@@ -1,14 +1,17 @@
 import React from "react";
-import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
-import ProductCard from "./components/ProductCard";
-import Header from "./components/Header";
-import MainPage from "./pages/MainPage.jsx";;
-function App() {
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import MainPage from "./pages/MainPage";
+import ProfilePage from "./pages/ProfilePage";
+// Importe outros componentes de página conforme necessário
 
+function App() {
   return (
-    <>
-    <MainPage />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/profilePage" element={<ProfilePage />} />
+      </Routes>
+    </Router>
   );
 }
 
