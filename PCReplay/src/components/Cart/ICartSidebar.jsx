@@ -1,7 +1,7 @@
 import React from "react";
 import { AiOutlineShoppingCart, AiOutlineClose } from "react-icons/ai";
 
-const CartSidebar = ({ isOpen, closeSidebar }) => {
+const ICartSidebar = ({ isOpen, closeSidebar }) => {
   return isOpen ? (
     <div className="fixed top-0 right-0 w-64 h-full bg-gray-800 text-white z-50">
       <button
@@ -18,4 +18,4 @@ const CartSidebar = ({ isOpen, closeSidebar }) => {
   ) : null;
 };
 
-export default CartSidebar;
+export default ICartSidebar;

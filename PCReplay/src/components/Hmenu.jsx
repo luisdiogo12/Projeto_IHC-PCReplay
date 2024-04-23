@@ -1,6 +1,6 @@
 import React from "react";
 
-const Hmenu = ({ isMenuOpen, setIsMenuOpen }) => {
+const HMenu = ({ isMenuOpen, setIsMenuOpen }) => {
   return (
     <nav
       className={`fixed top-12 bottom-0 left-0 bg-gray-800 w-64 transform ${
@@ -53,4 +53,4 @@ const Hmenu = ({ isMenuOpen, setIsMenuOpen }) => {
   );
 };
 
-export default Hmenu;
+export default HMenu;

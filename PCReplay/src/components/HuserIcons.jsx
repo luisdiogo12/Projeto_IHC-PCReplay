@@ -4,11 +4,11 @@ import {
   AiOutlineShoppingCart,
   AiOutlineUser,
 } from "react-icons/ai";
-import FavoritesSidebar from "./IfavoritesSidebar";
-import CartSidebar from "./IcartSidebar";
-import ProfileSidebar from "./IprofileSideBar";
+import IFavoritesSidebar from "./Favorites/IFavoritesSidebar";
+import ICartSidebar from "./Cart/ICartSidebar";
+import IProfileSidebar from "./Profile/IProfileSidebar";
 
-const HuserIcons = () => {
+const HUserIcons = () => {
   const [showFavorites, setShowFavorites] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
@@ -20,7 +20,7 @@ const HuserIcons = () => {
         className="cursor-pointer"
         onClick={() => setShowFavorites(true)}
       />
-      <FavoritesSidebar
+      <IFavoritesSidebar
         isOpen={showFavorites}
         closeSidebar={() => setShowFavorites(false)}
       />
@@ -30,14 +30,14 @@ const HuserIcons = () => {
         className="cursor-pointer"
         onClick={() => setShowCart(true)}
       />
-      <CartSidebar isOpen={showCart} closeSidebar={() => setShowCart(false)} />
+      <ICartSidebar isOpen={showCart} closeSidebar={() => setShowCart(false)} />
 
       <AiOutlineUser
         size="1.5em"
         className="cursor-pointer"
         onClick={() => setShowProfile(true)}
       />
-      <ProfileSidebar
+      <IProfileSidebar
         isOpen={showProfile}
         closeSidebar={() => setShowProfile(false)}
       />
@@ -45,4 +45,4 @@ const HuserIcons = () => {
   );
 };
 
-export default HuserIcons;
+export default HUserIcons;

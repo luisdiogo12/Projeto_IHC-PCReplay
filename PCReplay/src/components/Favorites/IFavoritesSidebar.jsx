@@ -1,7 +1,7 @@
 import React from "react";
-import { AiOutlineUser, AiOutlineClose } from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineClose } from "react-icons/ai";
 
-const ProfileSidebar = ({ isOpen, closeSidebar }) => {
+const IFavoritesSidebar = ({ isOpen, closeSidebar }) => {
   return isOpen ? (
     <div className="fixed top-0 right-0 w-64 h-full bg-gray-800 text-white z-50">
       <button
@@ -11,11 +11,11 @@ const ProfileSidebar = ({ isOpen, closeSidebar }) => {
         <AiOutlineClose size="1.5em" />
       </button>
       <div className="flex flex-col items-center justify-center h-full">
-        <AiOutlineUser size="2em" />
-        <p>Perfil</p>
+        <AiOutlineHeart size="2em" />
+        <p>Favoritos</p>
       </div>
     </div>
   ) : null;
 };
 
-export default ProfileSidebar;
+export default IFavoritesSidebar;

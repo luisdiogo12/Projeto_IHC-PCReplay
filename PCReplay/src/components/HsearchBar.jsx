@@ -1,7 +1,7 @@
 import React from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 
-const HsearchBar = () => {
+const HSearchBar = () => {
   return (
     <div className="flex bg-white rounded overflow-hidden">
       <input
@@ -16,4 +16,4 @@ const HsearchBar = () => {
   );
 };
 
-export default HsearchBar;
+export default HSearchBar;

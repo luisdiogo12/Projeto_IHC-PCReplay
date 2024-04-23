@@ -1,39 +1,35 @@
 import React from "react";
-import Header from "../components/Header"; // Ajuste o caminho conforme necessário
-import ProductCard from "../components/ProductCard"; // Ajuste o caminho conforme necessário
+import Header from "../components/Header"; 
+import ProductCard from "../components/ProductCard";
+import Footer from "../components/Footer";
 
 const MainPage = () => {
-  const products = [
-    {
-      id: 1,
-      imageUrl: "https://via.placeholder.com/400x300",
-      name: "Product 1",
-      description: "Description for Product 1. It's really awesome.",
-      price: "25.99",
-    },
-    {
-      id: 2,
-      imageUrl: "https://via.placeholder.com/400x300",
-      name: "Product 2",
-      description: "Description for Product 2. It's even better!",
-      price: "35.99",
-    },
-  ];
+  // Gerando 22 produtos de exemplo
+  const products = Array.from({ length: 20 }, (_, index) => ({
+    id: index + 1,
+    imageUrl: `https://via.placeholder.com/400x300?text=Product+${index + 1}`,
+    name: `Product ${index + 1}`,
+    description: `Description for Product ${
+      index + 1
+    }. It has some unique features.`,
+    price: `${(Math.random() * 50 + 15).toFixed(2)}`, // Preço aleatório entre 15 e 65
+  }));
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div>
-        <Header />
-      </div>
-      <div className="flex-grow container mx-auto px-4 sm:px-8">
-        <div className="py-8 flex flex-wrap">
-          {products.map((product) => (
-            <div key={product.id} className="w-full sm:w-1/2 lg:w-1/3 p-4">
-              <ProductCard product={product} />
-            </div>
-          ))}
+      <Header />
+      <div className="flex-grow container mx-auto px-4 sm:px-8 pt-16">
+        {" "}
+        {/* Adicionado pt-16 para adicionar padding ao topo */}
+        <div className="py-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

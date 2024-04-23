@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
-import Hmenu from "./Hmenu"; // Importe o componente Hmenu
-import HsearchBar from "./HsearchBar"; // Importe o componente SearchBar
-import HuserIcons from "./HuserIcons"; // Importe o componente UserIcons
+import Hmenu from "./HMenu"; // Importe o componente Hmenu
+import HSearchBar from "./HSearchBar"; // Importe o componente SearchBar
+import HUserIcons from "./HUserIcons"; // Importe o componente UserIcons
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,8 +20,8 @@ const Header = () => {
           <h1 className="font-bold mr-4">PCReplay</h1>
         </div>
         <Hmenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-        <HsearchBar /> {/* Utilização do componente SearchBar */}
-        <HuserIcons /> {/* Utilização do componente UserIcons */}
+        <HSearchBar /> {/* Utilização do componente SearchBar */}
+        <HUserIcons /> {/* Utilização do componente UserIcons */}
       </div>
     </header>
   );
