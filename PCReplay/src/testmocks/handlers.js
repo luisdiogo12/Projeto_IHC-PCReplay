@@ -1,15 +1,50 @@
+//+:Guarda as bases de dados(os produtos sao gerados aleatoriamente) e os handlers para as requisições
 import { http, HttpResponse } from "msw";
+import generateProducts from "./generateProducts";
 
 // Simulando um banco de dados de usuários
 const usersDB = [
-  { id: 1, username: "user1", password: "pass1", name: "User One" },
-  { id: 2, username: "user2", password: "pass2", name: "User Two" },
-  { id: 3, username: "user3", password: "pass3", name: "User Three" },
+  {
+    id: 1,
+    name: "John",
+    username: "john123",
+    email: "johndoe@example.com",
+    address: {
+      street: "1234 Fake St",
+      city: "Faketown",
+      state: "FS",
+      zip: "12345",
+    },
+    phone: "123-456-7890",
+    membershipStatus: "Active",
+    registrationDate: "2022-01-01",
+    password: "pass123",
+  },
+  {
+    id: 2,
+    name: "Mary",
+    username: "mary123",
+    email: "maryt@example.com",
+    address: {
+      street: "1234 Fake St",
+      city: "Faketown",
+      state: "FS",
+      zip: "12345",
+    },
+    phone: "123-456-7890",
+    membershipStatus: "Active",
+    registrationDate: "2022-01-01",
+    password: "pass123",
+  },
 ];
+const productsDB = generateProducts();
 
 export const handlers = [
   http.get("/api/users", (resolver) => {
     return HttpResponse.json(usersDB);
+  }),
+  http.get("/api/products", (resolver) => {
+    return HttpResponse.json(productsDB);
   }),
   http.post("/api/login", async ({ request }) => {
     const requestBody = await request.json();

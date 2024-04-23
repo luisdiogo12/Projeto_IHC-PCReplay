@@ -2,7 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
-import TestPaje from "./pages/TestPaje";
+import TestPage from "./pages/TestPage.jsx";
+import { UserProvider } from "./testmocks/userContext.jsx";
+import { ProductProvider } from "./testmocks/productContext.jsx";
 
 async function enableMocking() {
   if (process.env.NODE_ENV !== "development") {
@@ -21,7 +23,11 @@ enableMocking().then(() => {
     const root = ReactDOM.createRoot(rootElement);
     root.render(
       <React.StrictMode>
-        <TestPaje />
+        <UserProvider>
+          <ProductProvider>
+            <App />
+          </ProductProvider>
+        </UserProvider>
       </React.StrictMode>
     );
   } else {
