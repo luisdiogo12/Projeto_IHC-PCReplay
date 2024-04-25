@@ -5,6 +5,7 @@ import "./index.css";
 import TestPage from "./pages/TestPage.jsx";
 import { UserProvider } from "./testmockLocalStorage/userContext.jsx";
 import { ProductProvider } from "./testmockLocalStorage/productContext.jsx";
+import Initializer from "./testmockLocalStorage/Initializer";
 
 async function enableMocking() {
   if (process.env.NODE_ENV !== "development") {
@@ -15,7 +16,7 @@ async function enableMocking() {
 
   // `worker.start()` returns a Promise that resolves
   // once the Service Worker is up and ready to intercept requests.
-  return worker.start();
+  return worker.start({});
 }
 enableMocking().then(() => {
   const rootElement = document.getElementById("root");
@@ -25,7 +26,7 @@ enableMocking().then(() => {
       <React.StrictMode>
         <UserProvider>
           <ProductProvider>
-            <App />
+            <Initializer />
           </ProductProvider>
         </UserProvider>
       </React.StrictMode>

@@ -1,1 +1,1 @@
-# IHC_assigment2
+Esta configuração permite que você carregue dados de produtos do localStorage ou os gere automaticamente se não estiverem disponíveis, enquanto mantém a sincronização entre o localStorage e o ProductContext. Além disso, a lógica de carregamento inicial é isolada no Initializer, deixando o ProductProvider focado em fornecer e sincronizar o estado.

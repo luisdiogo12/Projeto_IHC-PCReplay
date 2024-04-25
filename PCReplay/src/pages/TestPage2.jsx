@@ -27,7 +27,7 @@ function TestPage2() {
         {user ? <p>Logged in as: {user.name}</p> : <p>No user is logged in.</p>}
         {userInfo.address && (
           <div>
-            <h3>Address</h3>
+            <h3>Address:</h3>
             <p>
               {userInfo.address.street}, {userInfo.address.city},{" "}
               {userInfo.address.state}, {userInfo.address.zip}

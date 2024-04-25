@@ -83,8 +83,7 @@ function TestPage() {
         <div>{user.name}</div> // Mostrando o usuário logado
       )}
       <h2>Products List</h2>
-      {/*
-      {products.map((product) => (
+      {/* {products.map((product) => (
         <div key={product.id}>
           <h3>{product.name}</h3>
           <p>{product.description}</p>
@@ -95,8 +94,7 @@ function TestPage() {
             style={{ width: "150px" }}
           />
         </div>
-      ))}
-      */}
+      ))} */}
       {message && <p>{message}</p>}
     </div>
   );

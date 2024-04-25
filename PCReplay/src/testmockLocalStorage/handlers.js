@@ -1,35 +1,7 @@
 import { http, HttpResponse } from "msw";
-import generateProducts from "./generateProducts";
 
-const usersDB = [
-  // Usuários pré-definidos com tokens
-  {
-    id: 1,
-    name: "John",
-    username: "john123",
-    email: "johndoe@example.com",
-    password: "pass123",
-    token: "unique_token12345", // Simulando token exclusivo
-    address: { street: "123 Main St", city: "Springfield", state: "IL", zip: "62701" },
-    phone: "555-123-4567",
-    membershipStatus: "Gold",
-    registrationDate: "2021-01-01",
-  },
-  {
-    id: 2,
-    name: "Mary",
-    username: "mary123",
-    email: "maryt@example.com",
-    password: "pass123",
-    token: "unique_token67890", // Simulando token exclusivo
-    address: { street: "456 Elm St", city: "Springfield", state: "IL", zip: "62701" },
-    phone: "555-987-6543",
-    membershipStatus: "Silver",
-    registrationDate: "2021-01-15",
-  },
-];
-
-const productsDB = generateProducts();
+const usersDB = JSON.parse(localStorage.getItem("usersDB"));
+const productsDB = JSON.parse(localStorage.getItem("productsDB"));
 
 export const handlers = [
   http.get("/api/users", (resolver) => {
@@ -72,9 +44,10 @@ export const handlers = [
         username,
         password,
         name,
-        token: `new_token${Date.now()}`, // Gerando um token fictício novo
+        token: `new_token${Date.now()}`,
       };
       usersDB.push(newUser);
+      localStorage.setItem("usersDB", JSON.stringify(usersDB)); // Atualizando o localStorage
       return HttpResponse.json(
         {
           message: "User created successfully",
