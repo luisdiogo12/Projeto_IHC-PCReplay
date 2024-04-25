@@ -24,7 +24,7 @@ export const signupUser = async (username, password, name) => {
 };
 
 // Função genérica para fazer requisições para rotas protegidas
-export const fetchProtectedData = async (endpoint, token) => {
+export const fetchProtectedData = async (endpoint,token) => {
   console.log("Sending token:", token); // Log para verificar o token enviado
   const response = await fetch(`${apiUrl}/${endpoint}`, {
     headers: {

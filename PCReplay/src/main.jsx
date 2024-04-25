@@ -4,6 +4,7 @@ import "./index.css";
 import { UserProvider } from "./mocks/UserContext.jsx";
 import { ProductProvider } from "./mocks/ProductContext.jsx";
 import MainPage from "./pages/MainPage.jsx";
+import Initializer from "./mocks/Initializer";
 
 async function enableMocking() {
   if (process.env.NODE_ENV !== "development") {
@@ -24,7 +25,7 @@ enableMocking().then(() => {
       <React.StrictMode>
         <UserProvider>
           <ProductProvider>
-            <MainPage />
+            <Initializer />
           </ProductProvider>
         </UserProvider>
       </React.StrictMode>

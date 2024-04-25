@@ -3,14 +3,18 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  // Inicializa o estado com o usuário armazenado em localStorage, se houver
-  const [user, setUser] = useState(() => {
-    const savedUser = localStorage.getItem("user");
-    return savedUser ? JSON.parse(savedUser) : null;
-  });
+  const [user, setUser] = useState(null);
 
-  //!: Atualiza localStorage sempre que o usuário mudar
   useEffect(() => {
+    // Carregar o usuário do localStorage na inicialização
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
+  }, [user]);
+
+  useEffect(() => {
+    // Atualiza o localStorage sempre que o usuário mudar
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
     } else {
