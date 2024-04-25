@@ -9,7 +9,7 @@ export const UserProvider = ({ children }) => {
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
-  // Atualiza localStorage sempre que o usuário mudar
+  //!: Atualiza localStorage sempre que o usuário mudar
   useEffect(() => {
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
