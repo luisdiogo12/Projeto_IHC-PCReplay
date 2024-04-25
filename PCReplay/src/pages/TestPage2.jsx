@@ -8,7 +8,7 @@ function TestPage2() {
 
   useEffect(() => {
     if (user && user.token) {
-      fetchProtectedData("user-info") // Ajuste o endpoint se necessário
+      fetchProtectedData("user-info", user.token) // Ajuste o endpoint se necessário
         .then((data) => {
           console.log("TestPage2-Data received:", data);
           setUserInfo(data);

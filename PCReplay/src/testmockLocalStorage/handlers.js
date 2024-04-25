@@ -10,6 +10,10 @@ const usersDB = [
     email: "johndoe@example.com",
     password: "pass123",
     token: "unique_token12345", // Simulando token exclusivo
+    address: { street: "123 Main St", city: "Springfield", state: "IL", zip: "62701" },
+    phone: "555-123-4567",
+    membershipStatus: "Gold",
+    registrationDate: "2021-01-01",
   },
   {
     id: 2,
@@ -18,6 +22,10 @@ const usersDB = [
     email: "maryt@example.com",
     password: "pass123",
     token: "unique_token67890", // Simulando token exclusivo
+    address: { street: "456 Elm St", city: "Springfield", state: "IL", zip: "62701" },
+    phone: "555-987-6543",
+    membershipStatus: "Silver",
+    registrationDate: "2021-01-15",
   },
 ];
 
@@ -89,13 +97,11 @@ export const handlers = [
         message: "No authorization header provided",
       });
     }
-
     const token = authHeader.split(" ")[1];
     const user = usersDB.find((u) => u.token === token);
     if (!user) {
       return HttpResponse.status(401).json({ message: "Unauthorized" });
     }
-
     return HttpResponse.json({
       id: user.id,
       name: user.name,

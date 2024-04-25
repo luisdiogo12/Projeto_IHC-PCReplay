@@ -24,8 +24,7 @@ export const signupUser = async (username, password, name) => {
 };
 
 // Função genérica para fazer requisições para rotas protegidas
-export const fetchProtectedData = async (endpoint) => {
-  const token = localStorage.getItem("token");
+export const fetchProtectedData = async (endpoint,token) => {
   console.log("Sending token:", token); // Log para verificar o token enviado
   const response = await fetch(`${apiUrl}/${endpoint}`, {
     headers: {
@@ -38,7 +37,6 @@ export const fetchProtectedData = async (endpoint) => {
     console.error("Response not OK, status:", response.status); // Log detalhado do erro de resposta
     throw new Error("Failed to fetch the data");
   }
-
   const data = await response.json(); // Pode ser útil colocar um try/catch aqui
   console.log("fetchProtectedData-Data received:", data); // Ver dados recebidos
   return data;
