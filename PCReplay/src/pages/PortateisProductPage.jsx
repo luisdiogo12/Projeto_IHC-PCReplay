@@ -2,14 +2,17 @@ import React, { useState, useEffect } from "react";
 import LayoutProductPage from "./LayoutProductPage";
 import ProductCard from "../components/ProductCard";
 import { useProducts } from "../mocks/ProductContext";
-import { fetchProducts } from "../mocks/api";
+import { fetchProductsByDescription } from "../mocks/api";
 
 const PortateisProductPage = () => {
   console.log("PortateisProductPage component mounted");
+  const filters = {
+    category: "portátil",
+  };
   const { products, updateProducts } = useProducts();
   const [error, setError] = useState("");
   useEffect(() => {
-    fetchProducts()
+    fetchProductsByDescription(filters)
       .then((data) => {
         updateProducts(data); // Atualiza o contexto com os produtos obtidos
       })

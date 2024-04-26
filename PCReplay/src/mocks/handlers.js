@@ -6,9 +6,6 @@ const productsDB = JSON.parse(localStorage.getItem("productsDB"));
 export const handlers = [
   http.get("/api/users", (resolver) => {
     return HttpResponse.json(usersDB);
-  }), 
-  http.get("/api/products", (resolver) => {
-    return HttpResponse.json(productsDB);
   }),
   http.post("/api/login", async ({ request }) => {
     const requestBody = await request.json();
@@ -84,5 +81,59 @@ export const handlers = [
       membershipStatus: user.membershipStatus,
       registrationDate: user.registrationDate,
     });
+  }),
+  http.get("/api/products", (resolver) => {
+    return HttpResponse.json(productsDB);
+  }), 
+  http.get("/api/products", (resolver, request) => {
+    const query = request.url.searchParams;
+    let filteredProducts = productsDB;
+
+    // Verifica se existem parâmetros de query e aplica os filtros
+    if (query.toString()) {
+      // Verifica e aplica filtro por categoria
+      const categoryFilter = query.get("category");
+      if (categoryFilter) {
+        filteredProducts = filteredProducts.filter(
+          (product) => product.category === categoryFilter
+        );
+      }
+
+      // Verifica e aplica filtro por CPU
+      const cpuFilter = query.get("cpu");
+      if (cpuFilter) {
+        filteredProducts = filteredProducts.filter(
+          (product) => product.characteristics.cpu === cpuFilter
+        );
+      }
+
+      // Verifica e aplica filtro por RAM
+      const ramFilter = query.get("ram");
+      if (ramFilter) {
+        filteredProducts = filteredProducts.filter(
+          (product) => product.characteristics.ram === ramFilter
+        );
+      }
+
+      // Repita para outros filtros de características
+      // Filtro por Memória
+      const memoriaFilter = query.get("memoria");
+      if (memoriaFilter) {
+        filteredProducts = filteredProducts.filter(
+          (product) => product.characteristics.memoria === memoriaFilter
+        );
+      }
+
+      // Filtro por Bateria
+      const bateriaFilter = query.get("bateria");
+      if (bateriaFilter) {
+        filteredProducts = filteredProducts.filter(
+          (product) => product.characteristics.bateria === bateriaFilter
+        );
+      }
+    }
+
+    // Retorna os produtos filtrados ou todos os produtos
+    return HttpResponse.json(filteredProducts);
   }),
 ];

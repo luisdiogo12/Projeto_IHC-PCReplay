@@ -59,4 +59,21 @@ export const fetchProducts = async () => {
     throw error;
   }
 };
-
+export const fetchProductsByDescription = async (filters) => {
+  try {
+    const queryParams = new URLSearchParams(filters);
+    const response = await fetch(`${apiUrl}/products?${queryParams}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+    const data = await response.json();
+    console.log("fetchProductsByDescription-Data received:", data);
+    if (!response.ok) {
+      throw new Error(data.message || "Failed to fetch products");
+    }
+    return data;
+  } catch (error) {
+    console.error("Error fetching products:", error.message);
+    throw error;
+  }
+};

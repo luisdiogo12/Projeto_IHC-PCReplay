@@ -1,7 +1,7 @@
 //+: gera um array de produtos para serem usados como base de dados no handlers.js
 const generateProducts = () => {
   // Definição de categorias
-  const categories = ["desktop", "laptop", "macbook"];
+  const categories = ["desktop", "portátil", "macbook"];
 
   // Definição de características possíveis
   const features = {
