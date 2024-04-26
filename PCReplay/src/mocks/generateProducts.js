@@ -28,7 +28,7 @@ const generateProducts = () => {
       id: index + 1,
       //imageUrl: imagePaths[category], // Imagem baseada na categoria
       imageUrl: `https://fastly.picsum.photos/id/9/5000/3269.jpg?hmac=cZKbaLeduq7rNB8X-bigYO8bvPIWtT-mh8GRXtU3vPc`, // Imagem aleatória
-      name: `Product ${index + 1}`,
+      name: `${category} ${index + 1}`,
       description: `Description for Product ${
         index + 1
       }. It has some unique features.`,

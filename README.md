@@ -1,6 +1,7 @@
 # IHC_assigment2
 ## Descrição do Projeto
-
+rascunho:
+os produtos sao gerados quando o website é ligado (se n tiver já lá no localStorage) e ficam permantes até o website ser desligado ou o localStorage ser limpo
 ## Autores do Projeto
 
 Este projeto foi realizado por :

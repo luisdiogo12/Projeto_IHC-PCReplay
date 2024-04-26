@@ -41,7 +41,7 @@ export const fetchProtectedData = async (endpoint,token) => {
   console.log("fetchProtectedData-Data received:", data); // Ver dados recebidos
   return data;
 };
-// Função para buscar os produtos
+// Função para buscar os produtos todos
 export const fetchProducts = async () => {
   try {
     const response = await fetch(`${apiUrl}/products`, {
