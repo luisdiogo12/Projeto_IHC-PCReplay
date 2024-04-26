@@ -3,8 +3,8 @@ import { useUser } from "../mocks/UserContext";
 import { useProducts } from "../mocks/ProductContext";
 
 const LocalStorageViewer = () => {
-  const { user, updateUser } = useUser();
-  const { products, updateProducts } = useProducts();
+  const { user } = useUser();
+  const { products} = useProducts();
   const [localStorageData, setLocalStorageData] = useState({});
 
   useEffect(() => {

@@ -6,7 +6,7 @@ const productsDB = JSON.parse(localStorage.getItem("productsDB"));
 export const handlers = [
   http.get("/api/users", (resolver) => {
     return HttpResponse.json(usersDB);
-  }),
+  }), 
   http.get("/api/products", (resolver) => {
     return HttpResponse.json(productsDB);
   }),

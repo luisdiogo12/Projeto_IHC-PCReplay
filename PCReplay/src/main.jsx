@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { UserProvider } from "./mocks/UserContext.jsx";
 import { ProductProvider } from "./mocks/ProductContext.jsx";
-import MainPage from "./pages/MainPage.jsx";
 import Initializer from "./mocks/Initializer";
 
 async function enableMocking() {
