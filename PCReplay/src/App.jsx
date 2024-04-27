@@ -7,6 +7,7 @@ import DesktopsProductPage from "./pages/DesktopsProductPage.jsx";
 import PortateisProductPage from "./pages/PortateisProductPage.jsx";
 import LaptopsProductPage from "./pages/LaptopsProductPage.jsx";
 import MacbooksProductPage from "./pages/MacbooksProductPage.jsx";
+import ApiViewer from "./pages/ApiViewer.jsx";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/portateis" element={<PortateisProductPage />} />
         <Route path="/laptops" element={<LaptopsProductPage />} />
         <Route path="/macbooks" element={<MacbooksProductPage />} />
+        <Route path="/apiviewer" element={<ApiViewer />} />
       </Routes>
     </Router>
   );

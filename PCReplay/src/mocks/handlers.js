@@ -82,58 +82,69 @@ export const handlers = [
       registrationDate: user.registrationDate,
     });
   }),
-  http.get("/api/products", (resolver) => {
+  http.get("/api/allproducts", (resolver) => {
     return HttpResponse.json(productsDB);
-  }), 
-  http.get("/api/products", (resolver, request) => {
-    const query = request.url.searchParams;
-    let filteredProducts = productsDB;
+  }),
+  http.post("/api/products", async ({ request }) => {
+    try {
+      const requestBody = await request.json();
+      const { params } = requestBody;
+      if (params) {
+        let filteredProducts = productsDB;
 
-    // Verifica se existem parâmetros de query e aplica os filtros
-    if (query.toString()) {
-      // Verifica e aplica filtro por categoria
-      const categoryFilter = query.get("category");
-      if (categoryFilter) {
-        filteredProducts = filteredProducts.filter(
-          (product) => product.category === categoryFilter
-        );
+        const idFilter = params.id;
+        if (idFilter) {
+          filteredProducts = filteredProducts.filter(
+            (product) => product.id === idFilter
+          );
+        }
+        const priceFilter = params.price;
+        if (priceFilter) {
+          filteredProducts = filteredProducts.filter(
+            (product) => product.price === priceFilter
+          );
+        }
+        const categoryFilter = params.category;
+        if (categoryFilter) {
+          filteredProducts = filteredProducts.filter(
+            (product) => product.category === categoryFilter
+          );
+        }
+        if (params.characteristics) {
+        const cpuFilter = params.characteristics.cpu;
+        if (cpuFilter) {
+          filteredProducts = filteredProducts.filter(
+            (product) => product.characteristics.cpu === cpuFilter
+          );
+        }
+        const ramFilter = params.characteristics.ram;
+        if (ramFilter) {
+          filteredProducts = filteredProducts.filter(
+            (product) => product.characteristics.ram === ramFilter
+          );
+        }
+        const memoriaFilter = params.characteristics.memoria;
+        if (memoriaFilter) {
+          filteredProducts = filteredProducts.filter(
+            (product) => product.characteristics.memoria === memoriaFilter
+          );
+        }
+        const bateriaFilter = params.characteristics.bateria;
+        if (bateriaFilter) {
+          filteredProducts = filteredProducts.filter(
+            (product) => product.characteristics.bateria === bateriaFilter
+          );
+        }
       }
-
-      // Verifica e aplica filtro por CPU
-      const cpuFilter = query.get("cpu");
-      if (cpuFilter) {
-        filteredProducts = filteredProducts.filter(
-          (product) => product.characteristics.cpu === cpuFilter
-        );
+        return HttpResponse.json(filteredProducts);
       }
-
-      // Verifica e aplica filtro por RAM
-      const ramFilter = query.get("ram");
-      if (ramFilter) {
-        filteredProducts = filteredProducts.filter(
-          (product) => product.characteristics.ram === ramFilter
-        );
-      }
-
-      // Repita para outros filtros de características
-      // Filtro por Memória
-      const memoriaFilter = query.get("memoria");
-      if (memoriaFilter) {
-        filteredProducts = filteredProducts.filter(
-          (product) => product.characteristics.memoria === memoriaFilter
-        );
-      }
-
-      // Filtro por Bateria
-      const bateriaFilter = query.get("bateria");
-      if (bateriaFilter) {
-        filteredProducts = filteredProducts.filter(
-          (product) => product.characteristics.bateria === bateriaFilter
-        );
-      }
-    }
-
-    // Retorna os produtos filtrados ou todos os produtos
-    return HttpResponse.json(filteredProducts);
+     } catch (error) {
+      console.error("Error handling request:", error.message);
+      return HttpResponse.status(500).json({
+        message: "Internal server error",
+      });
+    } 
+    
   }),
 ];
+

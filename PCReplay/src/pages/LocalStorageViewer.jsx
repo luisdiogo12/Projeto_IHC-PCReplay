@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useUser } from "../mocks/UserContext";
 import { useProducts } from "../mocks/ProductContext";
+import { fetchProductsByDescription } from "../mocks/api";
 
 const LocalStorageViewer = () => {
   const { user } = useUser();
-  const { products} = useProducts();
+  const { products } = useProducts();
   const [localStorageData, setLocalStorageData] = useState({});
+  const filters = {
+    category: "portátil",
+  };
 
   useEffect(() => {
     //!: Carrega todos os dados do localStorage
@@ -16,6 +20,16 @@ const LocalStorageViewer = () => {
     }
     setLocalStorageData(data);
   }, []);
+  useEffect(() => {
+    fetchProductsByDescription(filters)
+      .then((data) => {
+        updateProducts(data); // Atualiza o contexto com os produtos obtidos
+      })
+      .catch((error) => {
+        console.error("Failed to load products:", error);
+        setError(error.message); // Armazena o erro no estado, se houver
+      });
+  }, []); // Dependência no array de useEffect, removida para evitar loop infinito
 
   return (
     <div>

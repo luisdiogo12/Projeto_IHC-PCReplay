@@ -44,7 +44,7 @@ export const fetchProtectedData = async (endpoint,token) => {
 // Função para buscar os produtos todos
 export const fetchProducts = async () => {
   try {
-    const response = await fetch(`${apiUrl}/products`, {
+    const response = await fetch(`${apiUrl}/allproducts`, {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     });
@@ -59,21 +59,16 @@ export const fetchProducts = async () => {
     throw error;
   }
 };
-export const fetchProductsByDescription = async (filters) => {
-  try {
-    const queryParams = new URLSearchParams(filters);
-    const response = await fetch(`${apiUrl}/products?${queryParams}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
-    const data = await response.json();
-    console.log("fetchProductsByDescription-Data received:", data);
-    if (!response.ok) {
-      throw new Error(data.message || "Failed to fetch products");
-    }
-    return data;
-  } catch (error) {
-    console.error("Error fetching products:", error.message);
-    throw error;
+export const fetchProductsByDescription = async (params) => {
+  const response = await fetch(`${apiUrl}/products`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ params }),
+  });
+  const data = await response.json(); // Converte a resposta para JSON
+  console.log("api-Data:", data); // Log para verificar os dados recebidos
+  if (!response.ok) {
+    throw new Error(data.message || "Failed to fetch products");
   }
+  return data; // Retorna a resposta para ser manipulada pela página de login
 };
