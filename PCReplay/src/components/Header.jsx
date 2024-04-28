@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
-import Hmenu from "./HMenu.jsx"; // Importe o componente Hmenu
-import HSearchBar from "./HSearchBar"; // Importe o componente SearchBar
-import HUserIcons from "./HUserIcons"; // Importe o componente UserIcons
+import Hmenu from "./Hmenu.jsx"; // Importe o componente Hmenu
+import HSearchBar from "./HsearchBar.jsx"; // Importe o componente SearchBar
+import HUserIcons from "./HuserIcons.jsx"; // Importe o componente UserIcons
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
