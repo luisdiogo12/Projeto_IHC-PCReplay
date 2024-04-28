@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { UserProvider } from "./mocks/UserContext.jsx";
 import { ProductProvider } from "./mocks/ProductContext.jsx";
+import { FilterProvider } from "./mocks/FilterContext";
 import Initializer from "./mocks/Initializer";
 
 async function enableMocking() {
@@ -27,7 +28,9 @@ enableMocking().then(() => {
       <React.StrictMode>
         <UserProvider>
           <ProductProvider>
-            <Initializer />
+            <FilterProvider>
+              <Initializer />
+            </FilterProvider>
           </ProductProvider>
         </UserProvider>
       </React.StrictMode>

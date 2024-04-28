@@ -7,8 +7,16 @@ const ApiViewer = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const filters = {
-    characteristics: { cpu: "Intel i7" },
-    category: "portátil",
+    id: [7],
+    name: [],
+    price: ["1175.31"],
+    category: ["macbook"],
+    characteristics: {
+      cpu: ["Intel i5", "AMD Ryzen 5"],
+      ram: ["16GB"],
+      memoria: [],
+      bateria: [],
+    },
   };
 
  useEffect(() => {
@@ -31,7 +39,18 @@ const ApiViewer = () => {
         <ul>
           {data.map((item) => (
             <li key={item.id}>
-              {item.name} - {item.description}
+              <h3 className="font-bold mb-1">
+              {item.name}:
+			  </h3>
+			  <p>price: {item.price}</p>
+			  <p>category: {item.category}</p>
+              <ul>
+                {Object.keys(item.characteristics).map((key) => (
+                  <li key={key}>
+                    {key}: {item.characteristics[key]}
+                  </li>
+                ))}
+              </ul>
             </li>
           ))}
         </ul>

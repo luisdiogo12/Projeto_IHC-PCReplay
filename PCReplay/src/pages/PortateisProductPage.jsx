@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import LayoutProductPage from "./LayoutProductPage";
 import ProductCard from "../components/ProductCard";
 import { useProducts } from "../mocks/ProductContext";
+import { useFilters } from "../mocks/FilterContext"; 
 import { fetchProductsByDescription } from "../mocks/api";
 
 const PortateisProductPage = () => {
   console.log("PortateisProductPage component mounted");
-  const filters = {
-    category: "portátil",
-  };
+  const { filters } = useFilters();
   const { products, updateProducts } = useProducts();
   const [error, setError] = useState("");
+  console.log("Filters:", filters);
   useEffect(() => {
     fetchProductsByDescription(filters)
       .then((data) => {
@@ -20,7 +20,7 @@ const PortateisProductPage = () => {
         console.error("Failed to load products:", error);
         setError(error.message); // Armazena o erro no estado, se houver
       });
-  }, []); // Dependência no array de useEffect, removida para evitar loop infinito
+  }, [filters]); // Dependência no array de useEffect, removida para evitar loop infinito
 
   return (
     <LayoutProductPage>

@@ -92,59 +92,59 @@ export const handlers = [
       if (params) {
         let filteredProducts = productsDB;
 
-        const idFilter = params.id;
-        if (idFilter) {
-          filteredProducts = filteredProducts.filter(
-            (product) => product.id === idFilter
-          );
-        }
-        const priceFilter = params.price;
-        if (priceFilter) {
-          filteredProducts = filteredProducts.filter(
-            (product) => product.price === priceFilter
-          );
-        }
-        const categoryFilter = params.category;
-        if (categoryFilter) {
-          filteredProducts = filteredProducts.filter(
-            (product) => product.category === categoryFilter
-          );
-        }
-        if (params.characteristics) {
-        const cpuFilter = params.characteristics.cpu;
-        if (cpuFilter) {
-          filteredProducts = filteredProducts.filter(
-            (product) => product.characteristics.cpu === cpuFilter
-          );
-        }
-        const ramFilter = params.characteristics.ram;
-        if (ramFilter) {
-          filteredProducts = filteredProducts.filter(
-            (product) => product.characteristics.ram === ramFilter
-          );
-        }
-        const memoriaFilter = params.characteristics.memoria;
-        if (memoriaFilter) {
-          filteredProducts = filteredProducts.filter(
-            (product) => product.characteristics.memoria === memoriaFilter
-          );
-        }
-        const bateriaFilter = params.characteristics.bateria;
-        if (bateriaFilter) {
-          filteredProducts = filteredProducts.filter(
-            (product) => product.characteristics.bateria === bateriaFilter
-          );
-        }
-      }
+        const filterProducts = (filterValue, compareFunction) => {
+          if (filterValue && filterValue.length > 0) {
+            filteredProducts = filteredProducts.filter((product) =>
+              compareFunction(product, filterValue)
+            );
+          }
+        };
+
+        filterProducts(params.id, (product, idFilter) =>
+          idFilter.includes(product.id)
+        );
+        filterProducts(params.name, (product, nameFilter) =>
+          nameFilter.includes(product.name)
+        );
+        filterProducts(params.price, (product, priceFilter) =>
+          priceFilter.includes(product.price)
+        );
+        filterProducts(params.category, (product, categoryFilter) =>
+          categoryFilter.includes(product.category)
+        );
+
+        const characteristicsFilter = params.characteristics;
+        filteredProducts = filteredProducts.filter((product) => {
+          const productCharacteristics = product.characteristics;
+          let shouldIncludeProduct = true;
+
+          // Itera sobre todas as chaves em characteristicsFilter
+          for (let key in characteristicsFilter) {
+            // Se a chave atual existe em productCharacteristics e seu valor está no array de valores desejados
+            if (characteristicsFilter[key].length == 0) {
+              continue;
+            }
+            
+            if (
+              productCharacteristics[key] &&
+              characteristicsFilter[key].includes(productCharacteristics[key])
+            ) {
+              // O produto passa no filtro
+              shouldIncludeProduct &= true;
+            }else{
+              shouldIncludeProduct = false;
+               break;
+            }
+          }
+          return shouldIncludeProduct;
+        });
         return HttpResponse.json(filteredProducts);
+      } else {
+        return HttpResponse.json(productsDB);
       }
-     } catch (error) {
-      console.error("Error handling request:", error.message);
-      return HttpResponse.status(500).json({
-        message: "Internal server error",
-      });
-    } 
-    
+    } catch (error) {
+      return HttpResponse.internalServerError();
+    }
   }),
 ];
 
