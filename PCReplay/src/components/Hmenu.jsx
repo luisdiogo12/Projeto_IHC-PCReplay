@@ -1,6 +1,26 @@
 import React from "react";
+import { useFilters } from "../mocks/FilterContext";
+import { useNavigate } from "react-router-dom"; // Importe useNavigate para navegação programática
 
 const HMenu = ({ isMenuOpen, setIsMenuOpen }) => {
+  const navigate = useNavigate();
+  const { updateFilter } = useFilters(); // Importando updateFilters do seu FilterContext
+
+  const handleCategoryClick = (categories, path) => {
+    // Atualiza diretamente as categorias no filtro 
+       updateFilter({
+         id: [],
+         name: [],
+         price: [],
+         category: categories,
+         characteristics: { cpu: [], ram: [], memoria: [], bateria: [] },
+       });
+
+    console.log("FILTERS Updated with Categories:", categories);
+    // Redireciona para a rota especificada
+    navigate(path);
+  };
+
   return (
     <nav
       className={`fixed top-12 bottom-0 left-0 bg-gray-800 w-64 transform ${
@@ -9,42 +29,66 @@ const HMenu = ({ isMenuOpen, setIsMenuOpen }) => {
     >
       <ul className="flex flex-col space-y-4 p-4 mt-10">
         <li>
-          <a
-            href="/produtos/computadores"
+          <button
             className="text-white text-lg font-bold"
+            onClick={() => handleCategoryClick([], "/productsPage")}
           >
             Computadores
-          </a>
-          <ul className=" pl-4 text-gray-300">
+          </button>
+          <ul className="pl-4 text-gray-300">
             <li className="py-2 font-bold">
-              <a href="/produtos/desktops">Desktops</a>
+              <button
+                onClick={() =>
+                  handleCategoryClick(["desktop"], "/productsPage")
+                }
+              >
+                Desktops
+              </button>
             </li>
             <li className="py-2 font-bold">
-              <a href="/produtos/laptops">Laptops</a>
+              <button
+                onClick={() =>
+                  handleCategoryClick(["portátil", "macbook"], "/productsPage")
+                }
+              >
+                Laptops
+              </button>
             </li>
-            <ul className=" pl-4 text-gray-300">
-              <li className="">
-                <a href="/produtos/portateis">Portáteis</a>
-              </li>
-              <li className="">
-                <a href="/produtos/macbooks">MacBooks</a>
-              </li>
-            </ul>
+            <li>
+              <button
+                onClick={() =>
+                  handleCategoryClick(["portátil"], "/productsPage")
+                }
+              >
+                Portáteis
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() =>
+                  handleCategoryClick(["macbook"], "/productsPage")
+                }
+              >
+                MacBooks
+              </button>
+            </li>
           </ul>
         </li>
         <li>
-          <a
-            href="/produtos/ferramentas"
+          <button
             className="text-white text-lg font-bold"
+            onClick={() => navigate("/produtos/ferramentas")}
           >
             Ferramentas
-          </a>
+          </button>
           <ul className="pl-4 text-gray-300">
             <li className="py-2 font-bold">
-              <a href="/calculadora">Calculadora</a>
+              <button onClick={() => navigate("/calculadora")}>
+                Calculadora
+              </button>
             </li>
             <li className="py-2 font-bold">
-              <a href="/guiao">Guião</a>
+              <button onClick={() => navigate("/guiao")}>Guião</button>
             </li>
           </ul>
         </li>

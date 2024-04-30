@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useFilters } from "../mocks/FilterContext";
 
 const Filter = () => {
-	const { filters, setFilters } = useFilters(); // Use o hook useFilters para acessar e atualizar os filtros
+	const { filters, updateFilter } = useFilters(); // Use o hook useFilters para acessar e atualizar os filtros
 
   const handleCheckboxChange = (event) => {
     const { name,value, checked } = event.target;
 	console.log("event.target",event.target);
-    setFilters((prevFilters) => {
+    updateFilter((prevFilters) => {
       const newFilters = { ...prevFilters };
       if (checked) {
         // Se a checkbox foi marcada, adicione o valor ao array de filtros
@@ -22,7 +22,7 @@ const Filter = () => {
           name
         ].filter((filterValue) => filterValue !== value);
       }
-	  console.log(newFilters);
+      console.log(newFilters);
       return newFilters;
     });
   };

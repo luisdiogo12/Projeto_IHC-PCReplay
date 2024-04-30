@@ -2,14 +2,17 @@ import React, { useState, useEffect } from "react";
 import LayoutProductPage from "./LayoutProductPage";
 import ProductCard from "../components/ProductCard";
 import { useProducts } from "../mocks/ProductContext";
-import { fetchProducts } from "../mocks/api";
+import { useFilters } from "../mocks/FilterContext"; 
+import { fetchProductsByDescription } from "../mocks/api";
 
-const MacbooksProductPage = () => {
-  console.log("MacbooksProductPage component mounted");
+const ProductsPage = () => {
+  console.log("ProductPages component mounted");
+  const { filters } = useFilters();
   const { products, updateProducts } = useProducts();
   const [error, setError] = useState("");
   useEffect(() => {
-    fetchProducts()
+    console.log("FILTERS:", filters);
+    fetchProductsByDescription(filters)
       .then((data) => {
         updateProducts(data); // Atualiza o contexto com os produtos obtidos
       })
@@ -17,7 +20,7 @@ const MacbooksProductPage = () => {
         console.error("Failed to load products:", error);
         setError(error.message); // Armazena o erro no estado, se houver
       });
-  }, []); // Dependência no array de useEffect, removida para evitar loop infinito
+  }, [filters]); // Dependência no array de useEffect, removida para evitar loop infinito
 
   return (
     <LayoutProductPage>
@@ -29,4 +32,4 @@ const MacbooksProductPage = () => {
   );
 };
 
-export default MacbooksProductPage;
+export default ProductsPage;

@@ -1,28 +1,37 @@
 //!: Serve para mostrar os dados de uma API em uma página sem usar o mock de produtos
+//!: apenas usa os contextos para a visualizacao na LocalStorageViewer
 import React, { useState, useEffect } from "react";
 import { fetchProductsByDescription } from "../mocks/api";
+import { useFilters } from "../mocks/FilterContext";
+import { useProducts } from "../mocks/ProductContext";
+
+
 
 const ApiViewer = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const filters = {
-    id: [7],
+  const { products, updateProducts } = useProducts();
+  const { filters,setFilters,updateFilters, addToFilter } = useFilters();
+  const Constfilters = {
+    id: [2],
     name: [],
-    price: ["1175.31"],
-    category: ["macbook"],
+    price: [],
+    category: [],
     characteristics: {
-      cpu: ["Intel i5", "AMD Ryzen 5"],
-      ram: ["16GB"],
+      cpu: [],
+      ram: [],
       memoria: [],
       bateria: [],
     },
   };
 
  useEffect(() => {
-    fetchProductsByDescription(filters)
+    updateFilters(Constfilters);
+    fetchProductsByDescription(Constfilters)
       .then((data) => {
         setData(data); // Atualiza o estado com os produtos obtidos
+        updateProducts(data);
       })
       .catch((error) => {
         console.error("Failed to load products:", error);

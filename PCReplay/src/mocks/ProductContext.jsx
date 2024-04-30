@@ -11,7 +11,7 @@ export function ProductProvider({ children }) {
       setProducts(JSON.parse(savedProducts));
       console.log("Products loaded from localStorage");
     }
-  }, []);
+  }, []); //!:vazia-feito será executado apenas uma vez: após a primeira renderização do componente
 
   const updateProducts = (newProducts) => {
     setProducts(newProducts);
@@ -25,7 +25,7 @@ export function ProductProvider({ children }) {
   };
 
   return (
-    <ProductContext.Provider value={{ products, updateProducts }}>
+    <ProductContext.Provider value={{ products, updateProducts, setProducts }}>
       {children}
     </ProductContext.Provider>
   );
