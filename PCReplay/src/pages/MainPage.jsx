@@ -3,14 +3,16 @@ import ProductCard from "../components/ProductCard";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useProducts } from "../mocks/ProductContext";
-import { fetchProducts } from "../mocks/api";
+//
+import { fetchProductsByDescription } from "../mocks/api";
 
 const MainPage = () => {
   console.log("MainPage component mounted");
   const { products, updateProducts } = useProducts();
   const [error, setError] = useState("");
   useEffect(() => {
-    fetchProducts()
+    //fetchProducts()
+    fetchProductsByDescription()
       .then((data) => {
         updateProducts(data); // Atualiza o contexto com os produtos obtidos
       })

@@ -82,9 +82,6 @@ export const handlers = [
       registrationDate: user.registrationDate,
     });
   }),
-  http.get("/api/allproducts", (resolver) => {
-    return HttpResponse.json(productsDB);
-  }),
   http.post("/api/products", async ({ request }) => {
     try {
       const requestBody = await request.json();

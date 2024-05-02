@@ -41,24 +41,6 @@ export const fetchProtectedData = async (endpoint,token) => {
   console.log("fetchProtectedData-Data received:", data); // Ver dados recebidos
   return data;
 };
-// Função para buscar os produtos todos
-export const fetchProducts = async () => {
-  try {
-    const response = await fetch(`${apiUrl}/allproducts`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" }
-    });
-    const data = await response.json();
-    console.log("fetchProducts-Data received:", data);
-    if (!response.ok) {
-      throw new Error(data.message || "Failed to fetch products");
-    }
-    return data;
-  } catch (error) {
-    console.error("Error fetching products:", error.message);
-    throw error;
-  }
-};
 export const fetchProductsByDescription = async (params) => {
   const response = await fetch(`${apiUrl}/products`, {
     method: "POST",
