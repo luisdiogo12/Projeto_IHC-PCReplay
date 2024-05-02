@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "../components/Header";
-import ProductCard from "../components/ProductCard";
 import Footer from "../components/Footer";
 import CalculatorCard from "../components/CalculatorCard";
 
@@ -212,7 +211,7 @@ const CalculatorPage = () => {
                                                 </td>
                                             </tr>
                                         </table>
-                                       
+
                                     </div>
                                 </form>
                             </div>
