@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFilters } from "../mocks/FilterContext";
 
 const Filter = () => {
@@ -26,6 +26,11 @@ const Filter = () => {
       return newFilters;
     });
   };
+  //!: Atualizar o checkbox de acordo com o estado do filtro
+  useEffect(() => {
+    console.log("Filters updated:", filters);
+
+  }, []);
   return (
     <div className="sidebar w-64 py-20 px-4">
       {" "}
