@@ -5,6 +5,7 @@ import HSearchBar from "./HSearchBar";
 import HUserIcons from "./HUserIcons"; 
 import { useNavigate } from "react-router-dom";
 
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
