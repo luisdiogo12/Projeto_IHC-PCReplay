@@ -8,7 +8,7 @@ Este projeto foi realizado por :
 
 **Autores:**
 - [Luís Manuel Trindade Diogo, NºMec.: 108668](https://github.com/luisdiogo12)
-- [, NºMec.: ](https://github.com/)
+- [João André Moreira Rodrigues, NºMec.: 103947 ](https://github.com/joaoamrodrigues)
 - [, NºMec.: ](https://github.com/)
 - [, NºMec.: ](https://github.com/)
 
