@@ -4,8 +4,8 @@ import {
   AiOutlineShoppingCart,
   AiOutlineUser,
 } from "react-icons/ai";
-import IFavoritesSidebar from "./Favorites/IFavoritesSidebar";
-import ICartSidebar from "./Cart/ICartSidebar";
+import IFavoritesSidebar from "./Cart_Favorites/IFavoritesSidebar";
+import ICartSidebar from "./Cart_Favorites/ICartSidebar";
 import IProfileSidebar from "./Profile/IProfileSidebar";
 
 const HUserIcons = () => {

@@ -1,4 +1,5 @@
 import React from "react";
+import { useUser } from "../../mocks/UserContext";
 
 const PLogged = ({ user, onLogout }) => {
   return (

@@ -9,53 +9,95 @@ export const handlers = [
   }),
   http.post("/api/login", async ({ request }) => {
     const requestBody = await request.json();
-    const { username, password } = requestBody; //extração do username e password do corpo da requisição
+    const { email, password } = requestBody; //extração do username e password do corpo da requisição
     //!: set user to the user that matches the username and password
     const user = usersDB.find(
-      (u) => u.username === username && u.password === password
+      (u) => u.email === email && u.password === password
     );
     //!: if user is found, return a successful login message with the user's token
     if (user) {
       return HttpResponse.json({
         message: "Login Successful",
-        name: user.name,
-        username: user.username,
-        email: user.email,
         id: user.id,
+        name: user.name,
+        email: user.email,
         token: user.token, //!: Retornando token específico do usuário
+        address: user.address,
+        phone: user.phone,
+        registrationDate: user.registrationDate,
+        wishlist: user.wishlist,
+        cart: user.cart,
+        myproducts: user.myproducts,
       });
     } else {
       return HttpResponse.json(
-        { message: "Invalid credentials" },
+        { message: "Credenciais Inválidas" },
         { status: 401 }
       );
     }
   }),
   http.post("/api/signup", async ({ request }) => {
     const requestBody = await request.json();
-    const { username, password, name } = requestBody;
-    const exists = usersDB.some((u) => u.username === username);
+    const { email, password, name } = requestBody;
+    // Verifica se todos os campos foram preenchidos
+    if (!email || !password || !name) {
+      return HttpResponse.json(
+        { message: "Todos os parametros são obrigatórios"},
+        { status: 400 }
+      );
+    }
+    // Verifica se a senha tem pelo menos 8 caracteres
+    if (password.length < 8) {
+      return HttpResponse.json(
+        { message: "Password deve ter pelo menos 8 caracteres" },
+        { status: 400 }
+      );
+    }
+    // Verifica se o email é válido
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return HttpResponse.json(
+        { message: "Formato de email inválido" },
+        { status: 400 }
+      );
+    }
+    // Verifica se o email já está cadastrado
+    const exists = usersDB.some((u) => u.email === email);
     if (!exists) {
       const newUser = {
         id: usersDB.length + 1,
-        username,
+        email,
         password,
         name,
         token: `new_token${Date.now()}`,
+        address: {street: "", city: "", state: "", zip: ""},	
+        phone: "",
+        registrationDate: new Date().toISOString(),
+        wishlist: [],
+        cart: [],
+        myproducts: [],
       };
       usersDB.push(newUser);
       localStorage.setItem("usersDB", JSON.stringify(usersDB)); // Atualizando o localStorage
       return HttpResponse.json(
         {
           message: "User created successfully",
+          name: newUser.name,
+          email: newUser.email,
           id: newUser.id,
           token: newUser.token,
+          address: newUser.address,
+          phone: newUser.phone,
+          registrationDate: newUser.registrationDate,
+          wishlist: newUser.wishlist,
+          cart: newUser.cart,
+          myproducts: newUser.myproducts,
         },
         { status: 201 }
       );
     } else {
       return HttpResponse.json(
-        { message: "Username already exists" },
+        { message: "Conta já existe" },
         { status: 409 }
       );
     }
@@ -78,8 +120,10 @@ export const handlers = [
       email: user.email,
       address: user.address,
       phone: user.phone,
-      membershipStatus: user.membershipStatus,
       registrationDate: user.registrationDate,
+      wishlist: user.wishlist,
+      cart: user.cart,
+      myproducts: user.myproducts,
     });
   }),
   http.post("/api/products", async ({ request }) => {

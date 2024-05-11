@@ -1,22 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiOutlineUser, AiOutlineClose } from "react-icons/ai";
 import NotLogged from "./PNotLogged";
 import Login from "./PLogin";
 import SignUp from "./PSignUp";
 import Logged from "./PLogged";
+import { useUser } from "../../mocks/UserContext";
 
 const IProfileSidebar = ({ isOpen, closeSidebar }) => {
   const [view, setView] = useState("options"); // 'options', 'login', 'signup', 'profile'
-  const [user, setUser] = useState(null);
+  const { user, updateUser } = useUser(); // quando noa ha user, user = null
+  //+: Se user == null, view = 'options', senão view = 'profile'
+  useEffect(() => {
+    if (user) {
+      setView("profile");
+    } else {
+      setView("options");
+    }
+  }, [user]);
 
   const handleLoginSuccess = (userData) => {
-    setUser(userData);
-    setView("profile");
+    updateUser(userData);
+  };
+  const handleSignupSuccess = (userData) => {
+    updateUser(userData);
   };
 
   const handleLogout = () => {
-    setUser(null);
-    setView("options");
+    updateUser(null);
   };
 
   // Modificação aqui
@@ -42,7 +52,7 @@ const IProfileSidebar = ({ isOpen, closeSidebar }) => {
         <AiOutlineUser size="2em" />
         {view === "options" && <NotLogged setView={setView} />}
         {view === "login" && <Login onLoginSuccess={handleLoginSuccess} />}
-        {view === "signup" && <SignUp />}
+        {view === "signup" && <SignUp onSignupSuccess={handleSignupSuccess} />}
         {view === "profile" && user && (
           <Logged user={user} onLogout={handleLogout} />
         )}

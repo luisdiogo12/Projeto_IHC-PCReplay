@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
-import Hmenu from "./HMenu"; 
-import HSearchBar from "./HSearchBar"; 
+import Hmenu from "./Hmenu"; 
+import HSearchBar from "./HsearchBar"; 
 import HUserIcons from "./HUserIcons"; 
 import { useNavigate } from "react-router-dom";
 

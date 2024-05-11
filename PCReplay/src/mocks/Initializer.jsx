@@ -21,7 +21,6 @@ const Initializer = () => {
       {
         id: 1,
         name: "John",
-        username: "john123",
         email: "johndoe@example.com",
         password: "pass123",
         token: "unique_token12345",
@@ -40,7 +39,6 @@ const Initializer = () => {
       {
         id: 2,
         name: "Mary",
-        username: "mary123",
         email: "maryt@example.com",
         password: "pass123",
         token: "unique_token67890",

@@ -1,10 +1,10 @@
 const apiUrl = "/api";
 
-export const loginUser = async (username, password) => {
+export const loginUser = async (email, password) => {
   const response = await fetch(`${apiUrl}/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ email, password }),
   });
   const data = await response.json(); // Converte a resposta para JSON
   console.log("api-Data:", data); // Log para verificar os dados recebidos
@@ -14,11 +14,11 @@ export const loginUser = async (username, password) => {
   return data; // Retorna a resposta para ser manipulada pela página de login
 };
 // Função para registrar usuário
-export const signupUser = async (username, password, name) => {
+export const signupUser = async (email, password, name) => {
   const response = await fetch(`${apiUrl}/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password, name }),
+    body: JSON.stringify({ email, password, name }),
   });
   return response.json(); // Retorna a promessa resolvida para quem chamar
 };
