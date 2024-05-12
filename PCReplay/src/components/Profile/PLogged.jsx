@@ -1,7 +1,8 @@
 import React from "react";
-import { useUser } from "../../mocks/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const PLogged = ({ user, onLogout }) => {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col items-center justify-center h-full p-4">
       <div className="text-center">
@@ -9,7 +10,7 @@ const PLogged = ({ user, onLogout }) => {
         <ul className="space-y-2">
           <li>
             <button
-              onClick={() => alert("Ir para o perfil")}
+              onClick={() => navigate("/myprofile")}
               className="text-white bg-blue-500 w-full p-2 rounded"
             >
               Perfil
@@ -17,7 +18,7 @@ const PLogged = ({ user, onLogout }) => {
           </li>
           <li>
             <button
-              onClick={() => alert("Ir para os meus produtos")}
+              onClick={() => navigate("/myproducts")}
               className="text-white bg-blue-500 w-full p-2 rounded"
             >
               Os meus produtos
@@ -33,7 +34,7 @@ const PLogged = ({ user, onLogout }) => {
           </li>
           <li>
             <button
-              onClick={() => alert("Ir para as minhas marcações")}
+              onClick={() => navigate("/myappointments")}
               className="text-white bg-blue-500 w-full p-2 rounded"
             >
               As minhas marcações
@@ -41,7 +42,7 @@ const PLogged = ({ user, onLogout }) => {
           </li>
           <li>
             <button
-              onClick={() => alert("Ir para os meus chats")}
+              onClick={() => navigate("/mychats")}
               className="text-white bg-blue-500 w-full p-2 rounded"
             >
               Os meus chats

@@ -1,17 +1,10 @@
 import React from "react";
 import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import { useUser } from "../mocks/UserContext";
+import { FaRegEye } from "react-icons/fa";
 
 const ProductCard = ({ product }) => {
   const { user, addToCart, addToWishlist } = useUser();
-  const handleAddToCart = () => {
-    console.log("Add to cart:", product.id);
-    addToCart(product.id);
-  };
-  const handleAddToFavorites = () => {
-    console.log("Add to cart:", product.id);
-    addToWishlist(product.id);
-  };
 
   if (!product) return null; // Garante que não tentaremos renderizar sem produto
   return (
@@ -32,16 +25,10 @@ const ProductCard = ({ product }) => {
         </span>
         <div>
           <button
-            className="px-1 py-0 text-red-500 hover:text-red-700"
-            onClick={handleAddToFavorites}
-          >
-            <AiOutlineHeart size="1.5em" />
-          </button>
-          <button
             className="px-3 py-0 text-blue-500 hover:text-blue-700"
-            onClick={handleAddToCart}
+            onClick={() => alert("ir para a página do myproduto")}
           >
-            <AiOutlineShoppingCart size="1.5em" />
+            <FaRegEye size="1.5em" />
           </button>
         </div>
       </div>
