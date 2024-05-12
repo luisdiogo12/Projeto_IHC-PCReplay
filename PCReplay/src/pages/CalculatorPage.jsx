@@ -39,6 +39,8 @@ const CalculatorPage = () => {
     const ram_reference_value = [25,16];    // 16 GB DDR4
     const disk_reference_value = [35,500];  // 500 GB SSD
 
+    const [gb, setGB] = useState();
+
     function display(value){
         if (value != null){
             return value;
@@ -47,27 +49,26 @@ const CalculatorPage = () => {
 
     function runCalculator(cpu,gpu,ram,disk1,disk2,ram_type,disk1_type,disk2_type){
 
-        var cpu_price = cpu_reference_value;
-        var gpu_price = gpu_reference_value;
+        console.log("----------------------")
 
         if(cpu == null || cpu == ''){
-            console.log('cpu fault')
+            console.log('ERROR CPU')
             return false;
         }
         if(gpu == null || gpu == ''){
-            console.log('gpu fault')
+            console.log('ERROR GPU')
             return false;
         }
         if(ram < 0 || ram > 256 ){
-            console.log('ram fault')
+            console.log('ERROR RAM')
             return false;
         }
         if(disk1 < 0 || disk1 > 8000){
-            console.log('disk1 fault')
+            console.log('ERROR DISK1')
             return false;
         }
         if(disk2 < 0 || disk2 > 8000){
-            console.log('disk2 fault')
+            console.log('ERROR DISK2')
             return false;  
         }
 
@@ -75,11 +76,13 @@ const CalculatorPage = () => {
         var ram_price;
 
         console.log("RAM coefficient => " + ram_reference_value[0]/ram_reference_value[1]);
-
-        if (ram === undefined || ram_type === undefined){
+        console.log("RAM => " + ram);
+        console.log("RAM TYPE => " + ram_type);
+    
+        if (ram === undefined || ram == "" || ram_type === undefined || ram_type == ""){
             ram_price = 0;
+            setRAMDisplay(0);
             setRAMTypeDisplay();
-
         }else{
             switch (ram_type) {
                 case "DDR":
@@ -102,31 +105,46 @@ const CalculatorPage = () => {
                     break;
             }
             ram_price = (ram_reference_value[0]/ram_reference_value[1])*ram*ram_coefficient;
-            setRAMTypeDisplay(ram_type);
+            if (ram_price == 0){
+                setRAMTypeDisplay();
+            }else{
+                setRAMTypeDisplay(ram_type);
+            }
+            setRAMDisplay(ram);
         }
-        
-        console.log("DISK coefficient => " + disk_reference_value[0]/disk_reference_value[1]);
-       
 
-        if (disk1 === undefined || disk1_type === undefined){
-            var disk1_price = 0;  
+        console.log("RAM price => " + ram_price);
+
+        console.log("DISK coefficient => " + disk_reference_value[0]/disk_reference_value[1]);
+    
+        if (disk1 === undefined || disk1 == "" || disk1_type === undefined || disk1_type == ""){
+            var disk1_price = 0;
+            setD1Display(0);
+            setD1TypeDisplay();
         }else{
             var disk1_price = diskCalculator(disk1,disk1_type,disk_reference_value);
+            setD1Display(disk1);
             setD1TypeDisplay(disk1_type);
         }
 
-        if (disk2 === undefined || disk2_type === undefined){
-            var disk2_price = 0;  
+        if (disk2 === undefined || disk2 == "" || disk2_type === undefined || disk2_type == ""){
+            var disk2_price = 0;
+            setD2Display(0);
+            setD2TypeDisplay(); 
         }else{
             var disk2_price = diskCalculator(disk2,disk2_type,disk_reference_value);
+            setD2Display(disk2);
             setD2TypeDisplay(disk2_type);
         }
         
         ram_price = Number((ram_price).toFixed(2));
         disk1_price = Number((disk1_price).toFixed(2));
         disk2_price = Number((disk2_price).toFixed(2));
-        console.log("disk1_price " + disk1_price);
-        console.log("disk2_price " + disk2_price);
+        console.log("DISK1 price => " + disk1_price);
+        console.log("DISK2 price => " + disk2_price);
+
+        var cpu_price = cpu_reference_value;
+        var gpu_price = gpu_reference_value;
 
         setCPUPrice(cpu_price);
         setGPUPrice(gpu_price);
@@ -134,13 +152,12 @@ const CalculatorPage = () => {
         setD1Price(disk1_price);
         setD2Price(disk2_price);
         
+        setGB("GB");
+
         setCPUDisplay(cpu);
         setGPUDisplay(gpu);
-        setCPUDisplay(ram);
-        setCPUDisplay(disk1);
-        setCPUDisplay(disk2);
         
-        setTotal(cpu_price+gpu_price+ram_price+disk1_price+disk2_price);
+        setTotal(Number((cpu_price+gpu_price+ram_price+disk1_price+disk2_price).toFixed(2)));
     }
 
     function diskCalculator(disk,disk_type,disk_reference_value){
@@ -150,7 +167,7 @@ const CalculatorPage = () => {
                 disk_coefficient = 0.3;
                 break;
             case "SSD":
-                disk_coefficient = 0.95;
+                disk_coefficient = 0.9;
                 break;
             case "NVME/PCIE SSD":
                 disk_coefficient = 1.3;
@@ -159,11 +176,7 @@ const CalculatorPage = () => {
                 disk_coefficient = 0;
                 break;
         }
-        console.log("disk_reference_value[0]/ram_reference_value[1] " + disk_reference_value[0]/disk_reference_value[1]);
-        console.log("disk " + disk);
-        console.log("disk_price " + disk_price);
         var disk_price = (disk_reference_value[0]/disk_reference_value[1])*disk*disk_coefficient;
-        console.log("disk_price " + disk_price);
         return disk_price;
     }
 
@@ -192,6 +205,8 @@ const CalculatorPage = () => {
         setRAMTypeDisplay();
         setD1TypeDisplay();
         setD2TypeDisplay();
+
+        setGB();
 
         setTotal();
     }
@@ -231,12 +246,10 @@ const CalculatorPage = () => {
     ]
 
     return (
-
         <div className="flex flex-col min-h-screen">
             <Header />
             <div className="flex-grow container mx-auto px-4 sm:px-8 pt-16" align="center">
                 {" "}
-                
                 {/* Adicionado pt-16 para adicionar padding ao topo */}
                 <form>
                     <div className="flex w-full">
@@ -267,7 +280,7 @@ const CalculatorPage = () => {
                                 </div>
                                 <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
                                     <label className="input flex items-center gap-2">
-                                        <input type="number" defaultValue="0" min="0" max="256" placeholder="RAM (GB)" onChange={(e) => setRAM(e.target.value)} width="40px" className="input input-bordered w-full max-w-xs" />
+                                        <input type="number" defaultValue="0" min="0" max="256" placeholder="RAM" onChange={(e) => setRAM(e.target.value)} width="40px" className="input input-bordered w-full max-w-xs" />
                                         <div className="font-bold text-xl mb-2">GB</div>
                                         <select name="ram" id="ram" onChange={(e) => setRAMType(e.target.value)}>
                                             <option value="">Selecionar geração</option>
@@ -285,7 +298,7 @@ const CalculatorPage = () => {
                                 </div>
                                 <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
                                     <label className="input flex items-center gap-2">
-                                        <input type="number" defaultValue="0" min="0" max="8000" placeholder="Armazenamento #1 (GB)" onChange={(e) => setD1(e.target.value)} className="input input-bordered flex items-center gap-2" />
+                                        <input type="number" defaultValue="0" min="0" max="8000" placeholder="Armazenamento #1" onChange={(e) => setD1(e.target.value)} className="input input-bordered flex items-center gap-2" />
                                         <div className="font-bold text-xl mb-2">GB</div>
                                         <select name="disco1" id="disco2" onChange={(e) => setD1Type(e.target.value)}>
                                             <option value="">Selecionar tipo</option>
@@ -301,7 +314,7 @@ const CalculatorPage = () => {
                                 </div>
                                 <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
                                     <label className="input flex items-center gap-2">
-                                        <input type="number" defaultValue="0" min="0" max="8000" placeholder="Armazenamento #1 (GB)" onChange={(e) => setD2(e.target.value)} className="input input-bordered flex items-center gap-2" />
+                                        <input type="number" defaultValue="0" min="0" max="8000" placeholder="Armazenamento #2" onChange={(e) => setD2(e.target.value)} className="input input-bordered flex items-center gap-2" />
                                         <div className="font-bold text-xl mb-2">GB</div>
                                         <select name="disco1" id="disco2" onChange={(e) => setD2Type(e.target.value)}>
                                             <option value="">Selecionar tipo</option>
@@ -355,15 +368,15 @@ const CalculatorPage = () => {
                                 </div>
                                 <div className="divider divider-success"></div>
                                 <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
-                                    <div className="font-bold text-xl mb-2">Memória RAM - {display(ram_display)} {display(ram_type_display)} - {display(ram_calculated_value)}€</div>
+                                    <div className="font-bold text-xl mb-2">Memória RAM - {display(ram_display)} {display(gb)} {display(ram_type_display)}  - {display(ram_calculated_value)}€</div>
                                 </div>
                                 <div className="divider divider-success"></div>
                                 <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
-                                    <div className="font-bold text-xl mb-2">Disco 1 - {display(disk1_display)} {display(disk1_type_display)}- {display(disk1_calculated_value)}€</div>
+                                    <div className="font-bold text-xl mb-2">Disco 1 - {display(disk1_display)} {display(gb)} {display(disk1_type_display)} - {display(disk1_calculated_value)}€</div>
                                 </div>
                                 <div className="divider divider-success"></div>
                                 <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
-                                    <div className="font-bold text-xl mb-2">Disco 2 - {display(disk2_display)} {display(disk2_type_display)}- {display(disk2_calculated_value)}€</div>
+                                    <div className="font-bold text-xl mb-2">Disco 2 - {display(disk2_display)} {display(gb)} {display(disk2_type_display)} - {display(disk2_calculated_value)}€</div>
                                 </div>
                             </div>
                         </div>
