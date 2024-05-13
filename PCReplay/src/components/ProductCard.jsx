@@ -1,6 +1,8 @@
 import React from "react";
 import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import { useUser } from "../mocks/UserContext";
+import { Link } from "react-router-dom";
+
 
 const ProductCard = ({ product }) => {
   const { user, addToCart, addToWishlist } = useUser();
@@ -16,16 +18,18 @@ const ProductCard = ({ product }) => {
   if (!product) return null; // Garante que não tentaremos renderizar sem produto
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg m-4">
-      <img
-        className="w-full"
-        src={product.imageUrl}
-        alt={product.name}
-        style={{ height: "300px", objectFit: "cover" }}
-      />
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{product.name}</div>
-        <p className="text-gray-700 text-base">{product.description}</p>
-      </div>
+      <Link to={`/product/${product.id}`} className="no-underline block">
+        <img
+          className="w-full"
+          src={product.imageUrl}
+          alt={product.name}
+          style={{ height: "300px", objectFit: "cover" }}
+        />
+        <div className="px-6 py-4">
+          <div className="font-bold text-xl mb-2">{product.name}</div>
+          <p className="text-gray-700 text-base">{product.description}</p>
+        </div>
+      </Link>
       <div className="px-6 py-4 flex justify-between items-center">
         <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
           ${product.price}
