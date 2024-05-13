@@ -2,9 +2,15 @@ import React from "react";
 import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import { useUser } from "../mocks/UserContext";
 import { FaRegEye } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   const { user, addToCart, addToWishlist } = useUser();
+  const navigate = useNavigate();
+  const handleCardClick = () => {
+    console.log("Card clicked:", product.id);
+     navigate(`/product/${product.id}`);
+   };
 
   if (!product) return null; // Garante que não tentaremos renderizar sem produto
   return (
@@ -26,7 +32,7 @@ const ProductCard = ({ product }) => {
         <div>
           <button
             className="px-3 py-0 text-blue-500 hover:text-blue-700"
-            onClick={() => alert("ir para a página do myproduto")}
+            onClick={handleCardClick}
           >
             <FaRegEye size="1.5em" />
           </button>

@@ -3,6 +3,7 @@ import { useUser } from "../mocks/UserContext";
 import MainLayout from "./LayoutPage";
 import { fetchProductsByDescription } from "../mocks/api";
 import MyProductCard from "../components/MyProductCard";
+import { AiOutlineUser } from "react-icons/ai";
 
 const MyProducts = () => {
  const [filters, setFilters] = useState({ id: [] });
@@ -17,29 +18,32 @@ const MyProducts = () => {
  }, [user]);
 
  useEffect(() => {
-   if (!user) return;
-   console.log("FILTERS:", filters);
-   if (filters.id.length === 0) {
-     setProducts([]);
-     return;
-   }
-   fetchProductsByDescription(filters)
-     .then((data) => {
-       setProducts(data); // Atualiza o Products(local) com os produtos obtidos
-     })
-     .catch((error) => {
-       console.error("Failed to load products:", error);
-       setError(error.message); // Armazena o erro no estado, se houver
-     });
+  if (user){
+    console.log("FILTERS:", filters);
+    if (filters.id.length === 0) {
+      setProducts([]);
+      return;
+    }
+    fetchProductsByDescription(filters)
+      .then((data) => {
+        setProducts(data); // Atualiza o Products(local) com os produtos obtidos
+      })
+      .catch((error) => {
+        console.error("Failed to load products:", error);
+        setError(error.message); // Armazena o erro no estado, se houver
+      });
+  }
  }, [filters, user]);
 
   if (!user) {
     return (
-      <div className="flex flex-col items-center justify-center h-full">
-        <AiOutlineUser size="2em" />
-        <p className="text-lg font-semibold mb-4">Você não está logado</p>
-        <p>Por favor, faça login para ver o seu perfil.</p>
-      </div>
+      <MainLayout>
+        <div className="flex flex-col items-center justify-center h-full">
+          <AiOutlineUser size="2em" />
+          <p className="text-lg font-semibold mb-4">Você não está logado</p>
+          <p>Por favor, faça login para ver o seu perfil.</p>
+        </div>
+      </MainLayout>
     );
   }
 

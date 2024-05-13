@@ -5,11 +5,12 @@ import {
 } from "react-icons/ai"; 
 
 const GeneralInfo = ({ product }) => {
+  console.log("GeneralInfo:", product);
   return (
     <div className="bg-gray-800 p-4">
-      <h1 className="text-xl font-bold">{product.title}</h1>
+      <h1 className="text-xl font-bold">{product.name}</h1>
       <p className="text-lg font-semibold">Preço: {product.price}</p>
-      <p className="text-md">Vendedor: {product.vendor}</p>
+      <p className="text-md">Vendedor: {product.seller}</p>
       <div className="flex space-x-4 mt-4">
         <button className="flex items-center space-x-2 bg-blue-500 text-white px-4 py-2 rounded">
           <AiOutlineShoppingCart />

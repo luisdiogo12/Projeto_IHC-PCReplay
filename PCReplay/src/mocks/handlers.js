@@ -141,19 +141,27 @@ export const handlers = [
           }
         };
 
+        if(params.id && params.id.length > 0){
         filterProducts(params.id, (product, idFilter) =>
           idFilter.includes(product.id)
         );
+        }
+        if(params.name && params.name.length > 0){
         filterProducts(params.name, (product, nameFilter) =>
           nameFilter.includes(product.name)
         );
+        }
+        if(params.price && params.price.length > 0){
         filterProducts(params.price, (product, priceFilter) =>
           priceFilter.includes(product.price)
         );
+        }
+        if(params.category && params.category.length > 0){
         filterProducts(params.category, (product, categoryFilter) =>
           categoryFilter.includes(product.category)
         );
-
+        }
+        if(params.characteristics && Object.keys(params.characteristics).length > 0){
         const characteristicsFilter = params.characteristics;
         filteredProducts = filteredProducts.filter((product) => {
           const productCharacteristics = product.characteristics;
@@ -178,7 +186,7 @@ export const handlers = [
             }
           }
           return shouldIncludeProduct;
-        });
+        })};
         return HttpResponse.json(filteredProducts);
       } else {
         return HttpResponse.json(productsDB);

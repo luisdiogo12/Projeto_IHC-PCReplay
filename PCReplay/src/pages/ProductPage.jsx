@@ -13,10 +13,11 @@ const ProductPage = () => {
   const [product, setProducts] = useState([]);
 
   useEffect(() => {
-	fetchProductsByDescription({ id: [id] })
+	fetchProductsByDescription({ id: [+id] })
 	  .then((data) => {
-		setProducts(data);
+		setProducts(data[0]);
 		console.log("data:", data);
+    console.log("id", id);
 	  })
 	  .catch((error) => {
 		console.error("Failed to load products:", error);
@@ -39,10 +40,11 @@ const ProductPage = () => {
 }; */
 
   return (
+    console.log("product:", product),
     <MainLayout>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <div className="col-span-1 lg:col-span-2">
-          <ProductImages images={product.images} />
+          <ProductImages images={product.imageUrl} />
         </div>
         <div className="col-span-1">
           <GeneralInfo product={product} />

@@ -42,6 +42,7 @@ export const fetchProtectedData = async (endpoint,token) => {
   return data;
 };
 export const fetchProductsByDescription = async (params) => {
+  console.log("fetchProductsByDescription-Params:", params); // Log para verificar os parâmetros
   const response = await fetch(`${apiUrl}/products`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

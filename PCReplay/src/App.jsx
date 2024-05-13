@@ -11,7 +11,7 @@ import MyChats from "./pages/MyChats.jsx";
 import MyProducts from "./pages/MyProducts.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
 import LayoutViewer from "./pages/ViewerLayout.jsx";
-
+import GuidePage from "./pages/GuidePage.jsx";
 function App() {
 
   if(0){
@@ -35,6 +35,7 @@ function App() {
           <Route path="/myproducts" element={<MyProducts />} />
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/layoutviewer" element={<LayoutViewer />} />
+          <Route path="/guide" element={<GuidePage />} />
         </Routes>
       </Router>
     );

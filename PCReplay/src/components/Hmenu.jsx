@@ -88,7 +88,7 @@ const HMenu = ({ isMenuOpen, setIsMenuOpen }) => {
               </button>
             </li>
             <li className="py-2 font-bold">
-              <button onClick={() => navigate("/guiao")}>Guião</button>
+              <button onClick={() => navigate("/guide")}>Guia</button>
             </li>
           </ul>
         </li>

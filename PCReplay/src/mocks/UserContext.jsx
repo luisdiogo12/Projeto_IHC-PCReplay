@@ -13,14 +13,15 @@ export const UserProvider = ({ children }) => {
     }
   }, []); // Executa apenas na inicialização
 
-  useEffect(() => {
+  const updateUser = (newUser) => {
     // Atualiza o localStorage sempre que o usuário mudar
+    setUser(newUser);
     if (user) {
-      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("user", JSON.stringify(newUser));
     } else {
       localStorage.removeItem("user");
     }
-  }, [user]);
+  };
 
   const addToWishlist = (productId) => {
     setUser((prevUser) => {
@@ -66,7 +67,7 @@ export const UserProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         user,
-        updateUser: setUser,
+        updateUser,
         addToWishlist,
         addToCart,
         removeFromWishlist,
