@@ -366,7 +366,7 @@ const CalculatorPage = () => {
                                     </label>
                                 </div>
                                 <div className="divider divider-info"></div>
-                                <div align="center"> <Link to={"/"}><button onClick={() => runCalculator(cpu, gpu, ram, disk1, disk2, ram_type, disk1_type, disk2_type)}
+                                <div align="center"> <Link to={"/calculadora"}><button onClick={() => runCalculator(cpu, gpu, ram, disk1, disk2, ram_type, disk1_type, disk2_type)}
                                     disabled={cpu === undefined || cpu =="" || gpu === undefined || gpu == ""} className="btn btn-success">Calcular valor</button></Link></div>
                             </div>
                         </div>
@@ -379,7 +379,7 @@ const CalculatorPage = () => {
                                 </div>
                                 <div className="font-bold text-xl mb-2">Preço estimado - {display(total_value)}€</div>
                                 <div className="grid h-200 card bg-base-30 rounded-box place-items-center">
-                                    <div align="center"><button disabled={total_value === undefined} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-info">Agendar venda</button></div>
+                                    <Link to={"/calendario"}><div align="center"><button disabled={total_value === undefined} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-info">Agendar venda</button></div></Link>
                                     <div align="center"><button type="reset" onClick={() => reset()} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-outline btn-error" >Reset</button></div>
                                 </div>
 
@@ -397,7 +397,7 @@ const CalculatorPage = () => {
                                             <option value="0">{knownProducts[0].name}</option>
                                             <option value="1">{knownProducts[1].name}</option>
                                         </select>
-                                        <div align="center"> <Link to={"/"}><button onClick={(e) => runCalculator(
+                                        <div align="center"> <Link to={"/calculadora"}><button onClick={(e) => runCalculator(
                                             knownProducts[model].cpu,
                                             knownProducts[model].gpu,
                                             knownProducts[model].ram,

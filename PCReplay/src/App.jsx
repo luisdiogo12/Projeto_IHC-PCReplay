@@ -15,15 +15,6 @@ import GuidePage from "./pages/GuidePage.jsx";
 import CalendarPage from "./pages/CalendarPage.jsx"
 function App() {
 
-  if(0){
-    return(
-      <Router>
-      <Routes>
-        <Route path="/" element={<CalendarPage />} />
-      </Routes>
-    </Router>
-    );
-  }else{
     return (
       <Router>
         <Routes>
@@ -36,6 +27,7 @@ function App() {
           <Route path="/myappointments" element={<MyAppointments />} />
           <Route path="/mychats" element={<MyChats />} />
           <Route path="/myproducts" element={<MyProducts />} />
+          <Route path="/calendario" element={<CalendarPage />} />
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/layoutviewer" element={<LayoutViewer />} />
           <Route path="/guide" element={<GuidePage />} />
@@ -45,6 +37,4 @@ function App() {
 
   }
  
-}
-
 export default App;
