@@ -40,6 +40,15 @@ const generateProducts = () => {
         memoria: getRandomItem(features.memoria),
         bateria: getRandomItem(features.bateria),
       },
+      description: `Description for Product ${
+        index + 1
+      }. It has some unique features.`,
+      technicalInfo: `Technical information for Product ${
+        index + 1
+      }. It has some unique features.`,
+      evaluation: `Evaluation for Product ${
+        index + 1
+      }. It has some unique features.`,
     };
   });
 };
