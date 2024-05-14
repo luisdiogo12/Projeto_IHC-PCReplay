@@ -12,13 +12,16 @@ import MyProducts from "./pages/MyProducts.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
 import LayoutViewer from "./pages/ViewerLayout.jsx";
 import GuidePage from "./pages/GuidePage.jsx";
+import CalendarPage from "./pages/CalendarPage.jsx"
 function App() {
 
   if(0){
     return(
-      <>
-      <CalculatorPage />
-      </>
+      <Router>
+      <Routes>
+        <Route path="/" element={<CalendarPage />} />
+      </Routes>
+    </Router>
     );
   }else{
     return (

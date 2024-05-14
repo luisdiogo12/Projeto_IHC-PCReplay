@@ -10,8 +10,7 @@ const CalendarPage = () => {
     const month = data.getMonth();
     const year = data.getFullYear();
 
-    const prob = 0.3 // 1-prob
-
+    const prob = 0.5 // 1-prob
 
     const [buttonStatus1, setButton1] = useState(
         [
@@ -73,25 +72,44 @@ const CalendarPage = () => {
         ]
     )
 
-    var [selectedDay, setDay] = useState()
+    const [selectedDay, setDay] = useState()
 
     const [hourMenu, setHourMenu] = useState(
         [
-
-            { hour: "09:00h", disabled: Math.random() < prob && !(selectedDay === undefined) },
-            { hour: "10:00h", disabled: Math.random() < prob && !(selectedDay === undefined) },
-            { hour: "11:00h", disabled: Math.random() < prob && !(selectedDay === undefined) },
-            { hour: "14:00h", disabled: Math.random() < prob && !(selectedDay === undefined) },
-            { hour: "15:00h", disabled: Math.random() < prob && !(selectedDay === undefined) },
-            { hour: "16:00h", disabled: Math.random() < prob && !(selectedDay === undefined) },
-            { hour: "17:00h", disabled: Math.random() < prob && !(selectedDay === undefined) },
+            { hour: "09:00h", disabled: !((Math.random() < prob) || (selectedDay !== undefined)) },
+            { hour: "10:00h", disabled: !((Math.random() < prob) || (selectedDay !== undefined)) },
+            { hour: "11:00h", disabled: !((Math.random() < prob) || (selectedDay !== undefined)) },
+            { hour: "14:00h", disabled: !((Math.random() < prob) || (selectedDay !== undefined)) },
+            { hour: "15:00h", disabled: !((Math.random() < prob) || (selectedDay !== undefined)) },
+            { hour: "16:00h", disabled: !((Math.random() < prob) || (selectedDay !== undefined)) },
+            { hour: "17:00h", disabled: !((Math.random() < prob) || (selectedDay !== undefined)) },
         ]
     )
 
-
-    function reset(){
+    function reset() {
         setDay();
         setHour();
+    }
+
+    function display(value){
+        if (value !== undefined ){
+            return value
+        }
+    }
+
+    function Calendar(day) {
+        setDay(day)
+        setHour()
+        if (day !== undefined) {
+            hourMenu[0].disabled = !((Math.random() < prob) || (selectedDay === undefined));
+            hourMenu[1].disabled = !((Math.random() < prob) || (selectedDay === undefined));
+            hourMenu[2].disabled = !((Math.random() < prob) || (selectedDay === undefined));
+            hourMenu[3].disabled = !((Math.random() < prob) || (selectedDay === undefined));
+            hourMenu[4].disabled = !((Math.random() < prob) || (selectedDay === undefined));
+            hourMenu[5].disabled = !((Math.random() < prob) || (selectedDay === undefined));
+            hourMenu[6].disabled = !((Math.random() < prob) || (selectedDay === undefined));
+        }
+
     }
 
     const [selectedHour, setHour] = useState()
@@ -110,21 +128,27 @@ const CalendarPage = () => {
                         <div className="grid h-200 flex-grow card bg-base-300 rounded-box place-items-center">
 
                             <div className="grid flex-grow h-200 card  bg-base-30 rounded-box place-items-center">
-                                <div className="font-bold text-xl mb-2">{months[month]}</div>
-
+                                
+                                <div className="font-bold text-xl mb-2">Passo 1 - Escolha um dia</div>
+                                <div className="font-bold text-xl mb-2">{months[month]} {year}</div>
+                                {console.log(hourMenu)}
                                 <table>
-                                    <th>Dom</th>
-                                    <th>Seg</th>
-                                    <th>Ter</th>
-                                    <th>Qua</th>
-                                    <th>Qui</th>
-                                    <th>Sex</th>
-                                    <th>Sab</th>
+                                    <thead>
+                                        <tr>
+                                            <th>Dom</th>
+                                            <th>Seg</th>
+                                            <th>Ter</th>
+                                            <th>Qua</th>
+                                            <th>Qui</th>
+                                            <th>Sex</th>
+                                            <th>Sab</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
                                         <tr>
                                             {buttonStatus1.map((displayButton) => {
                                                 return (
-                                                    <td><div className="join"> <input onChange={() => setDay(displayButton.day)} className="join-item btn" type="radio" name="options" disabled={displayButton.disabled} aria-label={displayButton.day} /></div></td>
+                                                    <td><div className="join"> <input onChange={(e) => Calendar(e.target.ariaLabel)} className="join-item btn" type="radio" name="options" disabled={displayButton.disabled} aria-label={displayButton.day} /></div></td>
                                                 )
 
                                             })}
@@ -132,28 +156,28 @@ const CalendarPage = () => {
                                         <tr>
                                             {buttonStatus2.map((displayButton) => {
                                                 return (
-                                                    <td><div className="join"> <input onChange={() => setDay(displayButton.day)} className="join-item btn" type="radio" name="options" disabled={displayButton.disabled} aria-label={displayButton.day} /></div></td>
+                                                    <td><div className="join"> <input onChange={(e) => Calendar(e.target.ariaLabel)} className="join-item btn" type="radio" name="options" disabled={displayButton.disabled} aria-label={displayButton.day} /></div></td>
                                                 )
                                             })}
                                         </tr>
                                         <tr>
                                             {buttonStatus3.map((displayButton) => {
                                                 return (
-                                                    <td><div className="join"> <input onChange={() => setDay(displayButton.day)} className="join-item btn" type="radio" name="options" disabled={displayButton.disabled} aria-label={displayButton.day} /></div></td>
+                                                    <td><div className="join"> <input onChange={(e) => Calendar(e.target.ariaLabel)} className="join-item btn" type="radio" name="options" disabled={displayButton.disabled} aria-label={displayButton.day} /></div></td>
                                                 )
                                             })}
                                         </tr>
                                         <tr>
                                             {buttonStatus4.map((displayButton) => {
                                                 return (
-                                                    <td><div className="join"> <input onChange={() => setDay(displayButton.day)} className="join-item btn" type="radio" name="options" disabled={displayButton.disabled} aria-label={displayButton.day} /></div></td>
+                                                    <td><div className="join"> <input onChange={(e) => Calendar(e.target.ariaLabel)} className="join-item btn" type="radio" name="options" disabled={displayButton.disabled} aria-label={displayButton.day} /></div></td>
                                                 )
                                             })}
                                         </tr>
                                         <tr>
                                             {buttonStatus5.map((displayButton) => {
                                                 return (
-                                                    <td><div className="join"> <input onChange={() => setDay(displayButton.day)} className="join-item btn" type="radio" name="options" disabled={displayButton.disabled} aria-label={displayButton.day} /></div></td>
+                                                    <td><div className="join"> <input onChange={(e) => Calendar(e.target.ariaLabel)} className="join-item btn" type="radio" name="options" disabled={displayButton.disabled} aria-label={displayButton.day} /></div></td>
                                                 )
                                             })}
                                         </tr>
@@ -161,22 +185,26 @@ const CalendarPage = () => {
                                 </table>
                             </div>
 
-
+                            <div className="font-bold text-xl mb-2">Passo 2 - Escolha uma hora</div> 
                             <div className="grid h-200 flex-grow card bg-base-30 rounded-box place-items-center">
-                                {hourMenu.map((displayHour) => {
-                                    return (
-                                        <div className="join"> <input onChange={() => setHour(displayHour.hour)} type="radio" name="hour" disabled={displayHour.disabled}/>{displayHour.hour}</div>
-                                    )
+                                <div className="join"> <input onChange={() => setHour(hourMenu[0].hour)} type="radio" name="hour" disabled={hourMenu[0].disabled || selectedDay === undefined} />{hourMenu[0].hour}</div>
+                                <div className="join"> <input onChange={() => setHour(hourMenu[1].hour)} type="radio" name="hour" disabled={hourMenu[1].disabled || selectedDay === undefined} />{hourMenu[1].hour}</div>
+                                <div className="join"> <input onChange={() => setHour(hourMenu[2].hour)} type="radio" name="hour" disabled={hourMenu[2].disabled || selectedDay === undefined} />{hourMenu[2].hour}</div>
+                                <div className="join"> <input onChange={() => setHour(hourMenu[3].hour)} type="radio" name="hour" disabled={hourMenu[3].disabled || selectedDay === undefined} />{hourMenu[3].hour}</div>
+                                <div className="join"> <input onChange={() => setHour(hourMenu[4].hour)} type="radio" name="hour" disabled={hourMenu[4].disabled || selectedDay === undefined} />{hourMenu[4].hour}</div>
+                                <div className="join"> <input onChange={() => setHour(hourMenu[5].hour)} type="radio" name="hour" disabled={hourMenu[5].disabled || selectedDay === undefined} />{hourMenu[5].hour}</div>
+                                <div className="join"> <input onChange={() => setHour(hourMenu[6].hour)} type="radio" name="hour" disabled={hourMenu[6].disabled || selectedDay === undefined} />{hourMenu[6].hour}</div>
 
-                                })}
                                 {console.log("select " + selectedDay)}
                             </div>
 
                         </div>
                         <div className="divider divider-horizontal"></div>
                         <div className="grid h-200 flex-grow card bg-base-300 rounded-box place-items-center">
-                            <div className="font-bold text-xl mb-2">Escolha uma hora</div>
-                            <div align="center"><button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-info" disabled={selectedDay === undefined || selectedHour === undefined }>Agendar venda</button></div>
+                        
+                            <div align="center"><button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-info" disabled={selectedDay === undefined || selectedHour === undefined}>Agendar venda</button></div>
+                            <div className="font-bold text-xl mb-2">{display(selectedHour)} {display(selectedDay)} {months[month]} {year}  </div>
+
                             <div align="center"><button onClick={() => reset()} type="reset" className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-error" >Reset</button></div>
                         </div>
                     </div>
