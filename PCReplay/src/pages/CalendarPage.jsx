@@ -73,7 +73,26 @@ const CalendarPage = () => {
         ]
     )
 
-    const [selectedDay, setDay] = useState()
+    var [selectedDay, setDay] = useState()
+
+    const [hourMenu, setHourMenu] = useState(
+        [
+
+            { hour: "09:00h", disabled: Math.random() < prob && !(selectedDay === undefined) },
+            { hour: "10:00h", disabled: Math.random() < prob && !(selectedDay === undefined) },
+            { hour: "11:00h", disabled: Math.random() < prob && !(selectedDay === undefined) },
+            { hour: "14:00h", disabled: Math.random() < prob && !(selectedDay === undefined) },
+            { hour: "15:00h", disabled: Math.random() < prob && !(selectedDay === undefined) },
+            { hour: "16:00h", disabled: Math.random() < prob && !(selectedDay === undefined) },
+            { hour: "17:00h", disabled: Math.random() < prob && !(selectedDay === undefined) },
+        ]
+    )
+
+
+    function reset(){
+        setDay();
+        setHour();
+    }
 
     const [selectedHour, setHour] = useState()
 
@@ -142,29 +161,28 @@ const CalendarPage = () => {
                                 </table>
                             </div>
 
-                            
+
                             <div className="grid h-200 flex-grow card bg-base-30 rounded-box place-items-center">
-                            <div className="join"> <input onClick={() => setHour("09:00h")} type="radio" name="hora" disabled={0.4 < prob && (selectedDay !== undefined)} />09:00h</div>
-                            <div className="join"> <input onClick={() => setHour("10:00h")} type="radio" name="hora" disabled={0.7 < prob && (selectedDay !== undefined)} />10:00h</div>
-                            <div className="join"> <input onClick={() => setHour("11:00h")} type="radio" name="hora" disabled={0.2 < prob && (selectedDay !== undefined)} />11:00h</div>
-                            <div className="join"> <input onClick={() => setHour("14:00h")} type="radio" name="hora" disabled={0.1 < prob && (selectedDay !== undefined)} />14:00h</div>
-                            <div className="join"> <input onClick={() => setHour("15:00h")} type="radio" name="hora" disabled={0.3 < prob && (selectedDay !== undefined)} />15:00h</div>
-                            <div className="join"> <input onClick={() => setHour("16:00h")} type="radio" name="hora" disabled={0.9 < prob && (selectedDay !== undefined)} />16:00h</div>
-                            <div className="join"> <input onClick={() => setHour("17:00h")} type="radio" name="hora" disabled={0.2 < prob && (selectedDay !== undefined)} />17:00h</div>
-                            {console.log("select " + selectedDay)}
+                                {hourMenu.map((displayHour) => {
+                                    return (
+                                        <div className="join"> <input onChange={() => setHour(displayHour.hour)} type="radio" name="hour" disabled={displayHour.disabled}/>{displayHour.hour}</div>
+                                    )
+
+                                })}
+                                {console.log("select " + selectedDay)}
                             </div>
 
                         </div>
                         <div className="divider divider-horizontal"></div>
                         <div className="grid h-200 flex-grow card bg-base-300 rounded-box place-items-center">
                             <div className="font-bold text-xl mb-2">Escolha uma hora</div>
-                            <div align="center"><button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-info">Agendar venda</button></div>
-                            <div align="center"><button type="reset" className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-error">Reset</button></div>
+                            <div align="center"><button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-info" disabled={selectedDay === undefined || selectedHour === undefined }>Agendar venda</button></div>
+                            <div align="center"><button onClick={() => reset()} type="reset" className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-error" >Reset</button></div>
                         </div>
                     </div>
                 </form></div>
-               
-                { console.log("select hour " + selectedHour) }
+
+                {console.log("select hour " + selectedHour)}
 
             </div>
             <Footer />
