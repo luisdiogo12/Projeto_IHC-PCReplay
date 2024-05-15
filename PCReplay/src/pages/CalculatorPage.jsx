@@ -52,9 +52,9 @@ const CalculatorPage = () => {
         }
     }
 
-    function runCalculator(cpu, gpu, ram, disk1, disk2, ram_type, disk1_type, disk2_type,origem) {
+    function runCalculator(cpu, gpu, ram, disk1, disk2, ram_type, disk1_type, disk2_type, origem) {
 
-        if(origem != "predefinido"){
+        if (origem != "predefinido") {
             setModel(-1);
             setSrc("../src/assets/PCReplay_logo.png")
         }
@@ -292,165 +292,147 @@ const CalculatorPage = () => {
                 {" "}
                 {/* Adicionado pt-16 para adicionar padding ao topo */}
                 <form>
-                    <div className="flex w-full">
-                        <div className="grid h-200  card bg-base-300 rounded-box place-items-center">
-                            <div className="flex flex-col w-full">
-                                <div className="divider divider-error">
-                                    <div className="font-bold text-xl mb-2">Processador (CPU)</div>
-                                </div>
-                                <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
-                                    <div className="indicator">
-                                        <label className="input flex items-center gap-2">
-                                            <input type="text" placeholder="Modelo CPU" onChange={(e) => setCPU(e.target.value)} className="input input-bordered flex items-center gap-2" />
-                                            <span className="badge badge-error">Obrigatório</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div className="divider divider-error">
-                                    <div className="font-bold text-xl mb-2">Placa Gráfica (GPU)</div>
-                                </div>
-                                <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
-                                    <label className="input flex items-center gap-2">
-                                        <input type="text" placeholder="Modelo GPU" onChange={(e) => setGPU(e.target.value)} className="input input-bordered flex items-center gap-2" />
-                                        <span className="badge badge-error">Obrigatório</span>
-                                    </label>
-                                </div>
-                                <div className="divider divider-info">
-                                    <div className="font-bold text-xl mb-2">Memória RAM</div>
-                                </div>
-                                <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
-                                    <label className="input flex items-center gap-2">
-                                        <input type="number" defaultValue="0" min="0" max="256" placeholder="RAM" onChange={(e) => setRAM(e.target.value)} width="40px" className="input input-bordered w-full max-w-xs" />
-                                        <div className="font-bold text-xl mb-2">GB</div>
-                                        <select name="ram" id="ram" onChange={(e) => setRAMType(e.target.value)}>
-                                            <option value="">Selecionar geração</option>
-                                            <option value="DDR">DDR</option>
-                                            <option value="DDR2">DDR2</option>
-                                            <option value="DDR3">DDR3</option>
-                                            <option value="DDR4">DDR4</option>
-                                            <option value="DDR5">DDR5</option>
-                                        </select>
-                                        <span className="badge badge-info">Opcional</span>
-                                    </label>
-                                </div>
-                                <div className="divider divider-info">
-                                    <div className="font-bold text-xl mb-2">Disco 1</div>
-                                </div>
-                                <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
-                                    <label className="input flex items-center gap-2">
-                                        <input type="number" defaultValue="0" min="0" max="8000" placeholder="Armazenamento #1" onChange={(e) => setD1(e.target.value)} className="input input-bordered flex items-center gap-2" />
-                                        <div className="font-bold text-xl mb-2">GB</div>
-                                        <select name="disco1" id="disco2" onChange={(e) => setD1Type(e.target.value)}>
-                                            <option value="">Selecionar tipo</option>
-                                            <option value="HDD">HDD</option>
-                                            <option value="SSD">SSD</option>
-                                            <option value="NVME/PCIE SSD">NVME/PCIE SSD</option>
-                                        </select>
-                                        <span className="badge badge-info">Opcional</span>
-                                    </label>
-                                </div>
-                                <div className="divider divider-info">
-                                    <div className="font-bold text-xl mb-2">Disco 2 </div>
-                                </div>
-                                <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
-                                    <label className="input flex items-center gap-2">
-                                        <input type="number" defaultValue="0" min="0" max="8000" placeholder="Armazenamento #2" onChange={(e) => setD2(e.target.value)} className="input input-bordered flex items-center gap-2" />
-                                        <div className="font-bold text-xl mb-2">GB</div>
-                                        <select name="disco1" id="disco2" onChange={(e) => setD2Type(e.target.value)}>
-                                            <option value="">Selecionar tipo</option>
-                                            <option value="HDD">HDD</option>
-                                            <option value="SSD">SSD</option>
-                                            <option value="NVME/PCIE SSD">NVME/PCIE SSD</option>
-                                        </select>
-                                        <span className="badge badge-info">Opcional</span>
-                                    </label>
-                                </div>
-                                <div className="divider divider-info"></div>
-                                <div align="center"> <Link to={"/calculadora"}><button onClick={() => runCalculator(cpu, gpu, ram, disk1, disk2, ram_type, disk1_type, disk2_type)}
-                                    disabled={cpu === undefined || cpu =="" || gpu === undefined || gpu == ""} className="btn btn-success">Calcular valor</button></Link></div>
+                    <div className="flex ">
+
+                        <div className="grid h-200 flex-grow card bg-base-300 rounded-box place-items-center">
+                            <div className="divider divider-warning">
+                                <div className="font-bold text-xl mb-2">Calculadora de componentes</div>
                             </div>
+                            <div className="flex flex-col  border-opacity-50">
+                                <div className="grid h-20 card bg-base-300 rounded-box place-items-center">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <ul className="steps steps-vertical">
+                                                <li className><div className="font-bold text-xl mb-2"><span className="badge badge-error"> {}</span>Selecionar Modelo Predefinido</div></li>
+                                            </ul>
+                                            {console.log(document.getElementById("model"))}
+                                            <div>
+                                                <select className="select" name="model" id="model" onChange={(e) => renderImg(e.target.value)}>
+                                                    <option value="-1" defaultValue>Selecionar modelo</option>
+                                                    <option value="0">{knownProducts[0].name}</option>
+                                                    <option value="1">{knownProducts[1].name}</option>
+                                                    <option value="-1">Personalizado</option>
+                                                </select> 
+                                            </div>
+                                        </tr>
+                                    </tbody>  
+                                </table>
+                                    
+                                </div>
+                                <div className="divider">OU</div>
+
+                                <div className="grid h-200 card bg-base-300 rounded-box place-items-center">
+                                 <table>
+                                <tr>
+                                    <td>
+                                        <ul className="steps steps-vertical">
+                                            <li className={(cpu == null || cpu == "") ? "step" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-error"> Obrigatório</span>Selecionar CPU</div></li>
+                                            <li className={(gpu == null || gpu == "") ? "step" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-error">Obrigatório</span>Selecionar GPU</div></li>
+                                            <li className={(ram === undefined || ram == "" || ram_type === undefined || ram_type == "" || ram < 0 || ram > 256) ? "step step-info" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-info">Opcional</span>Selecionar quantidade RAM</div></li>
+                                            <li className={(disk1 === undefined || disk1 == "" || disk1_type === undefined || disk1_type == "" || disk1 < 0 || disk1 > 8000) ? "step step-info" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-info">Opcional</span>Selecionar quantidade de armazenamento #1</div></li>
+                                            <li className={(disk2 === undefined || disk2 == "" || disk2_type === undefined || disk1_type == "" || disk2 < 0 || disk2 > 8000) ? "step step-info" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-info">Opcional</span>Selecionar quantidade de armazenamento #2</div></li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
+                                            <label className="input flex items-center gap-2">
+                                                <input type="text" placeholder="Modelo CPU" onChange={(e) => setCPU(e.target.value)} className="input input-bordered flex items-center gap-2" />
+                                            </label>
+                                        </div>
+                                        <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
+                                            <label className="input flex items-center gap-2">
+                                                <input type="text" placeholder="Modelo GPU" onChange={(e) => setGPU(e.target.value)} className="input input-bordered flex items-center gap-2" />
+                                            </label>
+                                        </div>
+                                        <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
+                                            <label className="input flex items-center gap-2">
+                                                <input type="number" defaultValue="0" min="0" max="256" placeholder="RAM" onChange={(e) => setRAM(e.target.value)} width="40px" className="input input-bordered  max-w-xs" />
+                                                <div className="font-bold text-xl mb-2">GB</div>
+                                                <select name="ram" id="ram" onChange={(e) => setRAMType(e.target.value)}>
+                                                    <option value="">Selecionar geração</option>
+                                                    <option value="DDR">DDR</option>
+                                                    <option value="DDR2">DDR2</option>
+                                                    <option value="DDR3">DDR3</option>
+                                                    <option value="DDR4">DDR4</option>
+                                                    <option value="DDR5">DDR5</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                        <div className="grid h-20 flex-grow card bg-base-30 rounded-box place-items-center">
+                                            <label className="input flex items-center gap-2">
+                                                <input type="number" defaultValue="0" min="0" max="8000" placeholder="Armazenamento #2" onChange={(e) => setD1(e.target.value)} className="input input-bordered flex items-center gap-2" />
+                                                <div className="font-bold text-xl mb-2">GB</div>
+                                                <select name="disco1" id="disco1" onChange={(e) => setD1Type(e.target.value)}>
+                                                    <option value="">Selecionar tipo</option>
+                                                    <option value="HDD">HDD</option>
+                                                    <option value="SSD">SSD</option>
+                                                    <option value="NVME/PCIE SSD">NVME/PCIE SSD</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                        <div className="grid h-20 flex-grow card bg-base-30 rounded-box place-items-center">
+                                            <label className="input flex items-center gap-2">
+                                                <input type="number" defaultValue="0" min="0" max="8000" placeholder="Armazenamento #2" onChange={(e) => setD2(e.target.value)} className="input input-bordered flex items-center gap-2" />
+                                                <div className="font-bold text-xl mb-2">GB</div>
+                                                <select name="disco2" id="disco2" onChange={(e) => setD2Type(e.target.value)}>
+                                                    <option value="">Selecionar tipo</option>
+                                                    <option value="HDD">HDD</option>
+                                                    <option value="SSD">SSD</option>
+                                                    <option value="NVME/PCIE SSD">NVME/PCIE SSD</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                                </div>
+                            </div>
+                           
+                            <div align="center"> <Link to={"/calculadora"}><button onClick={() => runCalculator(cpu, gpu, ram, disk1, disk2, ram_type, disk1_type, disk2_type, "personalizado")}
+                                disabled={cpu === undefined || cpu == "" || gpu === undefined || gpu == ""} className="btn btn-success">Calcular valor</button></Link>
+                            </div>
+
+                            <div align="center"> <Link to={"/calculadora"}><button onClick={(e) => runCalculator(
+                                knownProducts[model].cpu,
+                                knownProducts[model].gpu,
+                                knownProducts[model].ram,
+                                knownProducts[model].disk1,
+                                knownProducts[model].disk2,
+                                knownProducts[model].ram_type,
+                                knownProducts[model].disk1_type,
+                                knownProducts[model].disk2_type,
+                                "predefinido")}
+                                disabled={knownProducts[model] === undefined}
+                                className="btn btn-success">Calcular valor</button></Link>
+                            </div>
+                            <div align="center"><button type="reset" onClick={() => reset()} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-outline btn-error" >Reset</button></div>
                         </div>
                         <div className="divider divider-horizontal"></div>
 
-                        <div className="grid  h-50 card bg-base-300 rounded-box place-items-center">
-                            <div className="flex flex-col w-full">
-                                <div className="divider divider-warning">
-                                    <div className="font-bold text-xl mb-2">Calculadora de componentes</div>
-                                </div>
-                                <div className="font-bold text-xl mb-2">Preço estimado - {display(total_value)}€</div>
-                                <div className="grid h-200 card bg-base-30 rounded-box place-items-center">
-                                    <Link to={"/calendario"}><div align="center"><button disabled={total_value === undefined} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-info">Agendar venda</button></div></Link>
-                                    <div align="center"><button type="reset" onClick={() => reset()} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-outline btn-error" >Reset</button></div>
-                                </div>
-
-                                <div className="divider divider-warning"></div>
-                                <div className="font-bold text-xl mb-2">{display(message)}</div>
-                                <div className="divider divider-warning"></div>
-
-                                <div className="font-bold text-xl mb-2">Modelos predefinidos</div>
+                        <div className="grid  h-200   card bg-base-30 rounded-box place-items-center">
+                            <div className="flex flex-col ">
                                 <div className="card card-compact w-96 bg-base-100 shadow-xl">
-                                    <figure><img src={display(src)} /></figure>
-                                    <div className="card-body">
-
-                                        <select name="model" id="model" onChange={(e) => renderImg(e.target.value)}>
-                                            <option value="-1">Selecionar modelo predefinido</option>
-                                            <option value="0">{knownProducts[0].name}</option>
-                                            <option value="1">{knownProducts[1].name}</option>
-                                        </select>
-                                        <div align="center"> <Link to={"/calculadora"}><button onClick={(e) => runCalculator(
-                                            knownProducts[model].cpu,
-                                            knownProducts[model].gpu,
-                                            knownProducts[model].ram,
-                                            knownProducts[model].disk1,
-                                            knownProducts[model].disk2,
-                                            knownProducts[model].ram_type,
-                                            knownProducts[model].disk1_type,
-                                            knownProducts[model].disk2_type,
-                                            "predefinido")}
-                                            disabled={knownProducts[model] === undefined}
-                                            className="btn btn-success">Calcular valor</button></Link>
-                                        </div>
-
-                                    </div>
+                                    <figure><img src={display(src)} height="250" width="250" /></figure>
                                 </div>
+                                <p>CPU: {cpu}</p>
+                                <p>GPU: {gpu}</p>
+                                <p>RAM: {ram}</p>
+                                <p>D1: {disk1}</p>
+                                <p>D1 TYPE: {disk1_type}</p>
+                                <p>D2: {disk2}</p>
+                                <p>D2 TYPE: {disk2_type}</p>
 
-                                <div className="divider divider-warning"></div>
+                                <div className="font-bold text-xl mb-2">Preço estimado - {display(total_value)}€</div>
+                                <Link to={"/calendario"}><div align="center"><button disabled={total_value === undefined} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-info">Agendar venda</button></div></Link>
                             </div>
                         </div>
 
-
-                        <div className="divider lg:divider-horizontal"></div>
-                        <div className="grid  h-200 card bg-base-300 rounded-box place-items-center">
-                            <div className="flex flex-col w-full">
-                                <div className="divider divider-success"></div>
-                                <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
-                                    <div className="font-bold text-xl mb-2">Processador (CPU) - {display(cpu_display)} - {display(cpu_calculated_value)}€</div>
-                                </div>
-                                <div className="divider divider-success"></div>
-                                <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
-                                    <div className="font-bold text-xl mb-2">Placa Gráfica (GPU) - {display(gpu_display)} - {display(gpu_calculated_value)}€</div>
-                                </div>
-                                <div className="divider divider-success"></div>
-                                <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
-                                    <div className="font-bold text-xl mb-2">Memória RAM - {display(ram_display)} {display(gb)} {display(ram_type_display)}  - {display(ram_calculated_value)}€</div>
-                                </div>
-                                <div className="divider divider-success"></div>
-                                <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
-                                    <div className="font-bold text-xl mb-2">Disco 1 - {display(disk1_display)} {display(gb)} {display(disk1_type_display)} - {display(disk1_calculated_value)}€</div>
-                                </div>
-                                <div className="divider divider-success"></div>
-                                <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
-                                    <div className="font-bold text-xl mb-2">Disco 2 - {display(disk2_display)} {display(gb)} {display(disk2_type_display)} - {display(disk2_calculated_value)}€</div>
-                                </div>
-                                <div className="divider divider-success"></div>
-                            </div>
-                        </div>
-
-                        <div className="grid h-20 card bg-base-30 rounded-box place-items-center"></div>
                     </div>
                 </form>
 
             </div>
+
             <Footer />
         </div>
     );
