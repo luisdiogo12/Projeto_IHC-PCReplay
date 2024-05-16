@@ -1,255 +1,263 @@
-import React, { useState } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
+import React, { useState } from "react"
+import Header from "../components/Header"
+import Footer from "../components/Footer"
+import { Link } from "react-router-dom"
 
 const CalculatorPage = () => {
 
-    const [cpu, setCPU] = useState();
-    const [gpu, setGPU] = useState();
-    const [ram, setRAM] = useState();
-    const [disk1, setD1] = useState();
-    const [disk2, setD2] = useState();
+    const [cpu, setCPU] = useState()
+    const [gpu, setGPU] = useState()
+    const [ram, setRAM] = useState()
+    const [disk1, setD1] = useState()
+    const [disk2, setD2] = useState()
 
-    const [cpu_calculated_value, setCPUPrice] = useState();
-    const [gpu_calculated_value, setGPUPrice] = useState();
-    const [ram_calculated_value, setRAMPrice] = useState();
-    const [disk1_calculated_value, setD1Price] = useState();
-    const [disk2_calculated_value, setD2Price] = useState();
+    const [cpu_calculated_value, setCPUPrice] = useState()
+    const [gpu_calculated_value, setGPUPrice] = useState()
+    const [ram_calculated_value, setRAMPrice] = useState()
+    const [disk1_calculated_value, setD1Price] = useState()
+    const [disk2_calculated_value, setD2Price] = useState()
 
-    const [ram_type, setRAMType] = useState();
-    const [disk1_type, setD1Type] = useState();
-    const [disk2_type, setD2Type] = useState();
+    const [ram_type, setRAMType] = useState()
+    const [disk1_type, setD1Type] = useState()
+    const [disk2_type, setD2Type] = useState()
 
-    const [cpu_display, setCPUDisplay] = useState();
-    const [gpu_display, setGPUDisplay] = useState();
-    const [ram_display, setRAMDisplay] = useState();
-    const [disk1_display, setD1Display] = useState();
-    const [disk2_display, setD2Display] = useState();
+    const [cpu_display, setCPUDisplay] = useState()
+    const [gpu_display, setGPUDisplay] = useState()
+    const [ram_display, setRAMDisplay] = useState()
+    const [disk1_display, setD1Display] = useState()
+    const [disk2_display, setD2Display] = useState()
 
-    const [ram_type_display, setRAMTypeDisplay] = useState();
-    const [disk1_type_display, setD1TypeDisplay] = useState();
-    const [disk2_type_display, setD2TypeDisplay] = useState();
+    const [ram_type_display, setRAMTypeDisplay] = useState()
+    const [disk1_type_display, setD1TypeDisplay] = useState()
+    const [disk2_type_display, setD2TypeDisplay] = useState()
 
-    const [total_value, setTotal] = useState();
+    const [total_value, setTotal] = useState()
 
-    const cpu_reference_value = 100;
-    const gpu_reference_value = 100;
-    const ram_reference_value = [25, 16];    // 16 GB DDR4
-    const disk_reference_value = [35, 500];  // 500 GB SSD
+    const [preset, setPreset] = useState(true)
+    const [write, setWrite] = useState(false)
 
-    const [gb, setGB] = useState();
+    const cpu_reference_value = 100
+    const gpu_reference_value = 100
+    const ram_reference_value = [25, 16]    // 16 GB DDR4
+    const disk_reference_value = [35, 500]  // 500 GB SSD
 
-    const [message, setMessage] = useState();
+    const dropdown_value = document.getElementById("personalizado")
 
-    const [model, setModel] = useState();
+    const [gb, setGB] = useState()
 
-    var [src, setSrc] = useState("../src/assets/PCReplay_logo.png");
+    const [model, setModel] = useState()
+
+    var [src, setSrc] = useState("../src/assets/PCReplay_logo.png")
 
     function display(value) {
         if (value != null) {
-            return value;
+            return value
         }
-    }
-
-    function runCalculator(cpu, gpu, ram, disk1, disk2, ram_type, disk1_type, disk2_type, origem) {
-
-        if (origem != "predefinido") {
-            setModel(-1);
-            setSrc("../src/assets/PCReplay_logo.png")
-        }
-
-        console.log("----------------------");
-
-        if (cpu == null || cpu == '') {
-            console.log('ERROR CPU')
-            setMessage("ERRO: CPU não selecionado\n");
-            reset();
-            return false;
-        }
-        if (gpu == null || gpu == '') {
-            console.log('ERROR GPU')
-            setMessage("ERRO: GPU não selecionado\n");
-            reset();
-            return false;
-        }
-        if (ram < 0 || ram > 256) {
-            console.log('ERROR RAM')
-            setMessage("AVISO: RAM entre 0 e 256 GB\n");
-            reset();
-            return false;
-        }
-        if (disk1 < 0 || disk1 > 8000) {
-            console.log('ERROR DISK1')
-            setMessage("AVISO: Disco 1 entre 0 e 8000 GB\n");
-            reset();
-            return false;
-        }
-        if (disk2 < 0 || disk2 > 8000) {
-            console.log('ERROR DISK2')
-            setMessage("AVISO: Disco 2 entre 0 e 8000 GB\n");
-            reset();
-            return false;
-        }
-
-        var ram_coefficient;
-        var ram_price;
-
-        console.log("RAM coefficient => " + ram_reference_value[0] / ram_reference_value[1]);
-        console.log("RAM => " + ram);
-        console.log("RAM TYPE => " + ram_type);
-
-        if (ram === undefined || ram == "" || ram_type === undefined || ram_type == "") {
-            ram_price = 0;
-            setRAMDisplay(0);
-            setRAMTypeDisplay();
-        } else {
-            switch (ram_type) {
-                case "DDR":
-                    ram_coefficient = 0.15;
-                    break;
-                case "DDR2":
-                    ram_coefficient = 0.25;
-                    break;
-                case "DDR3":
-                    ram_coefficient = 0.4;
-                    break;
-                case "DDR4":
-                    ram_coefficient = 1.0;
-                    break;
-                case "DDR5":
-                    ram_coefficient = 1.8;
-                    break;
-                default:
-                    ram_coefficient = 0;
-                    break;
-            }
-            ram_price = (ram_reference_value[0] / ram_reference_value[1]) * ram * ram_coefficient;
-            if (ram_price == 0) {
-                setRAMTypeDisplay();
-            } else {
-                setRAMTypeDisplay(ram_type);
-            }
-            setRAMDisplay(ram);
-        }
-
-        console.log("RAM price => " + ram_price);
-
-        console.log("DISK coefficient => " + disk_reference_value[0] / disk_reference_value[1]);
-
-        if (disk1 === undefined || disk1 == "" || disk1_type === undefined || disk1_type == "") {
-            var disk1_price = 0;
-            setD1Display(0);
-            setD1TypeDisplay();
-        } else {
-            var disk1_price = diskCalculator(disk1, disk1_type, disk_reference_value);
-            setD1Display(disk1);
-            setD1TypeDisplay(disk1_type);
-        }
-
-        if (disk2 === undefined || disk2 == "" || disk2_type === undefined || disk2_type == "") {
-            var disk2_price = 0;
-            setD2Display(0);
-            setD2TypeDisplay();
-        } else {
-            var disk2_price = diskCalculator(disk2, disk2_type, disk_reference_value);
-            setD2Display(disk2);
-            setD2TypeDisplay(disk2_type);
-        }
-
-        ram_price = Number((ram_price).toFixed(2));
-        disk1_price = Number((disk1_price).toFixed(2));
-        disk2_price = Number((disk2_price).toFixed(2));
-        console.log("DISK1 price => " + disk1_price);
-        console.log("DISK2 price => " + disk2_price);
-
-        var cpu_price = cpu_reference_value;
-        var gpu_price = gpu_reference_value;
-
-        setCPUPrice(cpu_price);
-        setGPUPrice(gpu_price);
-        setRAMPrice(ram_price);
-        setD1Price(disk1_price);
-        setD2Price(disk2_price);
-
-        setGB("GB");
-
-        setCPUDisplay(cpu);
-        setGPUDisplay(gpu);
-
-        setTotal(Number((cpu_price + gpu_price + ram_price + disk1_price + disk2_price).toFixed(2)));
-
-        setMessage();
     }
 
     function diskCalculator(disk, disk_type, disk_reference_value) {
-        var disk_coefficient;
+        var disk_coefficient
         switch (disk_type) {
             case "HDD":
-                disk_coefficient = 0.3;
-                break;
+                disk_coefficient = 0.3
+                break
             case "SSD":
-                disk_coefficient = 0.9;
-                break;
+                disk_coefficient = 0.9
+                break
             case "NVME/PCIE SSD":
-                disk_coefficient = 1.3;
-                break;
+                disk_coefficient = 1.3
+                break
             default:
-                disk_coefficient = 0;
-                break;
+                disk_coefficient = 0
+                break
         }
-        var disk_price = (disk_reference_value[0] / disk_reference_value[1]) * disk * disk_coefficient;
-        return disk_price;
+        var disk_price = (disk_reference_value[0] / disk_reference_value[1]) * disk * disk_coefficient
+        return disk_price
     }
 
     const reset = () => {
 
-        setCPU();
-        setGPU();
-        setRAM();
-        setD1();
-        setD2();
-        setRAMType();
-        setD1Type();
-        setD2Type();
+        setCPU()
+        setGPU()
+        setRAM()
+        setD1()
+        setD2()
+        setRAMType()
+        setD1Type()
+        setD2Type()
 
-        setCPUPrice();
-        setGPUPrice();
-        setRAMPrice();
-        setD1Price();
-        setD2Price();
+        setCPUPrice()
+        setGPUPrice()
+        setRAMPrice()
+        setD1Price()
+        setD2Price()
 
-        setCPUDisplay();
-        setGPUDisplay();
-        setRAMDisplay();
-        setD1Display();
-        setD2Display();
+        setCPUDisplay()
+        setGPUDisplay()
+        setRAMDisplay()
+        setD1Display()
+        setD2Display()
 
-        setRAMTypeDisplay();
-        setD1TypeDisplay();
-        setD2TypeDisplay();
+        setRAMTypeDisplay()
+        setD1TypeDisplay()
+        setD2TypeDisplay()
 
-        setGB();
+        setGB()
 
-        if (message !== undefined) {
-            setMessage();
-        }
+        setModel()
 
-        setModel();
+        setWrite(false)
+        setPreset(true)
 
-        renderImg(-1);
-
-        setTotal();
+        setTotal()
     }
 
-    function renderImg(src_number) {
+    function handleSpecs(cpu = null,
+                        gpu = null,
+                        ram = null ,
+                        ram_type = null,
+                        disk1 = null,
+                        disk1_type = null,
+                        disk2 = null,
+                        disk2_type = null,
+                        img_number = null,
+                        run = null){
 
-        setModel(src_number);
+        if(img_number != null){
+            setModel(img_number)
 
-        if (src_number == -1) {
-            setSrc("../src/assets/PCReplay_logo.png");
-        } else {
-            setSrc(knownProducts[src_number].src);
+            if (img_number < 0) {
+                setSrc("../src/assets/PCReplay_logo.png")
+            } else {
+                setSrc(knownProducts[img_number].src)
+            }
+        }
+
+        if (img_number == -2){ // personalizado
+            reset()
+            setPreset(false)
+            setWrite(true)
+        }else{
+            setPreset(true)
+        }
+
+        if (dropdown_value > -2){
+            setWrite(false) 
+        }
+
+        if (run == true){
+            console.log("----------------------")
+
+            var ram_coefficient
+            var ram_price
+
+            console.log("RAM coefficient => " + ram_reference_value[0] / ram_reference_value[1])
+            console.log("RAM => " + ram)
+            console.log("RAM TYPE => " + ram_type)
+
+            if (ram === undefined || ram == "" || ram_type === undefined || ram_type == "") {
+                ram_price = 0
+                setRAMDisplay(0)
+                setRAMTypeDisplay()
+            } else {
+                switch (ram_type) {
+                    case "DDR":
+                        ram_coefficient = 0.15
+                        break
+                    case "DDR2":
+                        ram_coefficient = 0.25
+                        break
+                    case "DDR3":
+                        ram_coefficient = 0.4
+                        break
+                    case "DDR4":
+                        ram_coefficient = 1.0
+                        break
+                    case "DDR5":
+                        ram_coefficient = 1.8
+                        break
+                    default:
+                        ram_coefficient = 0
+                        break
+                }
+                ram_price = (ram_reference_value[0] / ram_reference_value[1]) * ram * ram_coefficient
+                if (ram_price == 0) {
+                    setRAMTypeDisplay()
+                } else {
+                    setRAMTypeDisplay(ram_type)
+                }
+                setRAMDisplay(ram)
+            }
+
+            console.log("RAM price => " + ram_price)
+            console.log("DISK coefficient => " + disk_reference_value[0] / disk_reference_value[1])
+
+            if (disk1 === undefined || disk1 == "" || disk1_type === undefined || disk1_type == "") {
+                var disk1_price = 0
+                setD1Display(0)
+                setD1TypeDisplay()
+            } else {
+                var disk1_price = diskCalculator(disk1, disk1_type, disk_reference_value)
+                setD1Display(disk1)
+                setD1TypeDisplay(disk1_type)
+            }
+
+            if (disk2 === undefined || disk2 == "" || disk2_type === undefined || disk2_type == "") {
+                var disk2_price = 0
+                setD2Display(0)
+                setD2TypeDisplay()
+            } else {
+                var disk2_price = diskCalculator(disk2, disk2_type, disk_reference_value)
+                setD2Display(disk2)
+                setD2TypeDisplay(disk2_type)
+            }
+
+            ram_price = Number((ram_price).toFixed(2))
+            disk1_price = Number((disk1_price).toFixed(2))
+            disk2_price = Number((disk2_price).toFixed(2))
+            console.log("DISK1 price => " + disk1_price)
+            console.log("DISK2 price => " + disk2_price)
+
+            var cpu_price = cpu_reference_value
+            var gpu_price = gpu_reference_value
+
+            setCPUPrice(cpu_price)
+            setGPUPrice(gpu_price)
+            setRAMPrice(ram_price)
+            setD1Price(disk1_price)
+            setD2Price(disk2_price)
+
+            setGB("GB")
+
+            setCPUDisplay(cpu)
+            setGPUDisplay(gpu)
+
+            setTotal(Number((cpu_price + gpu_price + ram_price + disk1_price + disk2_price).toFixed(2)))
+        }
+
+        if (cpu != null){
+            setCPU(cpu)
+        }
+        if (gpu != null){
+            setGPU(gpu)
+        }
+        if (ram != null){
+            setRAM(ram)
+        }
+        if (ram_type != null){
+            setRAMType(ram_type)
+        }
+        if (disk1 != null){
+            setD1(disk1)
+        }
+        if (disk1_type != null){
+            setD1Type(disk1_type)
+        }
+        if (disk2 != null){
+            setD2(disk2)
+        }
+        if (disk2_type != null){
+            setD2Type(disk2_type)
         }
     }
 
@@ -303,18 +311,21 @@ const CalculatorPage = () => {
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <ul className="steps steps-vertical">
-                                                <li className><div className="font-bold text-xl mb-2"><span className="badge badge-error"> {}</span>Selecionar Modelo Predefinido</div></li>
-                                            </ul>
-                                            {console.log(document.getElementById("model"))}
-                                            <div>
-                                                <select className="select" name="model" id="model" onChange={(e) => renderImg(e.target.value)}>
-                                                    <option value="-1" defaultValue>Selecionar modelo</option>
-                                                    <option value="0">{knownProducts[0].name}</option>
-                                                    <option value="1">{knownProducts[1].name}</option>
-                                                    <option value="-1">Personalizado</option>
-                                                </select> 
-                                            </div>
+                                            <td>
+                                                <ul className="steps steps-vertical">
+                                                    <li className={(cpu == null || cpu == "") ? "step step-error" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-error">Obrigatório</span>Selecionar Modelo Predefinido</div></li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <select className="select" name="model" id="personalizado" onChange={(e) => handleSpecs(null,null,null,null,null,null,null,null,e.target.value,null)}>
+                                                        <option value="-1" defaultValue>Selecionar modelo</option>
+                                                        <option value="0">{knownProducts[0].name}</option>
+                                                        <option value="1">{knownProducts[1].name}</option>
+                                                        <option value="-2">Personalizado</option>
+                                                    </select> 
+                                                </div>
+                                            </td> 
                                         </tr>
                                     </tbody>  
                                 </table>
@@ -327,8 +338,8 @@ const CalculatorPage = () => {
                                 <tr>
                                     <td>
                                         <ul className="steps steps-vertical">
-                                            <li className={(cpu == null || cpu == "") ? "step" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-error"> Obrigatório</span>Selecionar CPU</div></li>
-                                            <li className={(gpu == null || gpu == "") ? "step" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-error">Obrigatório</span>Selecionar GPU</div></li>
+                                            <li className={(cpu == null || cpu == "") ? "step step-error" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-error"> Obrigatório</span>Selecionar CPU</div></li>
+                                            <li className={(gpu == null || gpu == "") ? "step step-error" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-error">Obrigatório</span>Selecionar GPU</div></li>
                                             <li className={(ram === undefined || ram == "" || ram_type === undefined || ram_type == "" || ram < 0 || ram > 256) ? "step step-info" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-info">Opcional</span>Selecionar quantidade RAM</div></li>
                                             <li className={(disk1 === undefined || disk1 == "" || disk1_type === undefined || disk1_type == "" || disk1 < 0 || disk1 > 8000) ? "step step-info" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-info">Opcional</span>Selecionar quantidade de armazenamento #1</div></li>
                                             <li className={(disk2 === undefined || disk2 == "" || disk2_type === undefined || disk1_type == "" || disk2 < 0 || disk2 > 8000) ? "step step-info" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-info">Opcional</span>Selecionar quantidade de armazenamento #2</div></li>
@@ -337,19 +348,19 @@ const CalculatorPage = () => {
                                     <td>
                                         <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
                                             <label className="input flex items-center gap-2">
-                                                <input type="text" placeholder="Modelo CPU" onChange={(e) => setCPU(e.target.value)} className="input input-bordered flex items-center gap-2" />
+                                                <input disabled={preset || write} type="text" placeholder="Modelo CPU" onChange={(e) => handleSpecs(e.target.value,null,null,null,null,null,null,null,null,null)} className="input input-bordered flex items-center gap-2" />
                                             </label>
                                         </div>
                                         <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
                                             <label className="input flex items-center gap-2">
-                                                <input type="text" placeholder="Modelo GPU" onChange={(e) => setGPU(e.target.value)} className="input input-bordered flex items-center gap-2" />
+                                                <input disabled={preset || !write} type="text" placeholder="Modelo GPU" onChange={(e) => handleSpecs(null,e.target.value,null,null,null,null,null,null,null,null)} className="input input-bordered flex items-center gap-2" />
                                             </label>
                                         </div>
                                         <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
                                             <label className="input flex items-center gap-2">
-                                                <input type="number" defaultValue="0" min="0" max="256" placeholder="RAM" onChange={(e) => setRAM(e.target.value)} width="40px" className="input input-bordered  max-w-xs" />
+                                                <input disabled={preset && !write} type="number" defaultValue="0" min="0" max="256" placeholder="RAM" onChange={(e) => handleSpecs(null,null,e.target.value,null,null,null,null,null,null,null)} width="40px" className="input input-bordered  max-w-xs" />
                                                 <div className="font-bold text-xl mb-2">GB</div>
-                                                <select name="ram" id="ram" onChange={(e) => setRAMType(e.target.value)}>
+                                                <select disabled={preset && !write} name="ram" id="ram" onChange={(e) => handleSpecs(null,null,null,e.target.value,null,null,null,null,null,null)}>
                                                     <option value="">Selecionar geração</option>
                                                     <option value="DDR">DDR</option>
                                                     <option value="DDR2">DDR2</option>
@@ -361,9 +372,9 @@ const CalculatorPage = () => {
                                         </div>
                                         <div className="grid h-20 flex-grow card bg-base-30 rounded-box place-items-center">
                                             <label className="input flex items-center gap-2">
-                                                <input type="number" defaultValue="0" min="0" max="8000" placeholder="Armazenamento #2" onChange={(e) => setD1(e.target.value)} className="input input-bordered flex items-center gap-2" />
+                                                <input disabled={preset && !write} type="number" defaultValue="0" min="0" max="8000" placeholder="Armazenamento #1" onChange={(e) => handleSpecs(null,null,null,null,e.target.value,null,null,null,null,null)} className= "input input-bordered flex items-center gap-2" />
                                                 <div className="font-bold text-xl mb-2">GB</div>
-                                                <select name="disco1" id="disco1" onChange={(e) => setD1Type(e.target.value)}>
+                                                <select  disabled={preset && !write} name="disco1" id="disco1" onChange={(e) => handleSpecs(null,null,null,null,null,e.target.value,null,null,null,null)}>
                                                     <option value="">Selecionar tipo</option>
                                                     <option value="HDD">HDD</option>
                                                     <option value="SSD">SSD</option>
@@ -373,9 +384,9 @@ const CalculatorPage = () => {
                                         </div>
                                         <div className="grid h-20 flex-grow card bg-base-30 rounded-box place-items-center">
                                             <label className="input flex items-center gap-2">
-                                                <input type="number" defaultValue="0" min="0" max="8000" placeholder="Armazenamento #2" onChange={(e) => setD2(e.target.value)} className="input input-bordered flex items-center gap-2" />
+                                                <input disabled={preset && !write} type="number" defaultValue="0" min="0" max="8000" placeholder="Armazenamento #2" onChange={(e) => handleSpecs(null,null,null,null,null,null,e.target.value,null,null,null)} className="input input-bordered flex items-center gap-2" />
                                                 <div className="font-bold text-xl mb-2">GB</div>
-                                                <select name="disco2" id="disco2" onChange={(e) => setD2Type(e.target.value)}>
+                                                <select disabled={!preset || write} name="disco2" id="disco2" onChange={(e) => handleSpecs(null,null,null,null,null,null,null,e.target.value,null,null)}>
                                                     <option value="">Selecionar tipo</option>
                                                     <option value="HDD">HDD</option>
                                                     <option value="SSD">SSD</option>
@@ -389,22 +400,19 @@ const CalculatorPage = () => {
                                 </div>
                             </div>
                            
-                            <div align="center"> <Link to={"/calculadora"}><button onClick={() => runCalculator(cpu, gpu, ram, disk1, disk2, ram_type, disk1_type, disk2_type, "personalizado")}
-                                disabled={cpu === undefined || cpu == "" || gpu === undefined || gpu == ""} className="btn btn-success">Calcular valor</button></Link>
-                            </div>
-
-                            <div align="center"> <Link to={"/calculadora"}><button onClick={(e) => runCalculator(
-                                knownProducts[model].cpu,
+                            <div align="center"> <Link to={"/calculadora"}><button onClick={() => preset == false ? handleSpecs(cpu, gpu, ram, ram_type, disk1, disk1_type, disk2, disk2_type, null, true):
+                            handleSpecs(knownProducts[model].cpu, 
                                 knownProducts[model].gpu,
                                 knownProducts[model].ram,
-                                knownProducts[model].disk1,
-                                knownProducts[model].disk2,
                                 knownProducts[model].ram_type,
+                                knownProducts[model].disk1,
                                 knownProducts[model].disk1_type,
+                                knownProducts[model].disk2,
                                 knownProducts[model].disk2_type,
-                                "predefinido")}
-                                disabled={knownProducts[model] === undefined}
-                                className="btn btn-success">Calcular valor</button></Link>
+                                null,
+                                true)
+                            }
+                                 className="btn btn-success">Calcular valor</button></Link>
                             </div>
                             <div align="center"><button type="reset" onClick={() => reset()} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-outline btn-error" >Reset</button></div>
                         </div>
@@ -418,10 +426,13 @@ const CalculatorPage = () => {
                                 <p>CPU: {cpu}</p>
                                 <p>GPU: {gpu}</p>
                                 <p>RAM: {ram}</p>
+                                <p>RAM TYPE: {ram_type}</p>
                                 <p>D1: {disk1}</p>
                                 <p>D1 TYPE: {disk1_type}</p>
                                 <p>D2: {disk2}</p>
                                 <p>D2 TYPE: {disk2_type}</p>
+                                <p>PRESET: {console.log(preset)}</p>
+
 
                                 <div className="font-bold text-xl mb-2">Preço estimado - {display(total_value)}€</div>
                                 <Link to={"/calendario"}><div align="center"><button disabled={total_value === undefined} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-info">Agendar venda</button></div></Link>
@@ -435,7 +446,7 @@ const CalculatorPage = () => {
 
             <Footer />
         </div>
-    );
-};
+    )
+}
 
-export default CalculatorPage;
+export default CalculatorPage
