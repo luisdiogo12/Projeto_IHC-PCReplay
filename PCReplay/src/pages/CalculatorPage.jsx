@@ -121,8 +121,6 @@ const CalculatorPage = () => {
         setD1Price()
         setD2Price()
 
-      
-
         setModel()
 
         setLockInput(true)
@@ -157,40 +155,35 @@ const CalculatorPage = () => {
             // personalizado
             if (img_number == -2) {
                 setLockInput(false)
-
-                setCPUPreset()
-                setGPUPreset()
-                setRAMPreset()
-                setD1Preset()
-                setD2Preset()
-                setRAMTypePreset()
-                setD1TypePreset()
-                setD2TypePreset()
-                
-                setTotal()
             } else {
                 setLockInput(true)
-
-                setCPU()
-                setGPU()
-                setRAM()
-                setD1()
-                setD2()
-                setRAMType()
-                setD1Type()
-                setD2Type()
-
-                setCPUPreset()
-                setGPUPreset()
-                setRAMPreset()
-                setD1Preset()
-                setD2Preset()
-                setRAMTypePreset()
-                setD1TypePreset()
-                setD2TypePreset()
-
-                setTotal()
             }
+
+            setCPU()
+            setGPU()
+            setRAM()
+            setD1()
+            setD2()
+            setRAMType()
+            setD1Type()
+            setD2Type()
+
+            setCPUPreset()
+            setGPUPreset()
+            setRAMPreset()
+            setD1Preset()
+            setD2Preset()
+            setRAMTypePreset()
+            setD1TypePreset()
+            setD2TypePreset()
+
+            setCPUPrice()
+            setGPUPrice()
+            setRAMPrice()
+            setD1Price()
+            setD2Price()
+
+            setTotal()  
         }
 
         if (mode == "assign") {
@@ -218,7 +211,7 @@ const CalculatorPage = () => {
                 }
                 if (disk2_type != null) {
                     setD2Type(disk2_type)
-                }    
+                }
             }
         }
 
@@ -293,10 +286,13 @@ const CalculatorPage = () => {
             console.log("DISK1 price => " + disk1_price)
             console.log("DISK2 price => " + disk2_price)
 
-            cpu_calculated_value = cpu_reference_value
-            gpu_calculated_value = gpu_reference_value
+            cpu_calculated_value = (cpu == null || cpu == "" || gpu === undefined) ? 0 : cpu_reference_value
+            gpu_calculated_value = (gpu == null || gpu == "" || gpu === undefined) ? 0 : gpu_reference_value
 
-            if(lock_input){
+            console.log("CPU CALCULATED " + cpu_calculated_value)
+            console.log("GPU CALCULATED " + gpu_calculated_value)
+           
+            if (lock_input) {
                 setCPUPreset(cpu)
                 setGPUPreset(gpu)
                 setRAMPreset(ram)
@@ -306,9 +302,9 @@ const CalculatorPage = () => {
                 setD1TypePreset(disk1_type)
                 setD2TypePreset(disk2_type)
             }
-            
-            setCPUPrice(cpu_reference_value)
-            setGPUPrice(gpu_reference_value)
+
+            setCPUPrice(cpu_calculated_value)
+            setGPUPrice(gpu_calculated_value)
             setRAMPrice(ram_calculated_value)
             setD1Price(disk1_calculated_value)
             setD2Price(disk2_calculated_value)
@@ -366,7 +362,7 @@ const CalculatorPage = () => {
                                 <div className="font-bold text-xl mb-2">Calculadora de componentes</div>
                             </div>
                             <div className="flex flex-col  border-opacity-50">
-                                <div className="grid h-20 card bg-base-300 rounded-box place-items-center">
+                                <div className="grid h-200 card bg-base-300 rounded-box">
                                     <table>
                                         <tbody>
                                             <tr>
@@ -374,8 +370,6 @@ const CalculatorPage = () => {
                                                     <ul className="steps steps-vertical">
                                                         <li className={(cpu == null || cpu == "") ? "step step-error" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-error">Obrigatório</span>Selecionar Modelo Predefinido</div></li>
                                                     </ul>
-                                                </td>
-                                                <td>
                                                     <div>
                                                         <select className="select" name="model" id="personalizado" onChange={(e) => handler(null, null, null, null, null, null, null, null, e.target.value, "set")}>
                                                             <option value="-1" defaultValue>Selecionar modelo</option>
@@ -397,25 +391,15 @@ const CalculatorPage = () => {
                                         <tr>
                                             <td>
                                                 <ul className="steps steps-vertical">
-                                                    <li className={(cpu == null || cpu == "") ? "step step-error" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-error"> Obrigatório</span>Selecionar CPU</div></li>
-                                                    <li className={(gpu == null || gpu == "") ? "step step-error" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-error">Obrigatório</span>Selecionar GPU</div></li>
-                                                    <li className={(ram === undefined || ram == "" || ram_type === undefined || ram_type == "" || ram < 0 || ram > 256) ? "step step-info" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-info">Opcional</span>Selecionar quantidade RAM</div></li>
-                                                    <li className={(disk1 === undefined || disk1 == "" || disk1_type === undefined || disk1_type == "" || disk1 < 0 || disk1 > 8000) ? "step step-info" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-info">Opcional</span>Selecionar quantidade de armazenamento #1</div></li>
-                                                    <li className={(disk2 === undefined || disk2 == "" || disk2_type === undefined || disk1_type == "" || disk2 < 0 || disk2 > 8000) ? "step step-info" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-info">Opcional</span>Selecionar quantidade de armazenamento #2</div></li>
+                                                    <li className={(cpu == null || cpu == "") ? "step step-error" : "step step-success"} ><div className="font-bold text-xl mb-2"><span className="badge badge-error"> Obrigatório</span>Selecionar CPU</div></li>
+                                                    <input disabled={lock_input} type="text" placeholder="Modelo CPU" onChange={(e) => handler(e.target.value, null, null, null, null, null, null, null, null, "assign")} className="input input-bordered flex items-center gap-2"/>
                                                 </ul>
-                                            </td>
-                                            <td>
-                                                <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
-                                                    <label className="input flex items-center gap-2">
-                                                        <input disabled={lock_input} type="text" placeholder="Modelo CPU" onChange={(e) => handler(e.target.value, null, null, null, null, null, null, null, null, "assign")} className="input input-bordered flex items-center gap-2" />
-                                                    </label>
-                                                </div>
-                                                <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
-                                                    <label className="input flex items-center gap-2">
-                                                        <input disabled={lock_input} type="text" placeholder="Modelo GPU" onChange={(e) => handler(null, e.target.value, null, null, null, null, null, null, null, "assign")} className="input input-bordered flex items-center gap-2" />
-                                                    </label>
-                                                </div>
-                                                <div className="grid h-20 card bg-base-30 rounded-box place-items-center">
+                                                <p><ul className="steps steps-vertical">
+                                                    <li className={(gpu == null || gpu == "") ? "step step-error" : "step step-success"} data-content="2"><div className="font-bold text-xl mb-2"><span className="badge badge-error">Obrigatório</span>Selecionar GPU</div></li>
+                                                    <input disabled={lock_input} type="text" placeholder="Modelo GPU" onChange={(e) => handler(null, e.target.value, null, null, null, null, null, null, null, "assign")} className="input input-bordered flex items-center gap-2" />
+                                                </ul></p>
+                                                <p><ul className="steps steps-vertical">
+                                                    <li className={(ram === undefined || ram == "" || ram_type === undefined || ram_type == "" || ram < 0 || ram > 256) ? "step step-info" : "step step-success"} data-content="3"><div className="font-bold text-xl mb-2"><span className="badge badge-info">Opcional</span>Selecionar quantidade RAM</div></li>
                                                     <label className="input flex items-center gap-2">
                                                         <input disabled={lock_input} type="number" defaultValue="0" min="0" max="256" placeholder="RAM" onChange={(e) => handler(null, null, e.target.value, null, null, null, null, null, null, "assign")} width="40px" className="input input-bordered  max-w-xs" />
                                                         <div className="font-bold text-xl mb-2">GB</div>
@@ -428,8 +412,9 @@ const CalculatorPage = () => {
                                                             <option value="DDR5">DDR5</option>
                                                         </select>
                                                     </label>
-                                                </div>
-                                                <div className="grid h-20 flex-grow card bg-base-30 rounded-box place-items-center">
+                                                </ul></p> 
+                                                <p><ul className="steps steps-vertical" >
+                                                    <li className={(disk1 === undefined || disk1 == "" || disk1_type === undefined || disk1_type == "" || disk1 < 0 || disk1 > 8000) ? "step step-info" : "step step-success"} data-content="4"><div className="font-bold text-xl mb-2"><span className="badge badge-info">Opcional</span>Selecionar armazenamento #1</div></li>
                                                     <label className="input flex items-center gap-2">
                                                         <input disabled={lock_input} type="number" defaultValue="0" min="0" max="8000" placeholder="Armazenamento #1" onChange={(e) => handler(null, null, null, null, e.target.value, null, null, null, null, "assign")} className="input input-bordered flex items-center gap-2" />
                                                         <div className="font-bold text-xl mb-2">GB</div>
@@ -440,8 +425,9 @@ const CalculatorPage = () => {
                                                             <option value="NVME/PCIE SSD">NVME/PCIE SSD</option>
                                                         </select>
                                                     </label>
-                                                </div>
-                                                <div className="grid h-20 flex-grow card bg-base-30 rounded-box place-items-center">
+                                                </ul></p>
+                                                <p><ul className="steps steps-vertical" >
+                                                    <li className={(disk2 === undefined || disk2 == "" || disk2_type === undefined || disk1_type == "" || disk2 < 0 || disk2 > 8000) ? "step step-info" : "step step-success"} data-content="5"><div className="font-bold text-xl mb-2"><span className="badge badge-info">Opcional</span>Selecionar armazenamento #2</div></li>
                                                     <label className="input flex items-center gap-2">
                                                         <input disabled={lock_input} type="number" defaultValue="0" min="0" max="8000" placeholder="Armazenamento #2" onChange={(e) => handler(null, null, null, null, null, null, e.target.value, null, null, "assign")} className="input input-bordered flex items-center gap-2" />
                                                         <div className="font-bold text-xl mb-2">GB</div>
@@ -452,32 +438,46 @@ const CalculatorPage = () => {
                                                             <option value="NVME/PCIE SSD">NVME/PCIE SSD</option>
                                                         </select>
                                                     </label>
-                                                </div>
+                                                </ul></p>
+                                            </td>
+                                            <td>
+
                                             </td>
                                         </tr>
                                     </table>
                                 </div>
                             </div>
 
-                            <div align="center"> <Link to={"/calculadora"}><button onClick={() => !lock_input ? handler(cpu, gpu, ram, ram_type, disk1, disk1_type, disk2, disk2_type, null, "run") :
-                                handler(knownProducts[model].cpu,
-                                    knownProducts[model].gpu,
-                                    knownProducts[model].ram,
-                                    knownProducts[model].ram_type,
-                                    knownProducts[model].disk1,
-                                    knownProducts[model].disk1_type,
-                                    knownProducts[model].disk2,
-                                    knownProducts[model].disk2_type,
-                                    null,
-                                    "run")
-                                }
-                                className="btn btn-success" >Calcular valor</button></Link>
-                            </div>
-                            <Link to={"/calendario"}><div align="center"><button disabled={total_value === undefined} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-info">Agendar venda</button></div></Link>
+                            <table>
+                                <thead>
+                                    <th>
+                                        <div align="center"> <Link to={"/calculadora"}><button 
+                                            disabled={!lock_input ? (cpu == null || cpu == "" || cpu === undefined ||
+                                            gpu == null || gpu == "" || gpu === undefined || ram < 0 || ram > 256 || 
+                                            disk1 < 0 || disk1 > 8000 || disk2 < 0 || disk2 > 8000 || (disk1 > 0 && disk1 < 8000 && (disk1_type === undefined || disk1_type == "")) || (disk2 > 0 && disk2 < 8000 && (disk2_type === undefined || disk2_type == ""))): false} 
+                                            onClick={() => !lock_input ? handler(cpu, gpu, ram, ram_type, disk1, disk1_type, disk2, disk2_type, null, "run") :
+                                            handler(knownProducts[model].cpu,
+                                                knownProducts[model].gpu,
+                                                knownProducts[model].ram,
+                                                knownProducts[model].ram_type,
+                                                knownProducts[model].disk1,
+                                                knownProducts[model].disk1_type,
+                                                knownProducts[model].disk2,
+                                                knownProducts[model].disk2_type,
+                                                null,
+                                                "run")
+                                        }
+                                            className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg  btn-success" >Calcular valor</button></Link>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div align="center"><button type="reset" onClick={() => reset()} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-outline btn-error" >Reset</button></div>
+                                    </th>
+                                </thead>
+                            </table>
 
                             <div className="font-bold text-xl mb-2">Preço estimado - {display(total_value)}€</div>
-                            <div align="center"><button type="reset" onClick={() => reset()} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-outline btn-error" >Reset</button></div>
-
+                            <div align="center"><button disabled={total_value === undefined} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-info"><Link to={"/calendario"}>Agendar venda</Link></button></div>
                         </div>
                         <div className="divider divider-horizontal"></div>
 
@@ -486,19 +486,21 @@ const CalculatorPage = () => {
                                 <div className="card card-compact w-96 bg-base-100 shadow-xl">
                                     <figure><img src={display(src)} height="250" width="250" /></figure>
                                 </div>
-                                <div className="font-bold text-xl mb-2">CPU: {lock_input ? cpu_preset : cpu}</div>
-                                <div className="font-bold text-xl mb-2">GPU: {lock_input ? gpu_preset : gpu}</div>
-                                <div className="font-bold text-xl mb-2">RAM: {lock_input ? ram_preset : ram} 
-                                {(ram !== undefined && ram != "" && ram_type !== undefined && ram_type != "") || (ram_preset !== undefined && ram_preset != "" && ram_type_preset !== undefined && ram_type_preset != "")
-                                ? "GB" : ""} {lock_input ? ram_type_preset : ram_type}</div>
+                                <div className="font-bold text-xl mb-2">CPU: {lock_input ? cpu_preset : cpu} - {cpu_calculated_value}€</div>
+                                <div className="font-bold text-xl mb-2">GPU: {lock_input ? gpu_preset : gpu} - {gpu_calculated_value}€</div>
+                                <div className="font-bold text-xl mb-2">RAM: {lock_input ? ram_preset : ram}
+                                    {(ram !== undefined && ram != "" && ram_type !== undefined && ram_type != "") || (ram_preset !== undefined && ram_preset != "" && ram_type_preset !== undefined && ram_type_preset != "")
+                                        ? "GB" : ""} {lock_input ? ram_type_preset : ram_type} - {ram_calculated_value}€</div>
 
-                                <div className="font-bold text-xl mb-2">Armazenamento #1: {lock_input ? disk1_preset : disk1} 
-                                {(disk1 !== undefined && disk1 != "" && disk1_type !== undefined && disk1_type != "") || (disk1_preset !== undefined && disk1_preset != "" && disk1_type_preset !== undefined && disk1_type_preset != "")
-                                ? "GB" : ""} {lock_input ? disk1_type_preset : disk1_type}</div>
+                                <div className="font-bold text-xl mb-2">Arm. #1: {lock_input ? disk1_preset : disk1}
+                                    {(disk1 !== undefined && disk1 != "" && disk1_type !== undefined && disk1_type != "") || (disk1_preset !== undefined && disk1_preset != "" && disk1_type_preset !== undefined && disk1_type_preset != "")
+                                        ? "GB" : ""} {lock_input ? disk1_type_preset : disk1_type} - {disk1_calculated_value}€</div>
 
-                                <div className="font-bold text-xl mb-2">Armazenamento #2: {lock_input ? disk2_preset : disk2} 
-                                {(disk2 !== undefined && disk2 != "" && disk2_type !== undefined && disk2_type != "") || (disk2_preset !== undefined && disk2_preset != "" && disk2_type_preset !== undefined && disk2_type_preset != "")
-                                ? "GB" : ""} {lock_input ? disk2_type_preset : disk2_type}</div>                          
+                                <div className="font-bold text-xl mb-2">Arm. #2: {lock_input ? disk2_preset : disk2}
+                                    {(disk2 !== undefined && disk2 != "" && disk2_type !== undefined && disk2_type != "") || (disk2_preset !== undefined && disk2_preset != "" && disk2_type_preset !== undefined && disk2_type_preset != "")
+                                        ? "GB" : ""} {lock_input ? disk2_type_preset : disk2_type} - {disk2_calculated_value}€</div>
+                                <div className="font-bold text-xl mb-2">TOTAL: {total_value}€</div>
+
                             </div>
                         </div>
 
