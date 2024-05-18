@@ -454,7 +454,7 @@ const CalculatorPage = () => {
                                         <div align="center"> <Link to={"/calculadora"}><button 
                                             disabled={!lock_input ? (cpu == null || cpu == "" || cpu === undefined ||
                                             gpu == null || gpu == "" || gpu === undefined || ram < 0 || ram > 256 || 
-                                            disk1 < 0 || disk1 > 8000 || disk2 < 0 || disk2 > 8000 || (disk1 > 0 && disk1 < 8000 && (disk1_type === undefined || disk1_type == "")) || (disk2 > 0 && disk2 < 8000 && (disk2_type === undefined || disk2_type == ""))): false} 
+                                            disk1 < 0 || disk1 > 8000 || disk2 < 0 || disk2 > 8000): false} 
                                             onClick={() => !lock_input ? handler(cpu, gpu, ram, ram_type, disk1, disk1_type, disk2, disk2_type, null, "run") :
                                             handler(knownProducts[model].cpu,
                                                 knownProducts[model].gpu,
@@ -477,7 +477,7 @@ const CalculatorPage = () => {
                             </table>
 
                             <div className="font-bold text-xl mb-2">Preço estimado - {display(total_value)}€</div>
-                            <div align="center"><button disabled={total_value === undefined} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-info"><Link to={"/calendario"}>Agendar venda</Link></button></div>
+                            <div align="center"><Link to={total_value === undefined ? "/calculadora" : "/calendario"}><button disabled={total_value === undefined} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-info">Agendar venda</button></Link></div>
                         </div>
                         <div className="divider divider-horizontal"></div>
 

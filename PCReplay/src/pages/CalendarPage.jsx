@@ -127,7 +127,7 @@ const CalendarPage = () => {
 
                         <div className="grid h-200 flex-grow card bg-base-300 rounded-box place-items-center">
 
-                            <div className="grid flex-grow h-200 card  bg-base-30 rounded-box place-items-center">
+                          
                                 
                                 <div className="font-bold text-xl mb-2">Passo 1 - Escolha um dia</div>
                                 <div className="font-bold text-xl mb-2">{months[month]} {year}</div>
@@ -181,10 +181,13 @@ const CalendarPage = () => {
                                                 )
                                             })}
                                         </tr>
+                                        <tr>
+                                            
+                                        </tr>
                                     </tbody>
                                 </table>
-                            </div>
-
+                                
+                            
                             <div className="font-bold text-xl mb-2">Passo 2 - Escolha uma hora</div> 
                             <div className="grid h-200 flex-grow card bg-base-30 rounded-box place-items-center">
                                 <div className="join"> <input onChange={() => setHour(hourMenu[0].hour)} type="radio" name="hour" disabled={hourMenu[0].disabled || selectedDay === undefined} />{hourMenu[0].hour}</div>
@@ -198,20 +201,24 @@ const CalendarPage = () => {
                                 {console.log("select " + selectedDay)}
                             </div>
 
-                        </div>
-                        <div className="divider divider-horizontal"></div>
-                        <div className="grid h-200 flex-grow card bg-base-300 rounded-box place-items-center">
-                        
-                            <div align="center"><button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-info" disabled={selectedDay === undefined || selectedHour === undefined}>Agendar venda</button></div>
+                            <div align="center"><Link to={selectedDay === undefined || selectedHour === undefined ? "/calendario" : "/"}><button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-info" disabled={selectedDay === undefined || selectedHour === undefined}>Agendar venda</button></Link></div>
                             <div className="font-bold text-xl mb-2">{display(selectedHour)} {display(selectedDay)} {months[month]} {year}  </div>
+                            
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div align="center"><Link to={"/calculadora"}><button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-warning" >Voltar para calculadora</button></Link></div>
+                                    </td>
+                                    <td>
+                                        <div align="center"><Link to={"/"}><button onClick={() => reset()} type="reset" className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-error" >Cancelar</button></Link></div>
+                                    </td>
+                                </tr>
+                            </table>
 
-                            <div align="center"><button onClick={() => reset()} type="reset" className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-error" >Reset</button></div>
+
                         </div>
                     </div>
                 </form></div>
-
-                {console.log("select hour " + selectedHour)}
-
             </div>
             <Footer />
         </div>
