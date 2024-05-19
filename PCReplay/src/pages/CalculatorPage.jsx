@@ -476,7 +476,7 @@ const CalculatorPage = () => {
                                 </thead>
                             </table>
 
-                            <div className="font-bold text-xl mb-2">Preço estimado - {display(total_value)}€</div>
+                            <div className="font-bold text-xl mb-2">Preço estimado - {total_value !== undefined ? Number(cpu_calculated_value*0.65 + gpu_calculated_value*0.6 + ram_calculated_value*0.7 + disk1_calculated_value*0.6 + disk2_calculated_value*0.6).toFixed(2)+"€-"+ total_value +"€ consoante a condição do produto": "" }</div>
                             <div align="center"><Link to={total_value === undefined ? "/calculadora" : "/calendario"}><button disabled={total_value === undefined} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-info">Agendar venda</button></Link></div>
                         </div>
                         <div className="divider divider-horizontal"></div>
@@ -484,22 +484,23 @@ const CalculatorPage = () => {
                         <div className="grid  h-200   card bg-base-30 rounded-box place-items-center">
                             <div className="flex flex-col ">
                                 <div className="card card-compact w-96 bg-base-100 shadow-xl">
-                                    <figure><img src={display(src)} height="250" width="250" /></figure>
+                                    <figure><img src={display(src)} height="300" width="300" /></figure>
                                 </div>
-                                <div className="font-bold text-xl mb-2">CPU: {lock_input ? cpu_preset : cpu} - {cpu_calculated_value}€</div>
-                                <div className="font-bold text-xl mb-2">GPU: {lock_input ? gpu_preset : gpu} - {gpu_calculated_value}€</div>
-                                <div className="font-bold text-xl mb-2">RAM: {lock_input ? ram_preset : ram}
+                                <div className="font-bold text-xl mb-2" align="left">Componentes</div>
+                                <div className="font-bold text-xl mb-2" align="left">CPU: {lock_input ? cpu_preset : cpu} : {total_value !== undefined ? Number(cpu_calculated_value*0.65).toFixed(2) +"-"+ cpu_calculated_value : ""  }€</div>
+                                <div className="font-bold text-xl mb-2" align="left">GPU: {lock_input ? gpu_preset : gpu} : {total_value !== undefined ? Number(gpu_calculated_value*0.6).toFixed(2) +"-"+ gpu_calculated_value : ""  }€</div>
+                                <div className="font-bold text-xl mb-2" align="left">RAM: {lock_input ? ram_preset : ram}
                                     {(ram !== undefined && ram != "" && ram_type !== undefined && ram_type != "") || (ram_preset !== undefined && ram_preset != "" && ram_type_preset !== undefined && ram_type_preset != "")
-                                        ? "GB" : ""} {lock_input ? ram_type_preset : ram_type} - {ram_calculated_value}€</div>
+                                        ? "GB" : ""} {lock_input ? ram_type_preset : ram_type} : {total_value !== undefined ? Number(ram_calculated_value*0.7).toFixed(2)+"€-"+ ram_calculated_value : ""  }€</div>
 
-                                <div className="font-bold text-xl mb-2">Arm. #1: {lock_input ? disk1_preset : disk1}
+                                <div className="font-bold text-xl mb-2" align="left">Arm. #1: {lock_input ? disk1_preset : disk1}
                                     {(disk1 !== undefined && disk1 != "" && disk1_type !== undefined && disk1_type != "") || (disk1_preset !== undefined && disk1_preset != "" && disk1_type_preset !== undefined && disk1_type_preset != "")
-                                        ? "GB" : ""} {lock_input ? disk1_type_preset : disk1_type} - {disk1_calculated_value}€</div>
+                                        ? "GB" : ""} {lock_input ? disk1_type_preset : disk1_type} : {total_value !== undefined  ? Number(disk1_calculated_value*0.6).toFixed(2)+"€-"+ disk1_calculated_value : ""  }€</div>
 
-                                <div className="font-bold text-xl mb-2">Arm. #2: {lock_input ? disk2_preset : disk2}
+                                <div className="font-bold text-xl mb-2" align="left">Arm. #2: {lock_input ? disk2_preset : disk2}
                                     {(disk2 !== undefined && disk2 != "" && disk2_type !== undefined && disk2_type != "") || (disk2_preset !== undefined && disk2_preset != "" && disk2_type_preset !== undefined && disk2_type_preset != "")
-                                        ? "GB" : ""} {lock_input ? disk2_type_preset : disk2_type} - {disk2_calculated_value}€</div>
-                                <div className="font-bold text-xl mb-2">TOTAL: {total_value}€</div>
+                                        ? "GB" : ""} {lock_input ? disk2_type_preset : disk2_type}  : {total_value !== undefined ? Number(disk2_calculated_value*0.6).toFixed(2)+"€-"+ disk2_calculated_value : "" }€</div>
+                                <div className="font-bold text-xl mb-2" align="left">TOTAL: {total_value !== undefined ? Number(cpu_calculated_value*0.65 + gpu_calculated_value*0.6 + ram_calculated_value*0.7 + disk1_calculated_value*0.6 + disk2_calculated_value*0.6).toFixed(2)+"€-"+ total_value: "" }€</div>
 
                             </div>
                         </div>
