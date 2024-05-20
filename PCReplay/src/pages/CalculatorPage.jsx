@@ -368,7 +368,9 @@ const CalculatorPage = () => {
                                             <tr>
                                                 <td>
                                                     <ul className="steps steps-vertical">
-                                                        <li className={(cpu == null || cpu == "") ? "step step-error" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-error">Obrigatório</span>Selecionar Modelo Predefinido</div></li>
+                                                        <li className={(!lock_input && !(cpu == null || cpu == "" || cpu === undefined ||
+                                                                        gpu == null || gpu == "" || gpu === undefined || ram < 0 || ram > 256 || 
+                                                                        disk1 < 0 || disk1 > 8000 || disk2 < 0 || disk2 > 8000)) || lock_input && model === undefined?  "step step-error" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-error">Obrigatório</span>Selecionar Modelo Predefinido</div></li>
                                                     </ul>
                                                     <div>
                                                         <select className="select" name="model" id="personalizado" onChange={(e) => handler(null, null, null, null, null, null, null, null, e.target.value, "set")}>

@@ -13,6 +13,7 @@ import ProductPage from "./pages/ProductPage.jsx";
 import LayoutViewer from "./pages/ViewerLayout.jsx";
 import GuidePage from "./pages/GuidePage.jsx";
 import CalendarPage from "./pages/CalendarPage.jsx"
+import CheckoutPage from "./pages/CheckoutPage.jsx";
 function App() {
 
     return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/layoutviewer" element={<LayoutViewer />} />
           <Route path="/guide" element={<GuidePage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
         </Routes>
       </Router>
     );
