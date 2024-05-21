@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineShoppingCart, AiOutlineClose } from "react-icons/ai";
+import { Link } from "react-router-dom";
 import { useUser } from "../../mocks/UserContext";
 import CProductCard from "./CProductCard";
 import { fetchProductsByDescription } from "../../mocks/api";
@@ -51,7 +52,7 @@ const IFavoritesSidebar = ({ isOpen, closeSidebar }) => {
         <AiOutlineShoppingCart size="2em" />
         <p className="text-lg font-semibold mb-4">Carrinho</p>
         {products.length === 0 ? (
-          <p className="text-gray-500">Sem favoritos.</p>
+          <p className="text-gray-500">Sem produtos no carrinho</p>
         ) : (
           products.map((product) => (
             <CProductCard
@@ -61,6 +62,11 @@ const IFavoritesSidebar = ({ isOpen, closeSidebar }) => {
             />
           ))
         )}
+        <Link to="/pages/CartPage" className="mt-4">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Ver Carrinho
+          </button>
+        </Link>
       </div>
     </div>
   );

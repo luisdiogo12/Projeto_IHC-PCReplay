@@ -56,7 +56,7 @@ const IFavoritesSidebar = ({ isOpen, closeSidebar }) => {
         <AiOutlineHeart size="2em" />
         <p className="text-lg font-semibold mb-4">Favoritos</p>
         {products.length === 0 ? (
-          <p className="text-gray-500">Sem favoritos.</p>
+          <p className="text-gray-500">Sem favoritos</p>
         ) : (
           products.map((product) => (
             <CFProductCard
