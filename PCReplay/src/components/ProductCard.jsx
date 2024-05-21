@@ -1,11 +1,16 @@
 import React from "react";
-import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
+import {
+  AiOutlineHeart,
+  AiOutlineShoppingCart,
+} from "react-icons/ai";
+import { MdOutlineSell } from "react-icons/md";
 import { useUser } from "../mocks/UserContext";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 
 const ProductCard = ({ product }) => {
   const { user, addToCart, addToWishlist } = useUser();
+  const navigate = useNavigate();
   const handleAddToCart = () => {
     console.log("Add to cart:", product.id);
     addToCart(product.id);
@@ -14,7 +19,9 @@ const ProductCard = ({ product }) => {
     console.log("Add to cart:", product.id);
     addToWishlist(product.id);
   };
-
+  const handleSellLikeProduct = () => {
+     navigate("/calculadora");
+  };
   if (!product) return null; // Garante que não tentaremos renderizar sem produto
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg m-4">
@@ -35,6 +42,12 @@ const ProductCard = ({ product }) => {
           ${product.price}
         </span>
         <div>
+          <button
+            className="px-1 py-0 text-yellow-500 hover:text-yellow-700"
+            onClick={handleSellLikeProduct}
+          >
+            <MdOutlineSell size="1.5em" />
+          </button>
           <button
             className="px-1 py-0 text-red-500 hover:text-red-700"
             onClick={handleAddToFavorites}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { AiOutlineHeart, AiOutlineClose } from "react-icons/ai";
+import { AiOutlineShoppingCart, AiOutlineClose } from "react-icons/ai";
 import { useUser } from "../../mocks/UserContext";
 import CProductCard from "./CProductCard";
 import { fetchProductsByDescription } from "../../mocks/api";
@@ -40,7 +40,7 @@ const IFavoritesSidebar = ({ isOpen, closeSidebar }) => {
 
   if (!user || !isOpen) return null;
   return (
-    <div className="fixed top-0 right-0 w-64 h-full bg-gray-800 text-white z-50">
+    <div className="fixed top-0 right-0 w-64 h-full bg-gray-800 text-white z-50 overflow-y-auto">
       <button
         onClick={closeSidebar}
         className="absolute top-4 right-4 text-white"
@@ -48,8 +48,8 @@ const IFavoritesSidebar = ({ isOpen, closeSidebar }) => {
         <AiOutlineClose size="1.5em" />
       </button>
       <div className="flex flex-col items-center p-4">
-        <AiOutlineHeart size="2em" />
-        <p className="text-lg font-semibold mb-4">Favoritos</p>
+        <AiOutlineShoppingCart size="2em" />
+        <p className="text-lg font-semibold mb-4">Carrinho</p>
         {products.length === 0 ? (
           <p className="text-gray-500">Sem favoritos.</p>
         ) : (

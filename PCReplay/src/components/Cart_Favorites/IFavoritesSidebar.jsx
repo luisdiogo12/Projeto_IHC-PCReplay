@@ -45,7 +45,7 @@ const IFavoritesSidebar = ({ isOpen, closeSidebar }) => {
 
   if (!user || !isOpen) return null;
   return (
-    <div className="fixed top-0 right-0 w-64 h-full bg-gray-800 text-white z-50">
+    <div className="fixed top-0 right-0 w-64 h-full bg-gray-800 text-white z-50  overflow-y-auto">
       <button
         onClick={closeSidebar}
         className="absolute top-4 right-4 text-white"

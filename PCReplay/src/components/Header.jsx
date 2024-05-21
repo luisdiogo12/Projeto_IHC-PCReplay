@@ -11,6 +11,9 @@ const Header = () => {
   const goToHomePage = () => {
     navigate("/");
   };
+  const goToMyProducts = () => {
+    navigate("/myproducts");
+  };
 
   return (
     <header className="left-0 top-0 bg-gray-800 text-white p-4 fixed w-full z-30">
@@ -28,6 +31,12 @@ const Header = () => {
         </div>
         <Hmenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
         <HSearchBar />
+        <h1
+          className="mr-1 ml-1 cursor-pointer"
+          onClick={goToMyProducts}
+        >
+          Os meus Computadores
+        </h1>
         <HUserIcons />
       </div>
     </header>

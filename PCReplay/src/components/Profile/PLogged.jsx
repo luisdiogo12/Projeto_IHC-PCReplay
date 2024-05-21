@@ -29,7 +29,15 @@ const PLogged = ({ user, onLogout }) => {
               onClick={() => alert("Ir para atividade")}
               className="text-white bg-blue-500 w-full p-2 rounded"
             >
-              Atividade
+              Os meus favoritos
+            </button>
+          </li>
+          <li>
+            <button
+              onClick={() => alert("Ir para atividade")}
+              className="text-white bg-blue-500 w-full p-2 rounded"
+            >
+              O meu Carrinho
             </button>
           </li>
           <li>
