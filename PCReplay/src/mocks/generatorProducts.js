@@ -52,5 +52,5 @@ const generateProducts = () => {
     };
   });
 };
-
 export default generateProducts;
+

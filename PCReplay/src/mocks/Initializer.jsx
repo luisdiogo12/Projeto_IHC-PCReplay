@@ -1,7 +1,7 @@
 //+: Inicializa o localStorage com produtos e usuários se não existirem para serem usados pelo handler como se fosse uma base de dados
 import React, { useEffect, useState } from "react";
 import App from "../App";
-import generateProducts from "./generateProducts"; // A função que gera produtos
+import generateProducts from "./generatorProducts"; // A função que gera produtos
 
 const Initializer = () => {
   const [loading, setLoading] = useState(true);
