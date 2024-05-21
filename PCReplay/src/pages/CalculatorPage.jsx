@@ -86,6 +86,71 @@ const CalculatorPage = () => {
         return disk_price
     }
 
+    function ShowForm(lock_input,cpu,gpu,ram,ram_type,disk1,disk1_type,disk2,disk2_type){
+        return(
+            <div className="grid h-200 card bg-base-300 rounded-box place-items-center">
+                <table>
+                    <tr>
+                        <td>
+                            <ul className="steps steps-vertical">
+                                <li className={(cpu == null || cpu == "") ? "step step-error" : "step step-success"} ><div className="font-bold text-xl mb-2">Selecionar CPU</div></li>
+                                <input disabled={lock_input} type="text" placeholder="Modelo CPU" onChange={(e) => handler(e.target.value, null, null, null, null, null, null, null, null, "assign")} className="input input-bordered flex items-center gap-2" />
+                            </ul>
+                            <p><ul className="steps steps-vertical">
+                                <li className={(gpu == null || gpu == "") ? "step step-error" : "step step-success"} data-content="2"><div className="font-bold text-xl mb-2">Selecionar GPU</div></li>
+                                <input disabled={lock_input} type="text" placeholder="Modelo GPU" onChange={(e) => handler(null, e.target.value, null, null, null, null, null, null, null, "assign")} className="input input-bordered flex items-center gap-2" />
+                            </ul></p>
+                            <p><ul className="steps steps-vertical">
+                                <li className={(ram === undefined || ram == "" || ram_type === undefined || ram_type == "" || ram < 0 || ram > 256) ? "step step-info" : "step step-success"} data-content="3"><div className="font-bold text-xl mb-2">Selecionar quantidade RAM</div></li>
+                                <label className="input flex items-center gap-2">
+                                    <input disabled={lock_input} type="number" defaultValue="0" min="0" max="256" placeholder="RAM" onChange={(e) => handler(null, null, e.target.value, null, null, null, null, null, null, "assign")} width="40px" className="input input-bordered  max-w-xs" />
+                                    <div className="font-bold text-xl mb-2">GB</div>
+                                    <select disabled={lock_input} name="ram" id="ram" onChange={(e) => handler(null, null, null, e.target.value, null, null, null, null, null, "assign")}>
+                                        <option value="">Selecionar geração</option>
+                                        <option value="DDR">DDR</option>
+                                        <option value="DDR2">DDR2</option>
+                                        <option value="DDR3">DDR3</option>
+                                        <option value="DDR4">DDR4</option>
+                                        <option value="DDR5">DDR5</option>
+                                    </select>
+                                </label>
+                            </ul></p>
+                            <p><ul className="steps steps-vertical" >
+                                <li className={(disk1 === undefined || disk1 == "" || disk1_type === undefined || disk1_type == "" || disk1 < 0 || disk1 > 8000) ? "step step-info" : "step step-success"} data-content="4"><div className="font-bold text-xl mb-2">Selecionar armazenamento #1</div></li>
+                                <label className="input flex items-center gap-2">
+                                    <input disabled={lock_input} type="number" defaultValue="0" min="0" max="8000" placeholder="Armazenamento #1" onChange={(e) => handler(null, null, null, null, e.target.value, null, null, null, null, "assign")} className="input input-bordered flex items-center gap-2" />
+                                    <div className="font-bold text-xl mb-2">GB</div>
+                                    <select disabled={lock_input} name="disco1" id="disco1" onChange={(e) => handler(null, null, null, null, null, e.target.value, null, null, null, "assign")}>
+                                        <option value="">Selecionar tipo</option>
+                                        <option value="HDD">HDD</option>
+                                        <option value="SSD">SSD</option>
+                                        <option value="NVME/PCIE SSD">NVME/PCIE SSD</option>
+                                    </select>
+                                </label>
+                            </ul></p>
+                            <p><ul className="steps steps-vertical" >
+                                <li className={(disk2 === undefined || disk2 == "" || disk2_type === undefined || disk1_type == "" || disk2 < 0 || disk2 > 8000) ? "step step-info" : "step step-success"} data-content="5"><div className="font-bold text-xl mb-2">Selecionar armazenamento #2</div></li>
+                                <label className="input flex items-center gap-2">
+                                    <input disabled={lock_input} type="number" defaultValue="0" min="0" max="8000" placeholder="Armazenamento #2" onChange={(e) => handler(null, null, null, null, null, null, e.target.value, null, null, "assign")} className="input input-bordered flex items-center gap-2" />
+                                    <div className="font-bold text-xl mb-2">GB</div>
+                                    <select disabled={lock_input} name="disco2" id="disco2" onChange={(e) => handler(null, null, null, null, null, null, null, e.target.value, null, "assign")}>
+                                        <option value="">Selecionar tipo</option>
+                                        <option value="HDD">HDD</option>
+                                        <option value="SSD">SSD</option>
+                                        <option value="NVME/PCIE SSD">NVME/PCIE SSD</option>
+                                    </select>
+                                </label>
+                            </ul></p>
+                        </td>
+                        <td>
+    
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        )
+    } 
+
     const reset = () => {
 
         setCPU()
@@ -386,68 +451,9 @@ const CalculatorPage = () => {
                                     </table>
 
                                 </div>
-                                <div className="divider">OU</div>
                                 
-                                <div className="grid h-200 card bg-base-300 rounded-box place-items-center">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <ul className="steps steps-vertical">
-                                                    <li className={(cpu == null || cpu == "") ? "step step-error" : "step step-success"} ><div className="font-bold text-xl mb-2">Selecionar CPU</div></li>
-                                                    <input disabled={lock_input} type="text" placeholder="Modelo CPU" onChange={(e) => handler(e.target.value, null, null, null, null, null, null, null, null, "assign")} className="input input-bordered flex items-center gap-2"/>
-                                                </ul>
-                                                <p><ul className="steps steps-vertical">
-                                                    <li className={(gpu == null || gpu == "") ? "step step-error" : "step step-success"} data-content="2"><div className="font-bold text-xl mb-2">Selecionar GPU</div></li>
-                                                    <input disabled={lock_input} type="text" placeholder="Modelo GPU" onChange={(e) => handler(null, e.target.value, null, null, null, null, null, null, null, "assign")} className="input input-bordered flex items-center gap-2" />
-                                                </ul></p>
-                                                <p><ul className="steps steps-vertical">
-                                                    <li className={(ram === undefined || ram == "" || ram_type === undefined || ram_type == "" || ram < 0 || ram > 256) ? "step step-info" : "step step-success"} data-content="3"><div className="font-bold text-xl mb-2">Selecionar quantidade RAM</div></li>
-                                                    <label className="input flex items-center gap-2">
-                                                        <input disabled={lock_input} type="number" defaultValue="0" min="0" max="256" placeholder="RAM" onChange={(e) => handler(null, null, e.target.value, null, null, null, null, null, null, "assign")} width="40px" className="input input-bordered  max-w-xs" />
-                                                        <div className="font-bold text-xl mb-2">GB</div>
-                                                        <select disabled={lock_input} name="ram" id="ram" onChange={(e) => handler(null, null, null, e.target.value, null, null, null, null, null, "assign")}>
-                                                            <option value="">Selecionar geração</option>
-                                                            <option value="DDR">DDR</option>
-                                                            <option value="DDR2">DDR2</option>
-                                                            <option value="DDR3">DDR3</option>
-                                                            <option value="DDR4">DDR4</option>
-                                                            <option value="DDR5">DDR5</option>
-                                                        </select>
-                                                    </label>
-                                                </ul></p> 
-                                                <p><ul className="steps steps-vertical" >
-                                                    <li className={(disk1 === undefined || disk1 == "" || disk1_type === undefined || disk1_type == "" || disk1 < 0 || disk1 > 8000) ? "step step-info" : "step step-success"} data-content="4"><div className="font-bold text-xl mb-2">Selecionar armazenamento #1</div></li>
-                                                    <label className="input flex items-center gap-2">
-                                                        <input disabled={lock_input} type="number" defaultValue="0" min="0" max="8000" placeholder="Armazenamento #1" onChange={(e) => handler(null, null, null, null, e.target.value, null, null, null, null, "assign")} className="input input-bordered flex items-center gap-2" />
-                                                        <div className="font-bold text-xl mb-2">GB</div>
-                                                        <select disabled={lock_input} name="disco1" id="disco1" onChange={(e) => handler(null, null, null, null, null, e.target.value, null, null, null, "assign")}>
-                                                            <option value="">Selecionar tipo</option>
-                                                            <option value="HDD">HDD</option>
-                                                            <option value="SSD">SSD</option>
-                                                            <option value="NVME/PCIE SSD">NVME/PCIE SSD</option>
-                                                        </select>
-                                                    </label>
-                                                </ul></p>
-                                                <p><ul className="steps steps-vertical" >
-                                                    <li className={(disk2 === undefined || disk2 == "" || disk2_type === undefined || disk1_type == "" || disk2 < 0 || disk2 > 8000) ? "step step-info" : "step step-success"} data-content="5"><div className="font-bold text-xl mb-2">Selecionar armazenamento #2</div></li>
-                                                    <label className="input flex items-center gap-2">
-                                                        <input disabled={lock_input} type="number" defaultValue="0" min="0" max="8000" placeholder="Armazenamento #2" onChange={(e) => handler(null, null, null, null, null, null, e.target.value, null, null, "assign")} className="input input-bordered flex items-center gap-2" />
-                                                        <div className="font-bold text-xl mb-2">GB</div>
-                                                        <select disabled={lock_input} name="disco2" id="disco2" onChange={(e) => handler(null, null, null, null, null, null, null, e.target.value, null, "assign")}>
-                                                            <option value="">Selecionar tipo</option>
-                                                            <option value="HDD">HDD</option>
-                                                            <option value="SSD">SSD</option>
-                                                            <option value="NVME/PCIE SSD">NVME/PCIE SSD</option>
-                                                        </select>
-                                                    </label>
-                                                </ul></p>
-                                            </td>
-                                            <td>
-
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
+                                {!lock_input ? ShowForm(lock_input,cpu,gpu,ram,ram_type,disk1,disk1_type,disk2,disk2_type): ""}
+                               
                             </div>
 
                             <table>
@@ -489,9 +495,11 @@ const CalculatorPage = () => {
                                 <div className="font-bold text-xl mb-2">Legenda</div>
                                 <div className="font-bold text-xl mb-2"><span className="badge badge-error"> Obrigatório</span><span className="badge badge-info"> Opcional</span><span className="badge badge-success"> Preenchido</span></div>
                                 </div>
+                                <div className="divider"></div>
                                 <div className="card card-compact w-96 bg-base-100 shadow-xl">
                                     <figure><img src={display(src)} height="300" width="300" /></figure>
                                 </div>
+                                <div className="divider"></div>
                                 <div className="font-bold text-xl mb-2" align="left">Componentes</div>
                                 <div className="font-bold text-xl mb-2" align="left">CPU: {lock_input ? cpu_preset : cpu} : {total_value !== undefined ? Number(cpu_calculated_value*0.65).toFixed(2) +"-"+ cpu_calculated_value : ""  }€</div>
                                 <div className="font-bold text-xl mb-2" align="left">GPU: {lock_input ? gpu_preset : gpu} : {total_value !== undefined ? Number(gpu_calculated_value*0.6).toFixed(2) +"-"+ gpu_calculated_value : ""  }€</div>
