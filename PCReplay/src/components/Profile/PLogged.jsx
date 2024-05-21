@@ -34,7 +34,7 @@ const PLogged = ({ user, onLogout }) => {
           </li>
           <li>
             <button
-              onClick={() => alert("Ir para atividade")}
+              onClick={() => navigate("/cart")}
               className="text-white bg-blue-500 w-full p-2 rounded"
             >
               O meu Carrinho

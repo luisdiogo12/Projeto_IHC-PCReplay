@@ -3,12 +3,14 @@ import { AiOutlineHeart, AiOutlineClose } from "react-icons/ai";
 import { useUser } from "../../mocks/UserContext";
 import CFProductCard from "./FProductCard";
 import { fetchProductsByDescription } from "../../mocks/api";
+import { useNavigate } from "react-router-dom";
 
 const IFavoritesSidebar = ({ isOpen, closeSidebar }) => {
   const [filters, setFilters] = useState({ id: [] });
   const [products, setProducts] = useState([]);
   const { user, addToCart, removeFromWishlist } = useUser();
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   //+: Sempre que o user muda o filtro(local) é atualizado
   useEffect(() => {
@@ -45,15 +47,14 @@ const IFavoritesSidebar = ({ isOpen, closeSidebar }) => {
 
   if (!user || !isOpen) return null;
   return (
-    <div className="fixed top-0 right-0 w-64 h-full bg-gray-800 text-white z-50  overflow-y-auto">
+    <div className="fixed top-0 right-0 w-64 h-full bg-gray-800 text-white z-50 flex flex-col justify-between">
       <button
         onClick={closeSidebar}
         className="absolute top-4 right-4 text-white"
       >
         <AiOutlineClose size="1.5em" />
       </button>
-      <div className="flex flex-col items-center p-4">
-        <AiOutlineHeart size="2em" />
+      <div className="flex flex-col items-center p-4 overflow-y-auto">
         <p className="text-lg font-semibold mb-4">Favoritos</p>
         {products.length === 0 ? (
           <p className="text-gray-500">Sem favoritos</p>
@@ -67,6 +68,14 @@ const IFavoritesSidebar = ({ isOpen, closeSidebar }) => {
             />
           ))
         )}
+      </div>
+      <div className="p-4">
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => navigate("/favorites")}
+        >
+          Ver Favoritos
+        </button>
       </div>
     </div>
   );

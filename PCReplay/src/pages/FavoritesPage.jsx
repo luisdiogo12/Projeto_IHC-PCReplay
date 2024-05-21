@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineUser } from "react-icons/ai";
-import { MdOutlineShoppingCartCheckout } from "react-icons/md"; // <MdOutlineShoppingCartCheckout />
 import { useUser } from "../mocks/UserContext";
 import MainLayout from "./LayoutPage";
 import { useNavigate } from "react-router-dom";
 import { fetchProductsByDescription } from "../mocks/api";
 import ProductCartCard from "../components/ProductCartCard";
 
-const CartPage = () => {
+const FavoritesPage = () => {
   const [filters, setFilters] = useState({ id: [] });
   const [products, setProducts] = useState([]);
   const { user, removeFromCart } = useUser();
@@ -15,8 +14,8 @@ const CartPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user && user.cart) {
-      setFilters({ id: user.cart });
+    if (user && user.wishlist) {
+      setFilters({ id: user.wishlist });
     }
   }, [user]);
   useEffect(() => {
@@ -29,19 +28,13 @@ const CartPage = () => {
     fetchProductsByDescription(filters)
       .then((data) => {
         setProducts(data); // Atualiza o Products(local) com os produtos obtidos
-		console.log("Products:", data);
+        console.log("Products:", data);
       })
       .catch((error) => {
         console.error("Failed to load products:", error);
         setError(error.message); // Armazena o erro no estado, se houver
       });
   }, [filters, user]);
-
-  const totalItems = products.length;
-  const totalPrice = products.reduce(
-    (sum, product) => sum + parseFloat(product.price),
-    0
-  );
 
   const handleRemoveFromCart = (productId) => {
     console.log("Remove from Favorites:", productId);
@@ -61,36 +54,16 @@ const CartPage = () => {
   return (
     <MainLayout>
       <div className="flex flex-grow">
-        <div className="w-2/3">
+        <div className="flex-grow">
           <div className="container mx-auto px-4 sm:px-8 pt-16">
             <div className="py-8">
-              <div className="flex flex-col">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {products.map((product) => (
-                  <ProductCartCard
-                    key={product.id}
-                    product={product}
-                    onRemove={handleRemoveFromCart}
-                  />
+                  <ProductCartCard key={product.id} product={product} />
                 ))}
                 {error && <p>Error: {error}</p>}
               </div>
             </div>
-          </div>
-        </div>
-        <div className="w-1/3 sticky top-0">
-          <div className="bg-gray-200 p-4">
-            <h2 className="text-lg font-semibold mb-4">Resumo do Carrinho</h2>
-            <p className="mb-2">Número de produtos: {totalItems}</p>
-            <p className="mb-2">Preço total: €{totalPrice.toFixed(2)}</p>
-            <button
-              //onClick={() => navigate("/checkout")}
-              className="p-2 mt-2 bg-red-500 text-white p-2 rounded"
-            >
-              <div className="flex items-center">
-                <MdOutlineShoppingCartCheckout />
-                <span className="ml-2">Checkout</span>
-              </div>
-            </button>
           </div>
         </div>
       </div>
@@ -98,4 +71,4 @@ const CartPage = () => {
   );
 };
 
-export default CartPage;
+export default FavoritesPage;

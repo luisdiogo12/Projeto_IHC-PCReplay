@@ -1,4 +1,5 @@
 import React from "react";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const CFProductCard = ({ product, onRemove }) => {
   return (
@@ -14,7 +15,7 @@ const CFProductCard = ({ product, onRemove }) => {
         onClick={() => onRemove(product.id)}
         className="p-2 mt-2 bg-red-500 text-white p-2 rounded"
       >
-        Remover
+        <RiDeleteBin6Line />
       </button>
     </div>
   );

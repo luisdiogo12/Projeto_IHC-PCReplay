@@ -16,6 +16,10 @@ const generateProducts = () => {
     macbook: "assets/macbook.jpeg",
   };
 
+  const nameExpert = {
+    experts: ["João Maria", "Maria Josefina", "José Anacleto", "Ana Pedrosa", "Pedro João"],
+  };
+
   // Função para selecionar um item aleatório de um array
   const getRandomItem = (items) => {
     return items[Math.floor(Math.random() * items.length)];
@@ -49,6 +53,7 @@ const generateProducts = () => {
       evaluation: `Evaluation for Product ${
         index + 1
       }. It has some unique features.`,
+      expert: getRandomItem(nameExpert.experts),
     };
   });
 };

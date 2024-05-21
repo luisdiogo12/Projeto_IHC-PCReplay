@@ -24,21 +24,6 @@ const ProductPage = () => {
 	  });
   }, [id]);
 
-/* const product = {
-  id: id,
-  title: "ComputadorX",
-  price: "R$ 2999,99",
-  vendor: "VendedorX",
-  images: [
-    "https://fastly.picsum.photos/id/217/150/150.jpg?hmac=K_meJnVnOP2whrBnQX_aEyDyW_Vk9mdBZExY2Y8WCis",
-    "https://fastly.picsum.photos/id/680/150/150.jpg?hmac=k7_h4ecbZ6RXaoRVCsnzAI83m6uT_E8b7sCFPzzZH9Q",
-    "https://fastly.picsum.photos/id/804/150/150.jpg?hmac=UiUS5GDKK4vuOKwucPoDzHvZk3e0N6XBWkII7j0hraA",
-  ],
-  description: "Descrição do produto...",
-  technicalInfo: "Informações técnicas...",
-  evaluation: "Avaliações...",
-}; */
-
   return (
     console.log("product:", product),
     <MainLayout>
@@ -51,9 +36,7 @@ const ProductPage = () => {
         </div>
         <div className="col-span-1 lg:col-span-3">
           <ProductInfoTabs
-            description={product.description}
-            technicalInfo={product.technicalInfo}
-            reviews={product.evaluation}
+            product={product}
           />
         </div>
       </div>

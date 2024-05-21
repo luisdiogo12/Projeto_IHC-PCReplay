@@ -14,6 +14,8 @@ import LayoutViewer from "./pages/ViewerLayout.jsx";
 import GuidePage from "./pages/GuidePage.jsx";
 import CalendarPage from "./pages/CalendarPage.jsx"
 import CheckoutPage from "./pages/CheckoutPage.jsx";
+import CartPage  from "./pages/CartPage.jsx";
+import FavoritesPage from "./pages/FavoritesPage.jsx";
 function App() {
 
     return (
@@ -33,6 +35,8 @@ function App() {
           <Route path="/layoutviewer" element={<LayoutViewer />} />
           <Route path="/guide" element={<GuidePage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
         </Routes>
       </Router>
     );
