@@ -2,6 +2,7 @@ import React from "react";
 import { useFilters } from "../mocks/FilterContext";
 import { useNavigate } from "react-router-dom"; // Importe useNavigate para navegação programática
 
+
 const HMenu = ({ isMenuOpen, setIsMenuOpen }) => {
   const navigate = useNavigate();
   const { updateFilter } = useFilters(); // Importando updateFilters do seu FilterContext
