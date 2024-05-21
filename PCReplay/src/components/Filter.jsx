@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useFilters } from "../mocks/FilterContext";
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
 
 const Filter = () => {
 	const { filters, updateFilter } = useFilters(); // Use o hook useFilters para acessar e atualizar os filtros
+  const [priceRange, setPriceRange] = useState([0, 10000]);
+
 
   const handleCheckboxChange = (event) => {
     const { name,value, checked } = event.target;
@@ -31,11 +35,49 @@ const Filter = () => {
     console.log("Filters updated:", filters);
 
   }, []);
+ const handlePriceChange = (range) => {
+   setPriceRange(range);
+   updateFilter((prevFilters) => ({
+     ...prevFilters,
+     price: range,
+   }));
+ };
+
   return (
     <div className="sidebar w-64 py-20 px-4">
-      {" "}
-      {/* Ajuste a largura conforme necessário */}
       <h2 className="font-bold text-lg mb-4">Filtros</h2>
+      <div className="filter-category mb-4">
+        <h3 className="font-semibold mb-2">Preço</h3>
+        <div className="flex flex-col mb-4">
+          <Slider
+            range
+            min={0}
+            max={10000}
+            value={priceRange}
+            onChange={handlePriceChange}
+            className="mb-4 "
+          />
+          <div className="flex justify-between">
+            <input
+              type="number"
+              value={priceRange[0]}
+              onChange={(e) =>
+                handlePriceChange([Number(e.target.value), priceRange[1]])
+              }
+              className="w-20"
+            />
+            <input
+              type="number"
+              value={priceRange[1]}
+              onChange={(e) =>
+                handlePriceChange([priceRange[0], Number(e.target.value)])
+              }
+              className="w-20"
+            />
+          </div>
+        </div>
+      </div>
+
       <div className="filter-category mb-4">
         <h3 className="font-semibold mb-2">CPU</h3>
         <div className="flex flex-col">
