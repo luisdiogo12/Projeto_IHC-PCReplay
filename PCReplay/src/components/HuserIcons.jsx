@@ -10,7 +10,7 @@ import ICartSidebar from "./Cart_Favorites/ICartSidebar";
 import IProfileSidebar from "./Profile/IProfileSidebar";
 import { useNavigate } from "react-router-dom";
 
-const HUserIcons = () => {
+const HUserIcons = ({ cartTotalItems, favoritesTotalItems }) => {
   const [showFavorites, setShowFavorites] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
@@ -23,21 +23,32 @@ const HUserIcons = () => {
         className="cursor-pointer"
         onClick={() => navigate("/calculadora")}
       />
-      <AiOutlineHeart
-        size="1.5em"
-        className="cursor-pointer"
-        onClick={() => setShowFavorites(true)}
-      />
+
+      <div className="indicator">
+        <span className="indicator-item badge badge-primary">
+          {favoritesTotalItems}
+        </span>
+        <AiOutlineHeart
+          size="1.5em"
+          className="cursor-pointer"
+          onClick={() => setShowFavorites(true)}
+        />
+      </div>
       <IFavoritesSidebar
         isOpen={showFavorites}
         closeSidebar={() => setShowFavorites(false)}
       />
 
-      <AiOutlineShoppingCart
-        size="1.5em"
-        className="cursor-pointer"
-        onClick={() => setShowCart(true)}
-      />
+      <div className="indicator">
+        <span className="indicator-item badge badge-primary">
+          {cartTotalItems}
+        </span>
+        <AiOutlineShoppingCart
+          size="1.5em"
+          className="cursor-pointer"
+          onClick={() => setShowCart(true)}
+        />
+      </div>
       <ICartSidebar isOpen={showCart} closeSidebar={() => setShowCart(false)} />
 
       <AiOutlineUser

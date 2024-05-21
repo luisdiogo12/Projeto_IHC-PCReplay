@@ -1,13 +1,64 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import Hmenu from "./Hmenu"; 
 import HSearchBar from "./HsearchBar"; 
 import HUserIcons from "./HUserIcons"; 
 import { useNavigate } from "react-router-dom";
+import { fetchProductsByDescription } from "../mocks/api";
+import { useUser } from "../mocks/UserContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const [filtersCart, setFiltersCart] = useState({ id: [] });
+  const [filtersFavorites, setFiltersFavorites] = useState({ id: [] });
+  const [productsCart, setProductsCart] = useState([]);
+  const [productsFavorites, setProductsFavorites] = useState([]);
+  const { user, removeFromCart } = useUser();
+
+  useEffect(() => {
+    if (user && user.cart) {
+      setFiltersCart({ id: user.cart });
+      setFiltersFavorites({ id: user.wishlist });
+    }
+  }, [user]);
+  useEffect(() => {
+    if (!user) return;
+    console.log("FILTERS:", filtersCart, filtersFavorites);
+
+    if (filtersCart.id.length === 0) {
+      setProductsCart([]);
+      return;
+    }
+    if (filtersFavorites.id.length === 0) {
+      setProductsFavorites([]);
+      return;
+    }
+
+    fetchProductsByDescription(filtersCart)
+      .then((data) => {
+        setProductsCart(data); // Atualiza o Products(local) com os produtos obtidos
+        console.log("Products:", data);
+      })
+      .catch((error) => {
+        console.error("Failed to load products:", error);
+        setError(error.message); // Armazena o erro no estado, se houver
+      });
+    fetchProductsByDescription(filtersFavorites)
+      .then((data) => {
+        setProductsFavorites(data); // Atualiza o Products(local) com os produtos obtidos
+        console.log("Products:", data);
+      })
+      .catch((error) => {
+        console.error("Failed to load products:", error);
+        setError(error.message); // Armazena o erro no estado, se houver
+      });
+  }, [filtersFavorites,filtersCart, user]);
+
+  const cartTotalItems = productsCart.length;
+  const favoritesTotalItems = productsFavorites.length;
+
+
   const goToHomePage = () => {
     navigate("/");
   };
@@ -31,13 +82,10 @@ const Header = () => {
         </div>
         <Hmenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
         <HSearchBar />
-        <h1
-          className="mr-1 ml-1 cursor-pointer"
-          onClick={goToMyProducts}
-        >
+        <h1 className="mr-1 ml-1 cursor-pointer" onClick={goToMyProducts}>
           Os meus Computadores
         </h1>
-        <HUserIcons />
+        <HUserIcons cartTotalItems={cartTotalItems} favoritesTotalItems={favoritesTotalItems}/>
       </div>
     </header>
   );
