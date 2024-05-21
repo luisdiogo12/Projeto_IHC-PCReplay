@@ -83,7 +83,7 @@ const CartPage = () => {
             <p className="mb-2">Número de produtos: {totalItems}</p>
             <p className="mb-2">Preço total: €{totalPrice.toFixed(2)}</p>
             <button
-              //onClick={() => navigate("/checkout")}
+              onClick={() => navigate("/checkout")}
               className="p-2 mt-2 bg-red-500 text-white p-2 rounded"
             >
               <div className="flex items-center">
