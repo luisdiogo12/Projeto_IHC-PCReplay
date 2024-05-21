@@ -370,7 +370,7 @@ const CalculatorPage = () => {
                                                     <ul className="steps steps-vertical">
                                                         <li className={(!lock_input && !(cpu == null || cpu == "" || cpu === undefined ||
                                                                         gpu == null || gpu == "" || gpu === undefined || ram < 0 || ram > 256 || 
-                                                                        disk1 < 0 || disk1 > 8000 || disk2 < 0 || disk2 > 8000)) || lock_input && model === undefined?  "step step-error" : "step step-success"}><div className="font-bold text-xl mb-2"><span className="badge badge-error">Obrigatório</span>Selecionar Modelo Predefinido</div></li>
+                                                                        disk1 < 0 || disk1 > 8000 || disk2 < 0 || disk2 > 8000)) || lock_input && model === undefined?  "step step-error" : "step step-success"}><div className="font-bold text-xl mb-2">Selecionar Modelo Predefinido</div></li>
                                                     </ul>
                                                     <div>
                                                         <select className="select" name="model" id="personalizado" onChange={(e) => handler(null, null, null, null, null, null, null, null, e.target.value, "set")}>
@@ -387,21 +387,21 @@ const CalculatorPage = () => {
 
                                 </div>
                                 <div className="divider">OU</div>
-
+                                
                                 <div className="grid h-200 card bg-base-300 rounded-box place-items-center">
                                     <table>
                                         <tr>
                                             <td>
                                                 <ul className="steps steps-vertical">
-                                                    <li className={(cpu == null || cpu == "") ? "step step-error" : "step step-success"} ><div className="font-bold text-xl mb-2"><span className="badge badge-error"> Obrigatório</span>Selecionar CPU</div></li>
+                                                    <li className={(cpu == null || cpu == "") ? "step step-error" : "step step-success"} ><div className="font-bold text-xl mb-2">Selecionar CPU</div></li>
                                                     <input disabled={lock_input} type="text" placeholder="Modelo CPU" onChange={(e) => handler(e.target.value, null, null, null, null, null, null, null, null, "assign")} className="input input-bordered flex items-center gap-2"/>
                                                 </ul>
                                                 <p><ul className="steps steps-vertical">
-                                                    <li className={(gpu == null || gpu == "") ? "step step-error" : "step step-success"} data-content="2"><div className="font-bold text-xl mb-2"><span className="badge badge-error">Obrigatório</span>Selecionar GPU</div></li>
+                                                    <li className={(gpu == null || gpu == "") ? "step step-error" : "step step-success"} data-content="2"><div className="font-bold text-xl mb-2">Selecionar GPU</div></li>
                                                     <input disabled={lock_input} type="text" placeholder="Modelo GPU" onChange={(e) => handler(null, e.target.value, null, null, null, null, null, null, null, "assign")} className="input input-bordered flex items-center gap-2" />
                                                 </ul></p>
                                                 <p><ul className="steps steps-vertical">
-                                                    <li className={(ram === undefined || ram == "" || ram_type === undefined || ram_type == "" || ram < 0 || ram > 256) ? "step step-info" : "step step-success"} data-content="3"><div className="font-bold text-xl mb-2"><span className="badge badge-info">Opcional</span>Selecionar quantidade RAM</div></li>
+                                                    <li className={(ram === undefined || ram == "" || ram_type === undefined || ram_type == "" || ram < 0 || ram > 256) ? "step step-info" : "step step-success"} data-content="3"><div className="font-bold text-xl mb-2">Selecionar quantidade RAM</div></li>
                                                     <label className="input flex items-center gap-2">
                                                         <input disabled={lock_input} type="number" defaultValue="0" min="0" max="256" placeholder="RAM" onChange={(e) => handler(null, null, e.target.value, null, null, null, null, null, null, "assign")} width="40px" className="input input-bordered  max-w-xs" />
                                                         <div className="font-bold text-xl mb-2">GB</div>
@@ -416,7 +416,7 @@ const CalculatorPage = () => {
                                                     </label>
                                                 </ul></p> 
                                                 <p><ul className="steps steps-vertical" >
-                                                    <li className={(disk1 === undefined || disk1 == "" || disk1_type === undefined || disk1_type == "" || disk1 < 0 || disk1 > 8000) ? "step step-info" : "step step-success"} data-content="4"><div className="font-bold text-xl mb-2"><span className="badge badge-info">Opcional</span>Selecionar armazenamento #1</div></li>
+                                                    <li className={(disk1 === undefined || disk1 == "" || disk1_type === undefined || disk1_type == "" || disk1 < 0 || disk1 > 8000) ? "step step-info" : "step step-success"} data-content="4"><div className="font-bold text-xl mb-2">Selecionar armazenamento #1</div></li>
                                                     <label className="input flex items-center gap-2">
                                                         <input disabled={lock_input} type="number" defaultValue="0" min="0" max="8000" placeholder="Armazenamento #1" onChange={(e) => handler(null, null, null, null, e.target.value, null, null, null, null, "assign")} className="input input-bordered flex items-center gap-2" />
                                                         <div className="font-bold text-xl mb-2">GB</div>
@@ -429,7 +429,7 @@ const CalculatorPage = () => {
                                                     </label>
                                                 </ul></p>
                                                 <p><ul className="steps steps-vertical" >
-                                                    <li className={(disk2 === undefined || disk2 == "" || disk2_type === undefined || disk1_type == "" || disk2 < 0 || disk2 > 8000) ? "step step-info" : "step step-success"} data-content="5"><div className="font-bold text-xl mb-2"><span className="badge badge-info">Opcional</span>Selecionar armazenamento #2</div></li>
+                                                    <li className={(disk2 === undefined || disk2 == "" || disk2_type === undefined || disk1_type == "" || disk2 < 0 || disk2 > 8000) ? "step step-info" : "step step-success"} data-content="5"><div className="font-bold text-xl mb-2">Selecionar armazenamento #2</div></li>
                                                     <label className="input flex items-center gap-2">
                                                         <input disabled={lock_input} type="number" defaultValue="0" min="0" max="8000" placeholder="Armazenamento #2" onChange={(e) => handler(null, null, null, null, null, null, e.target.value, null, null, "assign")} className="input input-bordered flex items-center gap-2" />
                                                         <div className="font-bold text-xl mb-2">GB</div>
@@ -485,6 +485,10 @@ const CalculatorPage = () => {
 
                         <div className="grid  h-200   card bg-base-30 rounded-box place-items-center">
                             <div className="flex flex-col ">
+                                <div className="card card-compact w-96 bg-base-100 shadow-xl">
+                                <div className="font-bold text-xl mb-2">Legenda</div>
+                                <div className="font-bold text-xl mb-2"><span className="badge badge-error"> Obrigatório</span><span className="badge badge-info"> Opcional</span><span className="badge badge-success"> Preenchido</span></div>
+                                </div>
                                 <div className="card card-compact w-96 bg-base-100 shadow-xl">
                                     <figure><img src={display(src)} height="300" width="300" /></figure>
                                 </div>
