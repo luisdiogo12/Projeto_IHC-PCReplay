@@ -10,7 +10,7 @@ const CalendarPage = () => {
     const month = data.getMonth();
     const year = data.getFullYear();
 
-    const prob = 0.5 // 1-prob
+    const prob = 0.3 // 1-prob
 
     const [buttonStatus1, setButton1] = useState(
         [
@@ -112,6 +112,10 @@ const CalendarPage = () => {
 
     }
 
+    function popup(hour,day,month,year){
+        alert("Reserva agendada para " + hour + " " + day + " " + month + " " + year)
+    }
+
     const [selectedHour, setHour] = useState()
 
     const months = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]
@@ -200,7 +204,7 @@ const CalendarPage = () => {
                                 {console.log("select " + selectedDay)}
                             </div>
 
-                            <div align="center"><Link to={selectedDay === undefined || selectedHour === undefined ? "/calendario" : "/"}><button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-info" disabled={selectedDay === undefined || selectedHour === undefined}>Agendar venda</button></Link></div>
+                            <div align="center"><Link to={selectedDay === undefined || selectedHour === undefined ? "/calendario" : "/"}><button  onClick={() => popup(selectedHour,selectedDay,months[month],year)} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-info" disabled={selectedDay === undefined || selectedHour === undefined}>Agendar venda</button></Link></div>
                             <div className="font-bold text-xl mb-2">{display(selectedHour)} {display(selectedDay)} {months[month]} {year}  </div>
 
                             <table>

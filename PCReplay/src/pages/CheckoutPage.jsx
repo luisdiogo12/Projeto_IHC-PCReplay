@@ -292,7 +292,7 @@ const CheckoutPage = () => {
                                   <label className="label cursor-pointer">
                                     <span className="label-text">
                                       <div className="font-bold text-xl mb-2">
-                                        Morada
+                                        Morada - {morada}
                                       </div>
                                     </span>
                                     <input
@@ -309,7 +309,7 @@ const CheckoutPage = () => {
                                   <label className="label cursor-pointer">
                                     <span className="label-text">
                                       <div className="font-bold text-xl mb-2">
-                                        Loja
+                                        Loja - Av. João Jacinto de Magalhães 17
                                       </div>
                                     </span>
                                     <input
@@ -447,6 +447,7 @@ const CheckoutPage = () => {
                         pagamento === undefined
                       }
                       className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg  btn-success"
+                      onClick={() => alert("Checkout realizado com sucesso")}
                     >
                       Finalizar checkout
                     </button>
