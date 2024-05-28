@@ -1,16 +1,15 @@
 # IHC_assigment2
 ## Descrição do Projeto
-rascunho:
-os produtos sao gerados quando o website é ligado (se n tiver já lá no localStorage) e ficam permantes até o website ser desligado ou o localStorage ser limpo
+PCReplay:
+
+Website de compra e venda de computadores usados.
+
+Os produtos sao gerados quando o website é ligado, caso não estejam já no localStorage, e ficam permantemente guardados até o website ser desligado ou o localStorage ser limpo. Devido a esta configuração, por vezes, é necessário fazer refresh à página para que os produtos apareçam.
 ## Autores do Projeto
 
-Este projeto foi realizado por :
-
-**Autores:**
 - [Luís Manuel Trindade Diogo, NºMec.: 108668](https://github.com/luisdiogo12)
 - [João André Moreira Rodrigues, NºMec.: 103947 ](https://github.com/joaoamrodrigues)
-- [, NºMec.: ](https://github.com/)
-- [, NºMec.: ](https://github.com/)
+- [Gonçalo Monteir, NºMec.: 107758](https://github.com/Girafa3456)
 
 
 
