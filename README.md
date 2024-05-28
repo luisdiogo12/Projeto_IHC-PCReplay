@@ -44,4 +44,5 @@ Os produtos sao gerados quando o website é ligado, caso não estejam já no loc
 	```bash
 	..\PCReplay>npm run dev
 	```
-6. Abrir o browser e navegar para `http://localhost:3000`
+6. Abrir o browser e navegar para `http://localhost:3000`, caso não esteja a carregar, que se deve ao gerador de produtos, fazer refresh à página.
+  
