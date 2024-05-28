@@ -22,3 +22,5 @@ const CFProductCard = ({ product, onRemove }) => {
 };
 
 export default CFProductCard;
+
+
