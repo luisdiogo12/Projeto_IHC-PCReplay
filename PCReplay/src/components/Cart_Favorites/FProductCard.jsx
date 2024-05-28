@@ -9,7 +9,7 @@ const CFProductCard = ({ product, onRemove, onCart }) => {
         className="w-full h-32 object-cover rounded-lg mb-2"
       />
       <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-      <p className="text-gray-900 font-bold">${product.price}</p>
+      <p className="text-gray-900 font-bold">€{product.price}</p>
       <button
         onClick={() => onRemove(product.id)}
         className="p-2 mt-2 bg-red-500 text-white p-2 rounded"

@@ -29,7 +29,7 @@ const ProductCartCard = ({ product, onRemove }) => {
         </Link>
         <div className="flex justify-between items-center mt-4">
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-            ${product.price}
+            €{product.price}
           </span>
           <div>
             <button
