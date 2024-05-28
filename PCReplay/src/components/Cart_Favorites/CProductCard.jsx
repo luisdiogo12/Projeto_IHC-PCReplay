@@ -14,6 +14,7 @@ const CFProductCard = ({ product, onRemove }) => {
       <button
         onClick={() => onRemove(product.id)}
         className="p-2 mt-2 bg-red-500 text-white p-2 rounded"
+        title="Remover do carrinho"
       >
         <RiDeleteBin6Line />
       </button>

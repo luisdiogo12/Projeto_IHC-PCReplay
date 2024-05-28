@@ -35,6 +35,7 @@ const ProductCartCard = ({ product, onRemove }) => {
             <button
               className="px-1 py-0 text-red-500 hover:text-red-700"
               onClick={() => onRemove(product.id)}
+              title="Remover do carrinho"
             >
               <RiDeleteBin6Line size="1.5em" />
             </button>

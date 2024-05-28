@@ -4,12 +4,12 @@ import { useUser } from "../mocks/UserContext";
 import MainLayout from "./LayoutPage";
 import { useNavigate } from "react-router-dom";
 import { fetchProductsByDescription } from "../mocks/api";
-import ProductCartCard from "../components/ProductCartCard";
+import ProductFavoritesCard from "../components/ProductFavoritesCard";
 
 const FavoritesPage = () => {
   const [filters, setFilters] = useState({ id: [] });
   const [products, setProducts] = useState([]);
-  const { user, removeFromCart } = useUser();
+  const { user, addToCart, removeFromWishlist } = useUser();
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -36,9 +36,20 @@ const FavoritesPage = () => {
       });
   }, [filters, user]);
 
-  const handleRemoveFromCart = (productId) => {
+  const totalItems = products.length;
+  const totalPrice = products.reduce(
+    (sum, product) => sum + parseFloat(product.price),
+    0
+  );
+
+  const handleAddToCart = (productId) => {
+    console.log("Add to cart:", productId);
+    addToCart(productId);
+  };
+
+  const handleRemoveFromFavorites = (productId) => {
     console.log("Remove from Favorites:", productId);
-    removeFromCart(productId);
+    removeFromWishlist(productId);
   };
 
   if (!user) {
@@ -56,16 +67,28 @@ const FavoritesPage = () => {
   return (
     <MainLayout>
       <div className="flex flex-grow">
-        <div className="flex-grow">
+        <div className="w-2/3">
           <div className="container mx-auto px-4 sm:px-8 pt-16">
             <div className="py-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              <div className="flex flex-col">
                 {products.map((product) => (
-                  <ProductCartCard key={product.id} product={product} />
+                  <ProductFavoritesCard
+                    key={product.id}
+                    product={product}
+                    onRemove={handleRemoveFromFavorites}
+                    onAdd={handleAddToCart}
+                  />
                 ))}
                 {error && <p>Error: {error}</p>}
               </div>
             </div>
+          </div>
+        </div>
+        <div className="w-1/3 sticky top-0">
+          <div className="bg-gray-200 p-4">
+            <h2 className="text-lg font-semibold mb-4">Resumo dos Favoritos</h2>
+            <p className="mb-2">Número de produtos: {totalItems}</p>
+            <p className="mb-2">Preço total: €{totalPrice.toFixed(2)}</p>
           </div>
         </div>
       </div>
