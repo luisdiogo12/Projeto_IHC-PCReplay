@@ -45,18 +45,21 @@ const ProductCard = ({ product }) => {
           <button
             className="px-1 py-0 text-yellow-500 hover:text-yellow-700"
             onClick={handleSellLikeProduct}
+            title="Vender produto semelhante"
           >
             <MdOutlineSell size="1.5em" />
           </button>
           <button
             className="px-1 py-0 text-red-500 hover:text-red-700"
             onClick={handleAddToFavorites}
+            title="Adicionar aos favoritos"
           >
             <AiOutlineHeart size="1.5em" />
           </button>
           <button
             className="px-3 py-0 text-blue-500 hover:text-blue-700"
             onClick={handleAddToCart}
+            title="Adicionar ao carrinho"
           >
             <AiOutlineShoppingCart size="1.5em" />
           </button>
