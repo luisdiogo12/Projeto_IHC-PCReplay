@@ -10,7 +10,7 @@ const CalendarPage = () => {
     const month = data.getMonth();
     const year = data.getFullYear();
 
-    const prob = 0.3 // 1-prob
+    const prob = 0.3 
 
     const [buttonStatus1, setButton1] = useState(
         [

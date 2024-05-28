@@ -1,7 +1,6 @@
 import React from "react";
 import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
-// <RiDeleteBin6Line />
 import { MdOutlineSell } from "react-icons/md";
 import { useUser } from "../mocks/UserContext";
 import { useNavigate, Link } from "react-router-dom";
@@ -11,7 +10,7 @@ const ProductCartCard = ({ product, onRemove }) => {
   const navigate = useNavigate();
 
   
-  if (!product) return null; // Garante que não tentaremos renderizar sem produto
+  if (!product) return null;
   return (
     <div className="flex m-4 shadow-lg rounded overflow-hidden ">
       <Link to={`/product/${product.id}`} className="no-underline block">

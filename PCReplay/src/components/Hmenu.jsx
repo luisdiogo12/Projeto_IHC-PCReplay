@@ -1,14 +1,13 @@
 import React from "react";
 import { useFilters } from "../mocks/FilterContext";
-import { useNavigate } from "react-router-dom"; // Importe useNavigate para navegação programática
+import { useNavigate } from "react-router-dom"; 
 
 
 const HMenu = ({ isMenuOpen, setIsMenuOpen }) => {
   const navigate = useNavigate();
-  const { updateFilter } = useFilters(); // Importando updateFilters do seu FilterContext
+  const { updateFilter } = useFilters(); 
 
   const handleCategoryClick = (categories, path) => {
-    // Atualiza diretamente as categorias no filtro 
        updateFilter({
          id: [],
          name: [],
@@ -16,9 +15,7 @@ const HMenu = ({ isMenuOpen, setIsMenuOpen }) => {
          category: categories,
          characteristics: { cpu: [], ram: [], memoria: [], bateria: [] },
        });
-
     console.log("FILTERS Updated with Categories:", categories);
-    // Redireciona para a rota especificada
     navigate(path);
   };
 

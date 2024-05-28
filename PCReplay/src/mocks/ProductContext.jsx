@@ -11,7 +11,7 @@ export function ProductProvider({ children }) {
       setProducts(JSON.parse(savedProducts));
       console.log("Products loaded from localStorage");
     }
-  }, []); //!:vazia-feito será executado apenas uma vez: após a primeira renderização do componente
+  }, []); 
 
   const updateProducts = (newProducts) => {
     setProducts(newProducts);

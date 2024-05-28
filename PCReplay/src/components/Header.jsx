@@ -38,21 +38,21 @@ const Header = () => {
 
     fetchProductsByDescription(filtersCart)
       .then((data) => {
-        setProductsCart(data); // Atualiza o Products(local) com os produtos obtidos
+        setProductsCart(data); 
         console.log("Products:", data);
       })
       .catch((error) => {
         console.error("Failed to load products:", error);
-        setError(error.message); // Armazena o erro no estado, se houver
+        setError(error.message); 
       });
     fetchProductsByDescription(filtersFavorites)
       .then((data) => {
-        setProductsFavorites(data); // Atualiza o Products(local) com os produtos obtidos
+        setProductsFavorites(data);
         console.log("Products:", data);
       })
       .catch((error) => {
         console.error("Failed to load products:", error);
-        setError(error.message); // Armazena o erro no estado, se houver
+        setError(error.message); 
       });
   }, [filtersFavorites,filtersCart, user]);
 

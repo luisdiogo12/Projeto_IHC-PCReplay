@@ -4,7 +4,7 @@ import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
 const Filter = () => {
-	const { filters, updateFilter } = useFilters(); // Use o hook useFilters para acessar e atualizar os filtros
+	const { filters, updateFilter } = useFilters(); 
   const [priceRange, setPriceRange] = useState([0, 10000]);
 
 
@@ -14,14 +14,14 @@ const Filter = () => {
     updateFilter((prevFilters) => {
       const newFilters = { ...prevFilters };
       if (checked) {
-        // Se a checkbox foi marcada, adicione o valor ao array de filtros
+        
         if (newFilters.characteristics[name]) {
           newFilters.characteristics[name].push(value);
         } else {
           newFilters.characteristics[name] = [value];
         }
       } else {
-        // Se a checkbox foi desmarcada, remova o valor do array de filtros
+        
         newFilters.characteristics[name] = newFilters.characteristics[
           name
         ].filter((filterValue) => filterValue !== value);
@@ -30,7 +30,6 @@ const Filter = () => {
       return newFilters;
     });
   };
-  //!: Atualizar o checkbox de acordo com o estado do filtro
   useEffect(() => {
     console.log("Filters updated:", filters);
 

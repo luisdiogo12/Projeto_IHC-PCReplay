@@ -1,18 +1,16 @@
-//+: Inicializa o localStorage com produtos e usuários se não existirem para serem usados pelo handler como se fosse uma base de dados
+
 import React, { useEffect, useState } from "react";
 import App from "../App";
-import generateProducts from "./generatorProducts"; // A função que gera produtos
-
+import generateProducts from "./generatorProducts"; 
 const Initializer = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadOrGenerateProducts = async () => {
       let savedProducts = localStorage.getItem("productsDB");
-	  // se não existirem produtos no localStorage, gera produtos
       if (!savedProducts) {
-        const newProducts = generateProducts(); // Gerar produtos se não existirem no localStorage
-        localStorage.setItem("productsDB", JSON.stringify(newProducts)); // Salvar no localStorage
+        const newProducts = generateProducts(); 
+        localStorage.setItem("productsDB", JSON.stringify(newProducts)); 
       }
       setLoading(false);
     };
@@ -56,9 +54,8 @@ const Initializer = () => {
       },
     ];
      let savedUsers = localStorage.getItem("usersDB");
-     // se não existirem users no localStorage, gera produtos
      if (!savedUsers) {
-       localStorage.setItem("usersDB", JSON.stringify(initialUsers)); // Salvar no localStorage
+       localStorage.setItem("usersDB", JSON.stringify(initialUsers)); 
      }
      setLoading(false);
    };

@@ -12,7 +12,7 @@ const ProductCard = ({ product }) => {
      navigate(`/product/${product.id}`);
    };
 
-  if (!product) return null; // Garante que não tentaremos renderizar sem produto
+  if (!product) return null; 
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg m-4">
       <img

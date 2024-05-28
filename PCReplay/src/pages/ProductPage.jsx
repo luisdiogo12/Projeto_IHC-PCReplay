@@ -1,14 +1,14 @@
 import React, { useEffect , useState} from "react";
 import { useUser } from "../mocks/UserContext";
 import MainLayout from "./LayoutPage";
-import { useParams } from "react-router-dom"; // Importe o hook useParams
-import { fetchProductsByDescription } from "../mocks/api"; // Importe a função fetchProductsByDescription
+import { useParams } from "react-router-dom"; 
+import { fetchProductsByDescription } from "../mocks/api"; 
 import ProductImages from "../components/ProductPage/ProductImages";
 import ProductInfoTabs from "../components/ProductPage/ProductInfoTabs";
 import GeneralInfo from "../components/ProductPage/GeneralInfo";
 
 const ProductPage = () => {
-  const { user } = useUser(); // util para as op. de adicionar/remover do carrinho e favoritos
+  const { user } = useUser(); 
   const { id } = useParams();
   const [product, setProducts] = useState([]);
 

@@ -28,11 +28,11 @@ const MyProducts = () => {
     }
     fetchProductsByDescription(filters)
       .then((data) => {
-        setProducts(data); // Atualiza o Products(local) com os produtos obtidos
+        setProducts(data);
       })
       .catch((error) => {
         console.error("Failed to load products:", error);
-        setError(error.message); // Armazena o erro no estado, se houver
+        setError(error.message); 
       });
   }
  }, [filters, user]);

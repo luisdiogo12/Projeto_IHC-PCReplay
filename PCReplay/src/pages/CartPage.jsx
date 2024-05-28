@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineUser } from "react-icons/ai";
-import { MdOutlineShoppingCartCheckout } from "react-icons/md"; // <MdOutlineShoppingCartCheckout />
+import { MdOutlineShoppingCartCheckout } from "react-icons/md"; 
 import { useUser } from "../mocks/UserContext";
 import MainLayout from "./LayoutPage";
 import { useNavigate } from "react-router-dom";
@@ -28,12 +28,12 @@ const CartPage = () => {
     }
     fetchProductsByDescription(filters)
       .then((data) => {
-        setProducts(data); // Atualiza o Products(local) com os produtos obtidos
+        setProducts(data); 
 		console.log("Products:", data);
       })
       .catch((error) => {
         console.error("Failed to load products:", error);
-        setError(error.message); // Armazena o erro no estado, se houver
+        setError(error.message); 
       });
   }, [filters, user]);
 

@@ -9,19 +9,17 @@ export const handlers = [
   }),
   http.post("/api/login", async ({ request }) => {
     const requestBody = await request.json();
-    const { email, password } = requestBody; //extração do username e password do corpo da requisição
-    //!: set user to the user that matches the username and password
+    const { email, password } = requestBody; 
     const user = usersDB.find(
       (u) => u.email === email && u.password === password
     );
-    //!: if user is found, return a successful login message with the user's token
     if (user) {
       return HttpResponse.json({
         message: "Login Successful",
         id: user.id,
         name: user.name,
         email: user.email,
-        token: user.token, //!: Retornando token específico do usuário
+        token: user.token,
         address: user.address,
         phone: user.phone,
         registrationDate: user.registrationDate,
@@ -39,21 +37,18 @@ export const handlers = [
   http.post("/api/signup", async ({ request }) => {
     const requestBody = await request.json();
     const { email, password, name } = requestBody;
-    // Verifica se todos os campos foram preenchidos
     if (!email || !password || !name) {
       return HttpResponse.json(
         { message: "Todos os parametros são obrigatórios"},
         { status: 400 }
       );
     }
-    // Verifica se a senha tem pelo menos 8 caracteres
     if (password.length < 8) {
       return HttpResponse.json(
         { message: "Password deve ter pelo menos 8 caracteres" },
         { status: 400 }
       );
     }
-    // Verifica se o email é válido
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return HttpResponse.json(
@@ -61,7 +56,6 @@ export const handlers = [
         { status: 400 }
       );
     }
-    // Verifica se o email já está cadastrado
     const exists = usersDB.some((u) => u.email === email);
     if (!exists) {
       const newUser = {
@@ -78,7 +72,7 @@ export const handlers = [
         myproducts: [],
       };
       usersDB.push(newUser);
-      localStorage.setItem("usersDB", JSON.stringify(usersDB)); // Atualizando o localStorage
+      localStorage.setItem("usersDB", JSON.stringify(usersDB)); 
       return HttpResponse.json(
         {
           message: "User created successfully",
@@ -167,9 +161,7 @@ export const handlers = [
           const productCharacteristics = product.characteristics;
           let shouldIncludeProduct = true;
 
-          // Itera sobre todas as chaves em characteristicsFilter
           for (let key in characteristicsFilter) {
-            // Se a chave atual existe em productCharacteristics e seu valor está no array de valores desejados
             if (characteristicsFilter[key].length == 0) {
               continue;
             }
@@ -178,7 +170,6 @@ export const handlers = [
               productCharacteristics[key] &&
               characteristicsFilter[key].includes(productCharacteristics[key])
             ) {
-              // O produto passa no filtro
               shouldIncludeProduct &= true;
             }else{
               shouldIncludeProduct = false;

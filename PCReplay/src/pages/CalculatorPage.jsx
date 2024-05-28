@@ -51,8 +51,8 @@ const CalculatorPage = () => {
 
     const cpu_reference_value = 100
     const gpu_reference_value = 100
-    const ram_reference_value = [30, 16]    // 16 GB DDR4
-    const disk_reference_value = [40, 500]  // 500 GB SSD
+    const ram_reference_value = [30, 16]    
+    const disk_reference_value = [40, 500]  
 
     const dropdown_value = document.getElementById("personalizado")
 
@@ -206,7 +206,6 @@ const CalculatorPage = () => {
 
         if (mode == "set") {
 
-            //render img
             if (img_number != null) {
                 setModel(img_number)
 
@@ -217,7 +216,6 @@ const CalculatorPage = () => {
                     setSrc(knownProducts[img_number].src)
                 }
             }
-            // personalizado
             if (img_number == -2) {
                 setLockInput(false)
             } else {

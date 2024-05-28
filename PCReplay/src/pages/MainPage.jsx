@@ -3,7 +3,6 @@ import ProductCard from "../components/ProductCard";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useProducts } from "../mocks/ProductContext";
-//
 import { fetchProductsByDescription } from "../mocks/api";
 
 const MainPage = () => {
@@ -11,16 +10,15 @@ const MainPage = () => {
   const { products, updateProducts } = useProducts();
   const [error, setError] = useState("");
   useEffect(() => {
-    //fetchProducts()
     fetchProductsByDescription()
       .then((data) => {
-        updateProducts(data); // Atualiza o contexto com os produtos obtidos
+        updateProducts(data); 
       })
       .catch((error) => {
         console.error("Failed to load products:", error);
-        setError(error.message); // Armazena o erro no estado, se houver
+        setError(error.message); 
       });
-  }, []); // Dependência no array de useEffect, removida para evitar loop infinito
+  }, []);
   
   return (
     <div className="flex flex-col min-h-screen">

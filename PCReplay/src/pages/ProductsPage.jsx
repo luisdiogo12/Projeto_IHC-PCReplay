@@ -14,13 +14,13 @@ const ProductsPage = () => {
     console.log("FILTERS:", filters);
     fetchProductsByDescription(filters)
       .then((data) => {
-        updateProducts(data); // Atualiza o contexto com os produtos obtidos
+        updateProducts(data); 
       })
       .catch((error) => {
         console.error("Failed to load products:", error);
-        setError(error.message); // Armazena o erro no estado, se houver
+        setError(error.message); 
       });
-  }, [filters]); // Dependência no array de useEffect, removida para evitar loop infinito
+  }, [filters]); 
 
   return (
     <LayoutProductPage>

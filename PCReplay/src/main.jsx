@@ -13,11 +13,9 @@ async function enableMocking() {
 
   const { worker } = await import("./mocks/browser");
 
-  // `worker.start()` returns a Promise that resolves
-  // once the Service Worker is up and ready to intercept requests.
   return worker.start({
-    quiet: false, // Garanta que isso não está definido como true
-    onUnhandledRequest: "warn", // ou 'warn' para avisos no console
+    quiet: false, 
+    onUnhandledRequest: "warn", 
   });
 }
 enableMocking().then(() => {
