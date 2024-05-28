@@ -16,6 +16,7 @@ const Header = () => {
   const [productsFavorites, setProductsFavorites] = useState([]);
   const { user, removeFromCart } = useUser();
 
+  const isLoggedIn = !!user;
   useEffect(() => {
     if (user && user.cart) {
       setFiltersCart({ id: user.cart });
@@ -85,7 +86,11 @@ const Header = () => {
         <h1 className="mr-1 ml-1 cursor-pointer" onClick={goToMyProducts}>
           Os meus Computadores
         </h1>
-        <HUserIcons cartTotalItems={cartTotalItems} favoritesTotalItems={favoritesTotalItems}/>
+        <HUserIcons
+          cartTotalItems={cartTotalItems}
+          favoritesTotalItems={favoritesTotalItems}
+          isLoggedIn={isLoggedIn}
+        />
       </div>
     </header>
   );

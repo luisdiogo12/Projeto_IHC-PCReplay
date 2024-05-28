@@ -10,7 +10,7 @@ import ICartSidebar from "./Cart_Favorites/ICartSidebar";
 import IProfileSidebar from "./Profile/IProfileSidebar";
 import { useNavigate } from "react-router-dom";
 
-const HUserIcons = ({ cartTotalItems, favoritesTotalItems }) => {
+const HUserIcons = ({ cartTotalItems, favoritesTotalItems, isLoggedIn }) => {
   const [showFavorites, setShowFavorites] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
@@ -22,6 +22,7 @@ const HUserIcons = ({ cartTotalItems, favoritesTotalItems }) => {
         size="1.5em"
         className="cursor-pointer"
         onClick={() => navigate("/calculadora")}
+        title="Ir para a calculadora"
       />
 
       <div className="indicator">
@@ -31,7 +32,14 @@ const HUserIcons = ({ cartTotalItems, favoritesTotalItems }) => {
         <AiOutlineHeart
           size="1.5em"
           className="cursor-pointer"
-          onClick={() => setShowFavorites(true)}
+          onClick={() => {
+            if (isLoggedIn) {
+              setShowFavorites(true);
+            } else {
+              window.alert("Você precisa estar logado para ver seus favoritos");
+            }
+          }}
+          title="Mostrar favoritos"
         />
       </div>
       <IFavoritesSidebar
@@ -46,7 +54,14 @@ const HUserIcons = ({ cartTotalItems, favoritesTotalItems }) => {
         <AiOutlineShoppingCart
           size="1.5em"
           className="cursor-pointer"
-          onClick={() => setShowCart(true)}
+          onClick={() => {
+            if (isLoggedIn) {
+              setShowCart(true);
+            } else {
+              window.alert("Você precisa estar logado para ver seu carrinho");
+            }
+          }}
+          title="Mostrar carrinho"
         />
       </div>
       <ICartSidebar isOpen={showCart} closeSidebar={() => setShowCart(false)} />

@@ -50,11 +50,13 @@ const CartPage = () => {
 
   if (!user) {
     return (
-      <div className="flex flex-col items-center justify-center h-full">
-        <AiOutlineUser size="2em" />
-        <p className="text-lg font-semibold mb-4">Você não está logado</p>
-        <p>Por favor, faça login para ver o seu carrinho.</p>
-      </div>
+      <MainLayout>
+        <div className="flex flex-col items-center justify-center h-full">
+          <AiOutlineUser size="2em" />
+          <p className="text-lg font-semibold mb-4">Você não está logado</p>
+          <p>Por favor, faça login para ver o seu carrinho.</p>
+        </div>
+      </MainLayout>
     );
   }
 
