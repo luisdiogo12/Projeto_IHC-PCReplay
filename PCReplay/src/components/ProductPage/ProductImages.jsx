@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const ProductImages = ({ images }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -6,6 +6,8 @@ const ProductImages = ({ images }) => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
+  
+  
   const handlePrev = () => {
     setCurrentImageIndex(
       (prevIndex) => (prevIndex - 1 + images.length) % images.length
@@ -24,7 +26,7 @@ const ProductImages = ({ images }) => {
     <div className="flex justify-center items-center">
       <button onClick={handlePrev}>&lt;</button>
       <img
-        src={images[currentImageIndex]}
+        src={`https://fastly.picsum.photos/id/9/5000/3269.jpg?hmac=cZKbaLeduq7rNB8X-bigYO8bvPIWtT-mh8GRXtU3vPc`}
         alt={`Produto ${currentImageIndex + 1}`}
         className="w-2/3 h-auto"
       />

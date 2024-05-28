@@ -18,6 +18,7 @@ const ProductPage = () => {
 		setProducts(data[0]);
 		console.log("data:", data);
     console.log("id", id);
+    console.log("product.imageURL", product.imageUrl);
 	  })
 	  .catch((error) => {
 		console.error("Failed to load products:", error);
